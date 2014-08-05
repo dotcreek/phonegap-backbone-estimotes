@@ -30,7 +30,7 @@ If you run
 ~$ grunt phonegap # custom task for this phonegap project
 ~~~
 
-Files from /App/dist will be copied to /phonegap/www/ and
+Files from /App/dist will be copied to /phonegap/www/
 
 *BUT*, you should update your /phonegap/www/index.html to include what you need
 from /ponegap/www/
@@ -109,3 +109,17 @@ Launch alacarte
 Choose Programming menu, then New Item, type any name you want, as command
 ~/.genymotion/genymotion/genymotion.
 You can use an icon placed ~/.genymotion/genymotion/
+
+### Run phonegap project
+
+* cd /App
+
+~~~
+grunt phonegap
+~~~
+
+* With one device connected(genymotion will work)
+
+~~~
+phonegap run android
+~~~

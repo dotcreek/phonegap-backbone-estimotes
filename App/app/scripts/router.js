@@ -5,6 +5,7 @@ App.Router = Backbone.Router.extend({
 
     initialize: function() {
         App.slider = new PageSlider($('body'));
+        this.currentView = null;
     },
 
     routes: {
@@ -21,19 +22,28 @@ App.Router = Backbone.Router.extend({
         '*404': 'notFound'
     },
 
+    /**
+     * Remove events associated to a view
+     * Un-delegate events associated to a view
+     * @param  {Object} view A Backbone View instance
+     */
+    cleanView: function(view) {
+        if (this.currentView) {
+            this.currentView.remove();
+        }
+        this.currentView = view;
+    },
+
     home: function() {
-        console.log('home');
         'use strict';
-        /**
-         * Since the home view never changes, we instantiate it and render
-         * it only once
-         */
-        App.Views.home = new App.Views.Home();
-        App.slider.slidePage(App.Views.home.render().$el);
+        var view = new App.Views.Home();
+        App.slider.slidePage(view.render().$el);
+        this.cleanView(view);
     },
 
     settings: function() {
-        console.log('settings');
-        App.slider.slidePage(new App.Views.Settings().render().$el);
+        var view = new App.Views.Settings();
+        App.slider.slidePage(view.render().$el);
+        this.cleanView(view);
     }
 });

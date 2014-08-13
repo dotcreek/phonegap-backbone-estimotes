@@ -5,19 +5,15 @@
  */
 window.PageSlider = function(container) {
     'use strict';
+    /**
+     * currentPage comes from ratchet as a function/object
+     */
     var currentPage,
         stateHistory = [];
 
     this.back = function() {
         location.hash = stateHistory[stateHistory.length - 2];
     };
-
-    // this.changeHistory = function(page) {
-
-    //     window.history.pushState({
-    //         page: "" + page
-    //     }, "" + page);
-    // };
 
     /**
      * Use this function if you want PageSlider to automatically determine

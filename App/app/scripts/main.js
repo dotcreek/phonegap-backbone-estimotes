@@ -70,6 +70,14 @@ window.App = {
  */
 $(document).ready(function() {
     'use strict';
+
+    Backbone.View.prototype.remove = function() {
+        // this.$el.html('');
+        this.stopListening();
+        this.undelegateEvents();
+        return this;
+    };
+
     var router = new App.Router();
     Backbone.history.start();
 });

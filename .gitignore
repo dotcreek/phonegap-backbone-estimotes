@@ -21,6 +21,7 @@ platforms/android/assets/www/
 
 www/scripts/
 www/styles/
+www/fonts/
 
 # IOS / Xcode
 build/*

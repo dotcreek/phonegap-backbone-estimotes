@@ -1,9 +1,9 @@
 (function() {
     'use strict';
 
-    App.Views.Home = Backbone.View.extend({
+    App.Views.Settings = Backbone.View.extend({
 
-        template: JST['app/scripts/templates/pages/home.ejs'],
+        template: JST['app/scripts/templates/pages/settings.ejs'],
 
         render: function() {
             this.$el.html(this.template());

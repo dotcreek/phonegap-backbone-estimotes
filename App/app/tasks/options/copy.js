@@ -8,8 +8,8 @@ module.exports = {
             src: [
                 'assets/**/*',
                 'images/{,*/}*.{webp,gif, jpg, png}',
-                'styles/fonts/{,*/}*.*',
-                'fonts/{,*/}*.*',
+                'styles/**.*',
+                'fonts/**/*.*',
             ]
         }]
     }

@@ -123,3 +123,7 @@ grunt phonegap
 ~~~
 phonegap run android
 ~~~
+
+### Emulate on Google Chrome 
+
+click on "show drawer" next to the "settings" button in the dev tools

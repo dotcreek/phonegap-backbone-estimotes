@@ -15,6 +15,7 @@ App.Router = Backbone.Router.extend({
          */
         '': 'home',
         'settings': 'settings',
+        'rooms' : 'rooms',
 
         /**
          * This route must be at the end of this object
@@ -43,6 +44,12 @@ App.Router = Backbone.Router.extend({
 
     settings: function() {
         var view = new App.Views.Settings();
+        App.slider.slidePage(view.render().$el);
+        this.cleanView(view);
+    },
+
+    rooms: function() {
+        var view = new App.Views.Rooms();
         App.slider.slidePage(view.render().$el);
         this.cleanView(view);
     }

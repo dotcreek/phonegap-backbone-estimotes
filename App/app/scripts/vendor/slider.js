@@ -3,7 +3,7 @@
  *   This could easily be changed to use Push State instead.
  * - jQuery dependency for now. This could also be easily removed.
  */
-window.PageSlider = function(container) {
+window.PageSlider = function (container) {
     'use strict';
     /**
      * currentPage comes from ratchet as a function/object
@@ -11,7 +11,7 @@ window.PageSlider = function(container) {
     var currentPage,
         stateHistory = [];
 
-    this.back = function() {
+    this.back = function () {
         location.hash = stateHistory[stateHistory.length - 2];
     };
 
@@ -21,7 +21,7 @@ window.PageSlider = function(container) {
      * @param  {Object} page A render result of a backbone view instance
      * @return {Function}    A call to slidePageFrom
      */
-    this.slidePage = function(page) {
+    this.slidePage = function (page) {
         if (!page) {
             return;
         }
@@ -50,7 +50,7 @@ window.PageSlider = function(container) {
      * @param  {Object} page An instance of backbone view rendered
      * @param  {String} from left or right
      */
-    this.slidePageFrom = function(page, from) {
+    this.slidePageFrom = function (page, from) {
         container.append(page);
 
         if (!currentPage || !from) {
@@ -62,7 +62,7 @@ window.PageSlider = function(container) {
         // Position the page at the starting position of the animation
         page.attr('class', 'page ' + from);
 
-        currentPage.one('webkitTransitionEnd', function(e) {
+        currentPage.one('webkitTransitionEnd', function (e) {
             $(e.target).remove();
         });
 

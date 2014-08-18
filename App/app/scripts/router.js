@@ -3,7 +3,7 @@
  */
 App.Router = Backbone.Router.extend({
 
-    initialize: function() {
+    initialize: function () {
         App.slider = new PageSlider($('body'));
         this.currentView = null;
     },
@@ -15,7 +15,7 @@ App.Router = Backbone.Router.extend({
          */
         '': 'home',
         'settings': 'settings',
-        'rooms' : 'rooms',
+        'rooms': 'rooms',
 
         /**
          * This route must be at the end of this object
@@ -28,29 +28,39 @@ App.Router = Backbone.Router.extend({
      * Un-delegate events associated to a view
      * @param  {Object} view A Backbone View instance
      */
-    cleanView: function(view) {
+    cleanView: function (view) {
         if (this.currentView) {
             this.currentView.remove();
         }
         this.currentView = view;
     },
 
-    home: function() {
+    home: function () {
         'use strict';
         var view = new App.Views.Home();
         App.slider.slidePage(view.render().$el);
         this.cleanView(view);
     },
 
-    settings: function() {
+    settings: function () {
         var view = new App.Views.Settings();
         App.slider.slidePage(view.render().$el);
         this.cleanView(view);
     },
 
-    rooms: function() {
-        var view = new App.Views.Rooms();
-        App.slider.slidePage(view.render().$el);
-        this.cleanView(view);
+    rooms: function () {
+        var collection = new App.Collections.Room({});
+        collection.fetch({
+            headers: {
+                auth_token: '2cc5bc9c-e407-4fbb-826f-ed4d92df603e'
+            }
+        }).done(_.bind(function () {
+            console.log("fetching rooms");
+            var view = new App.Views.Rooms({
+                collection: collection
+            });
+            App.slider.slidePage(view.render().$el);
+            this.cleanView(view);
+        }, this));
     }
 });

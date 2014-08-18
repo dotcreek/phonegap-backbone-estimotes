@@ -17,6 +17,8 @@ platforms/android/local.properties
 platforms/android/CordovaLib/local.properties
 
 platforms/android/ant-build/
+platforms/android/CordobaLib/ant-build/
+platforms/android/CordobaLib/ant-gen/
 platforms/android/ant-gen/
 platforms/android/assets/www/
 

@@ -60,21 +60,34 @@ module.exports = function(grunt) {
         return grunt.task.run(testTasks);
     });
 
-    grunt.registerTask('phonegap', [
-        'clean:dist',
-        'createDefaultTemplate',
-        'jst',
-        'useminPrepare',
-        'imagemin',
-        'htmlmin',
-        'concat',
-        'cssmin',
-        // 'uglify',
-        'copy:dist',
-        // 'rev',
-        // 'usemin',
-        'copy:phonegap',
-    ]);
+    /**
+     * Prepare content to be used with phonegap on
+     *     phonegap build/run android/ios
+     * @param  {String} target either android or ios
+     */
+    grunt.registerTask('phonegap', function(target) {
+
+        if (target) {
+            if (target !== 'phonegap' && target !== 'ios') {
+                throw new Error('target should be android or ios.');
+            }
+        }
+
+        var tasks = [
+            'clean:dist',
+            'createDefaultTemplate',
+            'jst',
+            'useminPrepare',
+            'imagemin',
+            'htmlmin',
+            'concat',
+            'cssmin:' + (target ? target : 'android'),
+            'copy:dist',
+            'copy:phonegap'
+        ];
+        grunt.task.run(tasks);
+        return;
+    });
 
     grunt.registerTask('build', [
         'clean:dist',
@@ -96,5 +109,4 @@ module.exports = function(grunt) {
         'test',
         'build'
     ]);
-
 };

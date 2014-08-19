@@ -30,11 +30,21 @@ loadConfig = function(path) {
 };
 
 module.exports = function(grunt) {
-    // show elapsed time at the end
-    // require('time-grunt')(grunt);
-    // load all grunt tasks
+
+    /**
+     * Show elapsed time at the end
+     */
+    require('time-grunt')(grunt);
+
+    /**
+     * Load all grunt tasks
+     */
     require('load-grunt-tasks')(grunt);
 
+    /**
+     * Configuration for grunt
+     * @type {Object}
+     */
     var config = {
         yeoman: {
             app: 'app',
@@ -45,8 +55,15 @@ module.exports = function(grunt) {
         }
     };
 
+    /**
+     * Merge config with tasks configuration defined inside tasks/options folder
+     */
     grunt.util._.extend(config, loadConfig('./tasks/options/'));
 
+    /**
+     * Connect task can't be loaded from tasks/options, define it in here
+     * @type {Object}
+     */
     config.connect = {
         options: {
             port: grunt.option('port') || SERVER_PORT,
@@ -92,7 +109,13 @@ module.exports = function(grunt) {
         }
     };
 
+    /**
+     * Load grunt configuration
+     */
     grunt.initConfig(config);
 
+    /**
+     * Load tasks defined inside tasks/tasks.js
+     */
     grunt.loadTasks('tasks');
 };

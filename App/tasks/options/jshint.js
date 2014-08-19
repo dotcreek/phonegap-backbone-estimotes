@@ -2,7 +2,8 @@ module.exports = {
 
     options: {
         jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        reporter: require('jshint-stylish'),
+        ignores: ['<%= yeoman.app %>/scripts/vendor/*.js']
     },
 
     all: [

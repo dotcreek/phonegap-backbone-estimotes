@@ -68,13 +68,14 @@ module.exports = function(grunt) {
     grunt.registerTask('phonegap', function(target) {
 
         if (target) {
-            if (target !== 'phonegap' && target !== 'ios') {
+            if (target !== 'android' && target !== 'ios') {
                 throw new Error('target should be android or ios.');
             }
         }
 
         var tasks = [
             'clean:dist',
+            'jshint',
             'createDefaultTemplate',
             'jst',
             'useminPrepare',

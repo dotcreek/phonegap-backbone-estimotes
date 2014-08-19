@@ -22,6 +22,7 @@ module.exports = function(grunt) {
                 'clean:server',
                 'createDefaultTemplate',
                 'jst',
+                'concat:unit',
                 'connect:test',
                 'open:test',
                 'watch'
@@ -32,6 +33,7 @@ module.exports = function(grunt) {
             'clean:server',
             'createDefaultTemplate',
             'jst',
+            'concat:unit',
             'connect:livereload',
             'open:server',
             'watch'
@@ -110,4 +112,30 @@ module.exports = function(grunt) {
         'test',
         'build'
     ]);
+
+    grunt.registerTask('unit', function(target) {
+        var tasks = ['clean:server'];
+
+        target = target ? target : '';
+        var concat = grunt.config.get('concat') || {};
+        if (target === 'models' || target === 'collections') {
+            target = target + '/**/';
+        }
+
+        if (!target || target === 'views') {
+            tasks.push('createDefaultTemplate');
+            tasks.push('jst');
+            if (!target) {}
+            target = target + '/**/';
+        }
+
+        concat.unit.src = 'test/unit/' + target + '*.js';
+        grunt.config.set('concat', concat);
+
+        ['concat:unit', 'connect:test', 'mocha:all'].forEach(function(item) {
+            tasks.push(item);
+        });
+
+        return grunt.task.run(tasks);
+    });
 };

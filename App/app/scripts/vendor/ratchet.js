@@ -15,38 +15,38 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
-  'use strict';
+!(function() {
+    'use strict';
 
-  var findModals = function (target) {
-    var i;
-    var modals = document.querySelectorAll('a');
+    var findModals = function(target) {
+        var i;
+        var modals = document.querySelectorAll('a');
 
-    for (; target && target !== document; target = target.parentNode) {
-      for (i = modals.length; i--;) {
-        if (modals[i] === target) {
-          return target;
+        for (; target && target !== document; target = target.parentNode) {
+            for (i = modals.length; i--;) {
+                if (modals[i] === target) {
+                    return target;
+                }
+            }
         }
-      }
-    }
-  };
+    };
 
-  var getModal = function (event) {
-    var modalToggle = findModals(event.target);
-    if (modalToggle && modalToggle.hash) {
-      return document.querySelector(modalToggle.hash);
-    }
-  };
+    var getModal = function(event) {
+        var modalToggle = findModals(event.target);
+        if (modalToggle && modalToggle.hash) {
+            return document.querySelector(modalToggle.hash);
+        }
+    };
 
-  window.addEventListener('touchend', function (event) {
-    var modal = getModal(event);
-    if (modal) {
-      if (modal && modal.classList.contains('modal')) {
-        modal.classList.toggle('active');
-      }
-      event.preventDefault(); // prevents rewriting url (apps can still use hash values in url)
-    }
-  });
+    window.addEventListener('touchend', function(event) {
+        var modal = getModal(event);
+        if (modal) {
+            if (modal && modal.classList.contains('modal')) {
+                modal.classList.toggle('active');
+            }
+            event.preventDefault(); // prevents rewriting url (apps can still use hash values in url)
+        }
+    });
 }());
 
 /* ========================================================================
@@ -57,83 +57,82 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
-  'use strict';
+!(function() {
+    'use strict';
 
-  var popover;
+    var popover;
 
-  var findPopovers = function (target) {
-    var i;
-    var popovers = document.querySelectorAll('a');
+    var findPopovers = function(target) {
+        var i;
+        var popovers = document.querySelectorAll('a');
 
-    for (; target && target !== document; target = target.parentNode) {
-      for (i = popovers.length; i--;) {
-        if (popovers[i] === target) {
-          return target;
+        for (; target && target !== document; target = target.parentNode) {
+            for (i = popovers.length; i--;) {
+                if (popovers[i] === target) {
+                    return target;
+                }
+            }
         }
-      }
-    }
-  };
+    };
 
-  var onPopoverHidden = function () {
-    popover.style.display = 'none';
-    popover.removeEventListener('webkitTransitionEnd', onPopoverHidden);
-  };
+    var onPopoverHidden = function() {
+        popover.style.display = 'none';
+        popover.removeEventListener('webkitTransitionEnd', onPopoverHidden);
+    };
 
-  var backdrop = (function () {
-    var element = document.createElement('div');
+    var backdrop = (function() {
+        var element = document.createElement('div');
 
-    element.classList.add('backdrop');
+        element.classList.add('backdrop');
 
-    element.addEventListener('touchend', function () {
-      popover.addEventListener('webkitTransitionEnd', onPopoverHidden);
-      popover.classList.remove('visible');
-      popover.parentNode.removeChild(backdrop);
-    });
+        element.addEventListener('touchend', function() {
+            popover.addEventListener('webkitTransitionEnd', onPopoverHidden);
+            popover.classList.remove('visible');
+            popover.parentNode.removeChild(backdrop);
+        });
 
-    return element;
-  }());
+        return element;
+    }());
 
-  var getPopover = function (e) {
-    var anchor = findPopovers(e.target);
+    var getPopover = function(e) {
+        var anchor = findPopovers(e.target);
 
-    if (!anchor || !anchor.hash || (anchor.hash.indexOf('/') > 0)) {
-      return;
-    }
+        if (!anchor || !anchor.hash || (anchor.hash.indexOf('/') > 0)) {
+            return;
+        }
 
-    try {
-      popover = document.querySelector(anchor.hash);
-    }
-    catch (error) {
-      popover = null;
-    }
+        try {
+            popover = document.querySelector(anchor.hash);
+        } catch (error) {
+            popover = null;
+        }
 
-    if (popover === null) {
-      return;
-    }
+        if (popover === null) {
+            return;
+        }
 
-    if (!popover || !popover.classList.contains('popover')) {
-      return;
-    }
+        if (!popover || !popover.classList.contains('popover')) {
+            return;
+        }
 
-    return popover;
-  };
+        return popover;
+    };
 
-  var showHidePopover = function (e) {
-    var popover = getPopover(e);
+    var showHidePopover = function(e) {
+        var popover = getPopover(e);
 
-    if (!popover) {
-      return;
-    }
+        if (!popover) {
+            return;
+        }
 
-    popover.style.display = 'block';
-    popover.offsetHeight;
-    popover.classList.add('visible');
+        popover.style.display = 'block';
+        popover.offsetHeight;
+        popover.classList.add('visible');
 
-    popover.parentNode.appendChild(backdrop);
-  };
+        popover.parentNode.appendChild(backdrop);
+    };
 
-  window.addEventListener('touchend', showHidePopover);
+    window.addEventListener('touchend', showHidePopover);
 
 }());
 
@@ -629,62 +628,66 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
-  'use strict';
+!(function() {
+    'use strict';
 
-  var getTarget = function (target) {
-    var i;
-    var segmentedControls = document.querySelectorAll('.segmented-control .control-item');
+    var getTarget = function(target) {
+        var i;
+        var segmentedControls = document.querySelectorAll('.segmented-control .control-item');
 
-    for (; target && target !== document; target = target.parentNode) {
-      for (i = segmentedControls.length; i--;) {
-        if (segmentedControls[i] === target) {
-          return target;
+        for (; target && target !== document; target = target.parentNode) {
+            for (i = segmentedControls.length; i--;) {
+                if (segmentedControls[i] === target) {
+                    return target;
+                }
+            }
         }
-      }
-    }
-  };
+    };
 
-  window.addEventListener('touchend', function (e) {
-    var activeTab;
-    var activeBodies;
-    var targetBody;
-    var targetTab     = getTarget(e.target);
-    var className     = 'active';
-    var classSelector = '.' + className;
+    window.addEventListener('touchend', function(e) {
+        var activeTab;
+        var activeBodies;
+        var targetBody;
+        var targetTab = getTarget(e.target);
+        var className = 'active';
+        var classSelector = '.' + className;
 
-    if (!targetTab) {
-      return;
-    }
+        if (!targetTab) {
+            return;
+        }
 
-    activeTab = targetTab.parentNode.querySelector(classSelector);
+        activeTab = targetTab.parentNode.querySelector(classSelector);
 
-    if (activeTab) {
-      activeTab.classList.remove(className);
-    }
+        if (activeTab) {
+            activeTab.classList.remove(className);
+        }
 
-    targetTab.classList.add(className);
+        targetTab.classList.add(className);
 
-    if (!targetTab.hash) {
-      return;
-    }
+        if (!targetTab.hash) {
+            return;
+        }
 
-    targetBody = document.querySelector(targetTab.hash);
+        targetBody = document.querySelector(targetTab.hash);
 
-    if (!targetBody) {
-      return;
-    }
+        if (!targetBody) {
+            return;
+        }
 
-    activeBodies = targetBody.parentNode.querySelectorAll(classSelector);
+        activeBodies = targetBody.parentNode.querySelectorAll(classSelector);
 
-    for (var i = 0; i < activeBodies.length; i++) {
-      activeBodies[i].classList.remove(className);
-    }
+        for (var i = 0; i < activeBodies.length; i++) {
+            activeBodies[i].classList.remove(className);
+        }
 
-    targetBody.classList.add(className);
-  });
+        targetBody.classList.add(className);
+    });
 
-  window.addEventListener('click', function (e) { if (getTarget(e.target)) {e.preventDefault();} });
+    window.addEventListener('click', function(e) {
+        if (getTarget(e.target)) {
+            e.preventDefault();
+        }
+    });
 }());
 
 /* ========================================================================
@@ -696,131 +699,133 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
-  'use strict';
+!(function() {
+    'use strict';
 
-  var pageX;
-  var pageY;
-  var slider;
-  var deltaX;
-  var deltaY;
-  var offsetX;
-  var lastSlide;
-  var startTime;
-  var resistance;
-  var sliderWidth;
-  var slideNumber;
-  var isScrolling;
-  var scrollableArea;
+    var pageX;
+    var pageY;
+    var slider;
+    var deltaX;
+    var deltaY;
+    var offsetX;
+    var lastSlide;
+    var startTime;
+    var resistance;
+    var sliderWidth;
+    var slideNumber;
+    var isScrolling;
+    var scrollableArea;
 
-  var getSlider = function (target) {
-    var i;
-    var sliders = document.querySelectorAll('.slider > .slide-group');
+    var getSlider = function(target) {
+        var i;
+        var sliders = document.querySelectorAll('.slider > .slide-group');
 
-    for (; target && target !== document; target = target.parentNode) {
-      for (i = sliders.length; i--;) {
-        if (sliders[i] === target) {
-          return target;
+        for (; target && target !== document; target = target.parentNode) {
+            for (i = sliders.length; i--;) {
+                if (sliders[i] === target) {
+                    return target;
+                }
+            }
         }
-      }
-    }
-  };
+    };
 
-  var getScroll = function () {
-    if ('webkitTransform' in slider.style) {
-      var translate3d = slider.style.webkitTransform.match(/translate3d\(([^,]*)/);
-      var ret = translate3d ? translate3d[1] : 0;
-      return parseInt(ret, 10);
-    }
-  };
+    var getScroll = function() {
+        if ('webkitTransform' in slider.style) {
+            var translate3d = slider.style.webkitTransform.match(/translate3d\(([^,]*)/);
+            var ret = translate3d ? translate3d[1] : 0;
+            return parseInt(ret, 10);
+        }
+    };
 
-  var setSlideNumber = function (offset) {
-    var round = offset ? (deltaX < 0 ? 'ceil' : 'floor') : 'round';
-    slideNumber = Math[round](getScroll() / (scrollableArea / slider.children.length));
-    slideNumber += offset;
-    slideNumber = Math.min(slideNumber, 0);
-    slideNumber = Math.max(-(slider.children.length - 1), slideNumber);
-  };
+    var setSlideNumber = function(offset) {
+        var round = offset ? (deltaX < 0 ? 'ceil' : 'floor') : 'round';
+        slideNumber = Math[round](getScroll() / (scrollableArea / slider.children.length));
+        slideNumber += offset;
+        slideNumber = Math.min(slideNumber, 0);
+        slideNumber = Math.max(-(slider.children.length - 1), slideNumber);
+    };
 
-  var onTouchStart = function (e) {
-    slider = getSlider(e.target);
+    var onTouchStart = function(e) {
+        slider = getSlider(e.target);
 
-    if (!slider) {
-      return;
-    }
+        if (!slider) {
+            return;
+        }
 
-    var firstItem  = slider.querySelector('.slide');
+        var firstItem = slider.querySelector('.slide');
 
-    scrollableArea = firstItem.offsetWidth * slider.children.length;
-    isScrolling    = undefined;
-    sliderWidth    = slider.offsetWidth;
-    resistance     = 1;
-    lastSlide      = -(slider.children.length - 1);
-    startTime      = +new Date();
-    pageX          = e.touches[0].pageX;
-    pageY          = e.touches[0].pageY;
-    deltaX         = 0;
-    deltaY         = 0;
+        scrollableArea = firstItem.offsetWidth * slider.children.length;
+        isScrolling = undefined;
+        sliderWidth = slider.offsetWidth;
+        resistance = 1;
+        lastSlide = -(slider.children.length - 1);
+        startTime = +new Date();
+        pageX = e.touches[0].pageX;
+        pageY = e.touches[0].pageY;
+        deltaX = 0;
+        deltaY = 0;
 
-    setSlideNumber(0);
+        setSlideNumber(0);
 
-    slider.style['-webkit-transition-duration'] = 0;
-  };
+        slider.style['-webkit-transition-duration'] = 0;
+    };
 
-  var onTouchMove = function (e) {
-    if (e.touches.length > 1 || !slider) {
-      return; // Exit if a pinch || no slider
-    }
+    var onTouchMove = function(e) {
+        if (e.touches.length > 1 || !slider) {
+            return; // Exit if a pinch || no slider
+        }
 
-    deltaX = e.touches[0].pageX - pageX;
-    deltaY = e.touches[0].pageY - pageY;
-    pageX  = e.touches[0].pageX;
-    pageY  = e.touches[0].pageY;
+        deltaX = e.touches[0].pageX - pageX;
+        deltaY = e.touches[0].pageY - pageY;
+        pageX = e.touches[0].pageX;
+        pageY = e.touches[0].pageY;
 
-    if (typeof isScrolling === 'undefined') {
-      isScrolling = Math.abs(deltaY) > Math.abs(deltaX);
-    }
+        if (typeof isScrolling === 'undefined') {
+            isScrolling = Math.abs(deltaY) > Math.abs(deltaX);
+        }
 
-    if (isScrolling) {
-      return;
-    }
+        if (isScrolling) {
+            return;
+        }
 
-    offsetX = (deltaX / resistance) + getScroll();
+        offsetX = (deltaX / resistance) + getScroll();
 
-    e.preventDefault();
+        e.preventDefault();
 
-    resistance = slideNumber === 0         && deltaX > 0 ? (pageX / sliderWidth) + 1.25 :
-                 slideNumber === lastSlide && deltaX < 0 ? (Math.abs(pageX) / sliderWidth) + 1.25 : 1;
+        resistance = slideNumber === 0 && deltaX > 0 ? (pageX / sliderWidth) + 1.25 :
+            slideNumber === lastSlide && deltaX < 0 ? (Math.abs(pageX) / sliderWidth) + 1.25 : 1;
 
-    slider.style.webkitTransform = 'translate3d(' + offsetX + 'px,0,0)';
-  };
+        slider.style.webkitTransform = 'translate3d(' + offsetX + 'px,0,0)';
+    };
 
-  var onTouchEnd = function (e) {
-    if (!slider || isScrolling) {
-      return;
-    }
+    var onTouchEnd = function(e) {
+        if (!slider || isScrolling) {
+            return;
+        }
 
-    setSlideNumber(
-      (+new Date()) - startTime < 1000 && Math.abs(deltaX) > 15 ? (deltaX < 0 ? -1 : 1) : 0
-    );
+        setSlideNumber(
+            (+new Date()) - startTime < 1000 && Math.abs(deltaX) > 15 ? (deltaX < 0 ? -1 : 1) : 0
+        );
 
-    offsetX = slideNumber * sliderWidth;
+        offsetX = slideNumber * sliderWidth;
 
-    slider.style['-webkit-transition-duration'] = '.2s';
-    slider.style.webkitTransform = 'translate3d(' + offsetX + 'px,0,0)';
+        slider.style['-webkit-transition-duration'] = '.2s';
+        slider.style.webkitTransform = 'translate3d(' + offsetX + 'px,0,0)';
 
-    e = new CustomEvent('slide', {
-      detail: { slideNumber: Math.abs(slideNumber) },
-      bubbles: true,
-      cancelable: true
-    });
+        e = new CustomEvent('slide', {
+            detail: {
+                slideNumber: Math.abs(slideNumber)
+            },
+            bubbles: true,
+            cancelable: true
+        });
 
-    slider.parentNode.dispatchEvent(e);
-  };
+        slider.parentNode.dispatchEvent(e);
+    };
 
-  window.addEventListener('touchstart', onTouchStart);
-  window.addEventListener('touchmove', onTouchMove);
-  window.addEventListener('touchend', onTouchEnd);
+    window.addEventListener('touchstart', onTouchStart);
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('touchend', onTouchEnd);
 
 }());
 
@@ -833,112 +838,117 @@
  * Licensed under MIT (https://github.com/twbs/ratchet/blob/master/LICENSE)
  * ======================================================================== */
 
-!(function () {
-  'use strict';
+!(function() {
+    'use strict';
 
-  var start     = {};
-  var touchMove = false;
-  var distanceX = false;
-  var toggle    = false;
+    var start = {};
+    var touchMove = false;
+    var distanceX = false;
+    var toggle = false;
 
-  var findToggle = function (target) {
-    var i;
-    var toggles = document.querySelectorAll('.toggle');
+    var findToggle = function(target) {
+        var i;
+        var toggles = document.querySelectorAll('.toggle');
 
-    for (; target && target !== document; target = target.parentNode) {
-      for (i = toggles.length; i--;) {
-        if (toggles[i] === target) {
-          return target;
+        for (; target && target !== document; target = target.parentNode) {
+            for (i = toggles.length; i--;) {
+                if (toggles[i] === target) {
+                    return target;
+                }
+            }
         }
-      }
-    }
-  };
+    };
 
-  window.addEventListener('touchstart', function (e) {
-    e = e.originalEvent || e;
+    window.addEventListener('touchstart', function(e) {
+        e = e.originalEvent || e;
 
-    toggle = findToggle(e.target);
+        toggle = findToggle(e.target);
 
-    if (!toggle) {
-      return;
-    }
+        if (!toggle) {
+            return;
+        }
 
-    var handle      = toggle.querySelector('.toggle-handle');
-    var toggleWidth = toggle.clientWidth;
-    var handleWidth = handle.clientWidth;
-    var offset      = toggle.classList.contains('active') ? (toggleWidth - handleWidth) : 0;
+        var handle = toggle.querySelector('.toggle-handle');
+        var toggleWidth = toggle.clientWidth;
+        var handleWidth = handle.clientWidth;
+        var offset = toggle.classList.contains('active') ? (toggleWidth - handleWidth) : 0;
 
-    start     = { pageX : e.touches[0].pageX - offset, pageY : e.touches[0].pageY };
-    touchMove = false;
-  });
-
-  window.addEventListener('touchmove', function (e) {
-    e = e.originalEvent || e;
-
-    if (e.touches.length > 1) {
-      return; // Exit if a pinch
-    }
-
-    if (!toggle) {
-      return;
-    }
-
-    var handle      = toggle.querySelector('.toggle-handle');
-    var current     = e.touches[0];
-    var toggleWidth = toggle.clientWidth;
-    var handleWidth = handle.clientWidth;
-    var offset      = toggleWidth - handleWidth;
-
-    touchMove = true;
-    distanceX = current.pageX - start.pageX;
-
-    if (Math.abs(distanceX) < Math.abs(current.pageY - start.pageY)) {
-      return;
-    }
-
-    e.preventDefault();
-
-    if (distanceX < 0) {
-      return (handle.style.webkitTransform = 'translate3d(0,0,0)');
-    }
-    if (distanceX > offset) {
-      return (handle.style.webkitTransform = 'translate3d(' + offset + 'px,0,0)');
-    }
-
-    handle.style.webkitTransform = 'translate3d(' + distanceX + 'px,0,0)';
-
-    toggle.classList[(distanceX > (toggleWidth / 2 - handleWidth / 2)) ? 'add' : 'remove']('active');
-  });
-
-  window.addEventListener('touchend', function (e) {
-    if (!toggle) {
-      return;
-    }
-
-    var handle      = toggle.querySelector('.toggle-handle');
-    var toggleWidth = toggle.clientWidth;
-    var handleWidth = handle.clientWidth;
-    var offset      = (toggleWidth - handleWidth);
-    var slideOn     = (!touchMove && !toggle.classList.contains('active')) || (touchMove && (distanceX > (toggleWidth / 2 - handleWidth / 2)));
-
-    if (slideOn) {
-      handle.style.webkitTransform = 'translate3d(' + offset + 'px,0,0)';
-    } else {
-      handle.style.webkitTransform = 'translate3d(0,0,0)';
-    }
-
-    toggle.classList[slideOn ? 'add' : 'remove']('active');
-
-    e = new CustomEvent('toggle', {
-      detail: { isActive: slideOn },
-      bubbles: true,
-      cancelable: true
+        start = {
+            pageX: e.touches[0].pageX - offset,
+            pageY: e.touches[0].pageY
+        };
+        touchMove = false;
     });
 
-    toggle.dispatchEvent(e);
+    window.addEventListener('touchmove', function(e) {
+        e = e.originalEvent || e;
 
-    touchMove = false;
-    toggle    = false;
-  });
+        if (e.touches.length > 1) {
+            return; // Exit if a pinch
+        }
+
+        if (!toggle) {
+            return;
+        }
+
+        var handle = toggle.querySelector('.toggle-handle');
+        var current = e.touches[0];
+        var toggleWidth = toggle.clientWidth;
+        var handleWidth = handle.clientWidth;
+        var offset = toggleWidth - handleWidth;
+
+        touchMove = true;
+        distanceX = current.pageX - start.pageX;
+
+        if (Math.abs(distanceX) < Math.abs(current.pageY - start.pageY)) {
+            return;
+        }
+
+        e.preventDefault();
+
+        if (distanceX < 0) {
+            return (handle.style.webkitTransform = 'translate3d(0,0,0)');
+        }
+        if (distanceX > offset) {
+            return (handle.style.webkitTransform = 'translate3d(' + offset + 'px,0,0)');
+        }
+
+        handle.style.webkitTransform = 'translate3d(' + distanceX + 'px,0,0)';
+
+        toggle.classList[(distanceX > (toggleWidth / 2 - handleWidth / 2)) ? 'add' : 'remove']('active');
+    });
+
+    window.addEventListener('touchend', function(e) {
+        if (!toggle) {
+            return;
+        }
+
+        var handle = toggle.querySelector('.toggle-handle');
+        var toggleWidth = toggle.clientWidth;
+        var handleWidth = handle.clientWidth;
+        var offset = (toggleWidth - handleWidth);
+        var slideOn = (!touchMove && !toggle.classList.contains('active')) || (touchMove && (distanceX > (toggleWidth / 2 - handleWidth / 2)));
+
+        if (slideOn) {
+            handle.style.webkitTransform = 'translate3d(' + offset + 'px,0,0)';
+        } else {
+            handle.style.webkitTransform = 'translate3d(0,0,0)';
+        }
+
+        toggle.classList[slideOn ? 'add' : 'remove']('active');
+
+        e = new CustomEvent('toggle', {
+            detail: {
+                isActive: slideOn
+            },
+            bubbles: true,
+            cancelable: true
+        });
+
+        toggle.dispatchEvent(e);
+
+        touchMove = false;
+        toggle = false;
+    });
 
 }());

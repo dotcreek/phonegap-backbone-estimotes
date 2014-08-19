@@ -71,6 +71,10 @@ window.App = {
 $(document).ready(function() {
     'use strict';
 
+    /**
+     * Override remove function from View
+     * @return {Object} view instance
+     */
     Backbone.View.prototype.remove = function() {
         // this.$el.html('');
         this.stopListening();
@@ -78,17 +82,6 @@ $(document).ready(function() {
         return this;
     };
 
-    var router = new App.Router();
+    new App.Router();
     Backbone.history.start();
 });
-
-/**
- * Override remove function from View
- * @return {Object} view instance
- */
-// Backbone.View.prototype.remove = function() {
-//     this.$el.html('');
-//     this.stopListening();
-//     this.undelegateEvents();
-//     return this;
-// };

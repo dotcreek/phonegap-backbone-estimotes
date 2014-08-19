@@ -7,39 +7,38 @@
 </head>
 <body>
     <div id="mocha"></div>
-            <!-- build:js scripts/vendor.js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/underscore/underscore.js"></script>
-        <script src="bower_components/backbone/backbone.js"></script>
-        <script src="scripts/vendor/ratchet.js"></script>
-        <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/main.js -->
+    <!-- libraries -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/backbone/backbone.js"></script>
+    <script src="scripts/vendor/ratchet.js"></script>
 
-        <script src="scripts/vendor/slider.js"></script>
-        <script src="scripts/main.js"></script>
-        <script src="scripts/router.js"></script>
-        <script src="scripts/templates.js"></script>
-        <script src="scripts/models/session.js"></script>
-        <script src="scripts/views/pages/home.js"></script>
-        <script src="scripts/views/pages/settings.js"></script>
-        <script src="scripts/views/rooms/index.js"></script>
+    <!-- app files -->
+    <script src="scripts/vendor/slider.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/router.js"></script>
+    <script src="scripts/templates.js"></script>
+    <script src="scripts/models/session.js"></script>
+    <script src="scripts/views/pages/home.js"></script>
+    <script src="scripts/views/pages/settings.js"></script>
+    <script src="scripts/views/rooms/index.js"></script>
+
     <script src="bower_components/mocha/mocha.js"></script>
-    <script src="helpers.js"></script>
-    <script>mocha.setup('bdd')</script>
     <script src="bower_components/chai/chai.js"></script>
+    <!-- test helpers -->
+    <script src="helpers.js"></script>
+
+    <!-- Mocha setup -->
     <script>
+        mocha.setup('bdd');
         var assert = chai.assert;
         var expect = chai.expect;
         var should = chai.should();
     </script>
 
-    <!-- include source files here... -->
-
-    <script src="views/pages/settings.spec.js"></script>
-    <script src="views/rooms/index.spec.js"></script>
-    <!-- include spec files here... -->
-    <script src="spec/test.js"></script>
+    <!-- concatenated file with all tests -->
+    <script type="text/javascript" src="scripts/test.js"></script>
 
     <script>mocha.run()</script>
 </body>

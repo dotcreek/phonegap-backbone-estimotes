@@ -1,9 +1,10 @@
 /**
  * Backbone Router
  */
+'use strict';
 App.Router = Backbone.Router.extend({
 
-    initialize: function () {
+    initialize: function() {
         App.slider = new PageSlider($('body'));
         this.currentView = null;
     },
@@ -28,21 +29,20 @@ App.Router = Backbone.Router.extend({
      * Un-delegate events associated to a view
      * @param  {Object} view A Backbone View instance
      */
-    cleanView: function (view) {
+    cleanView: function(view) {
         if (this.currentView) {
             this.currentView.remove();
         }
         this.currentView = view;
     },
 
-    home: function () {
-        'use strict';
+    home: function() {
         var view = new App.Views.Home();
         App.slider.slidePage(view.render().$el);
         this.cleanView(view);
     },
 
-    settings: function () {
+    settings: function() {
         var view = new App.Views.Settings();
         App.slider.slidePage(view.render().$el);
         this.cleanView(view);

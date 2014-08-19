@@ -49,18 +49,23 @@ App.Router = Backbone.Router.extend({
     },
 
     rooms: function () {
+        var self = this;
         var collection = new App.Collections.Room({});
         collection.fetch({
-            headers: {
-                auth_token: '2cc5bc9c-e407-4fbb-826f-ed4d92df603e'
+            success: function (data) {
+                var view = new App.Views.Rooms({
+                    collection: collection
+                });
+                App.slider.slidePage(view.render().$el);
+                self.cleanView(view);
+            },
+
+            error: function (error) {
+                /**
+                 * Do something with the error
+                 */
+                console.log(error);
             }
-        }).done(_.bind(function () {
-            console.log("fetching rooms");
-            var view = new App.Views.Rooms({
-                collection: collection
-            });
-            App.slider.slidePage(view.render().$el);
-            this.cleanView(view);
-        }, this));
+        });
     }
 });

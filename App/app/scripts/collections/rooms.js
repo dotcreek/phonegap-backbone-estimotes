@@ -5,7 +5,7 @@
 
         model: App.Models.Room,
 
-        url: 'http://localhost:4000/rooms'
+        url: App.config.api + 'rooms'
 
     });
 

@@ -17,6 +17,7 @@ App.Router = Backbone.Router.extend({
         '': 'home',
         'settings': 'settings',
         'rooms': 'rooms',
+        'rooms/:id': 'showRoom',
 
         /**
          * This route must be at the end of this object
@@ -64,6 +65,27 @@ App.Router = Backbone.Router.extend({
                 /**
                  * Do something with the error
                  */
+                console.log(error);
+            }
+        });
+    },
+
+    showRoom: function(id){
+        var self = this;
+        var model = new App.Models.Room({
+            id: id
+        });
+
+        model.fetch({
+            success: function(data){
+                var view = new App.Views.RoomsShow({
+                    model:model
+                });
+                App.slider.slidePage(view.render().$el);
+                self.cleanView(view);
+            },
+
+            error: function(error){
                 console.log(error);
             }
         });

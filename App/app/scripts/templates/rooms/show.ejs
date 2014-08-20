@@ -1,0 +1,23 @@
+<header class="bar bar-nav">
+    <button class="btn btn-link btn-back btn-nav pull-left">
+        <span class="icon icon-left-nav"></span>
+        Back
+    </button>
+    <h1 class="title"><%= model.get('room').name %></h1>
+</header>
+<div class="content">
+   <ul class="table-view">
+        <% model.get('contents').upcommingEvents.forEach(function(item){%>
+            <li class="table-view-cell media">
+                <a class="" href='#rooms/<%= item.get("")%>'>
+                    <div class="media-body">
+                        <%=item.get( '') %>
+                            <p> <%= item.get('') %> </p>
+                    </div>
+                </a>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+

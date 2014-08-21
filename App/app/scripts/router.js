@@ -49,11 +49,11 @@ App.Router = Backbone.Router.extend({
         this.cleanView(view);
     },
 
-    rooms: function () {
+    rooms: function() {
         var self = this;
         var collection = new App.Collections.Room({});
         collection.fetch({
-            success: function (data) {
+            success: function() {
                 var view = new App.Views.Rooms({
                     collection: collection
                 });
@@ -61,7 +61,7 @@ App.Router = Backbone.Router.extend({
                 self.cleanView(view);
             },
 
-            error: function (error) {
+            error: function(error) {
                 /**
                  * Do something with the error
                  */
@@ -70,22 +70,22 @@ App.Router = Backbone.Router.extend({
         });
     },
 
-    showRoom: function(id){
+    showRoom: function(id) {
         var self = this;
         var model = new App.Models.Room({
             id: id
         });
 
         model.fetch({
-            success: function(data){
+            success: function() {
                 var view = new App.Views.RoomsShow({
-                    model:model
+                    model: model
                 });
                 App.slider.slidePage(view.render().$el);
                 self.cleanView(view);
             },
 
-            error: function(error){
+            error: function(error) {
                 console.log(error);
             }
         });

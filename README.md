@@ -127,3 +127,11 @@ phonegap run android
 ### Emulate on Google Chrome 
 
 click on "show drawer" next to the "settings" button in the dev tools
+
+### Install Required plugins
+
+To install the cordova globalization plugin use this command:
+
+~~~
+phonegap plugin add org.apache.cordova.globalization
+~~~

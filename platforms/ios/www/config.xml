@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.dotcreek.sctsummit" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>SCTSummit</name>
+<widget id="com.dotcreek.appphonegap" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>App</name>
     <description>
-        San Carlos Technology Summit event application
+        Hello World sample application that responds to the deviceready event.
     </description>
-    <author email="support@dotcreek.com" href="http://www.dotcreek.com">
-        DotCreek Team
+    <author email="support@phonegap.com" href="http://phonegap.com">
+        PhoneGap Team
     </author>
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.5.0" />

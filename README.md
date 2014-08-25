@@ -1,3 +1,5 @@
+# Estimote CMS
+
 ## Basic setup of phonegap project
 
 Please take a look at .gitignore file, to check you dont upload unnesesary files
@@ -7,6 +9,11 @@ to your repository.
 
 ~~~
 ~$ [sudo] npm install phonegap -g
+~$ [sudo] npm install cordova -g
+
+~$ cd App
+~$ [sudo] npm install
+~$ [sudo] bower install
 ~~~
 
 ~~~
@@ -14,12 +21,22 @@ to your repository.
 ~~~
 
 ### Add platform
+Use this if you need to add a new platform
+~~~
+~$ cordova platform add android
+~$ cordova platform add ios
+~~~
+
+
+### Install Required plugins
+
+To install the cordova globalization plugin use this command:
 
 ~~~
-~$ phonegap add android
+~$ phonegap plugin add org.apache.cordova.globalization
 ~~~
 
-### Install in your phone, emulator or virtualized device, no need to build
+### About special "grunt phonegap" task
 
 First, you need to update your /www/index.html with all your files needed from
 /www/js
@@ -27,7 +44,7 @@ First, you need to update your /www/index.html with all your files needed from
 If you run
 
 ~~~
-~$ grunt phonegap # custom task for this phonegap project
+~$ grunt phonegap 
 ~~~
 
 Files from /App/dist will be copied to /phonegap/www/
@@ -68,11 +85,24 @@ www
 With two folders for the same thing(css or js), we ensure that phonegap
 structure will not be overridden by our scripts.
 
+
+
+## Platform Configuration
+
+### iOS
+Special configuration for setting up your dev or test enviroment to run phonegap's iOS project
 ~~~
-~$ phonegap run android
+~$ [sudo] npm install -g ios-deploy
+~$ [sudo] npm install -g ios-sim
 ~~~
 
-### Virtualize device so you dont need to use emulator or your phone
+
+
+### Android
+
+Special configuration for setting up your dev or test enviroment to run phonegap's Android project
+
+#### Virtualize device so you dont need to use emulator or your phone
 
 * Install GenyMotion on Ubuntu
 
@@ -110,28 +140,49 @@ Choose Programming menu, then New Item, type any name you want, as command
 ~/.genymotion/genymotion/genymotion.
 You can use an icon placed ~/.genymotion/genymotion/
 
-### Run phonegap project
+## Run phonegap
 
+### Run on Web browser
+
+~~~
+~$ cd App
+~$ grunt server
+~~~
+
+
+
+### Emulate on Hardware
 * cd /App
 
-~~~
-grunt phonegap
-~~~
-
-* With one device connected(genymotion will work)
+Copy the modified files to the phonegap folder structure
 
 ~~~
-phonegap run android
+~$ grunt phonegap
 ~~~
+
+Build and run the project in the specific platform.
+* In case of Android with one device connected. (genymotion will work)
+
+
+*phonegap run **platform***
+~~~
+~$ phonegap run android
+~~~
+or
+~~~
+~$ phonegap run ios
+~~~
+
+#### iOS
+- Open the Xcode recent generate project
+
+~~~
+~$ open platforms/ios/*.xcodeproj
+~~~
+
+- Now compile and run on the iOS Simulator
+
 
 ### Emulate on Google Chrome 
 
 click on "show drawer" next to the "settings" button in the dev tools
-
-### Install Required plugins
-
-To install the cordova globalization plugin use this command:
-
-~~~
-phonegap plugin add org.apache.cordova.globalization
-~~~

@@ -5,6 +5,13 @@
 
         urlRoot: App.config.api + 'rooms',
 
-        defaults: {}
+        defaults: {},
+
+        parse: function(data) {
+            debugger;
+            this.currentEvent = data.currentEvent;
+            this.upcoming = data.upcoming;
+            return data.room;
+        }
     });
 })();

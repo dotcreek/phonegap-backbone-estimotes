@@ -61,6 +61,21 @@ window.App = {
             while (wrap.firstChild) {
                 wrap.removeChild(wrap.firstChild);
             }
+        },
+
+        getLanguaje: function(callback) {
+            'use strict';
+            var lang = '';
+            var iso = '';
+            var succes = function(locale) {
+                lang = locale.value.split("-");
+                iso = lang[0].toUpperCase();
+                return callback(iso);
+            };
+            var error = function() {
+                alert('Error');
+            };
+            return navigator.globalization.getLocaleName(succes, error);
         }
     }
 };

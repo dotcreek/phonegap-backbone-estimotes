@@ -9,7 +9,7 @@
 
         parse: function(data) {
             this.currentEvent = data.currentEvent;
-            this.upcoming = data.upcoming;
+            this.upcomingEvent = data.upcoming;
             return data;
         }
     });

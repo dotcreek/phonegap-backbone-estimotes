@@ -7,7 +7,16 @@
                 <a class="navigate-right" href='#rooms/<%= item.get("id")%>'>
                     <div class="media-body">
                         <%=item.get( 'name') %>
-                        <p> <%= item.upcommingCount %> </p>
+                        <% if(item.currentEvent){ %>
+                            <p>Current event: <%= item.currentEvent %></p>
+                        <% }else{ %>
+                            <p>No Current Event</p>
+                        <% } %>
+                        <% if(item.upcomingEvent){ %>
+                            <p> Upcoming Event: <%= item.upcomingEvent %> </p>
+                        <% }else{ %>
+                            <p>No Upcoming Events</p>
+                        <% } %>
                     </div>
                 </a>
             </li>

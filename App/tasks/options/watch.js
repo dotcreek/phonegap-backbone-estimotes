@@ -21,6 +21,7 @@ module.exports = {
             '{.tmp,<%= yeoman.app %>}/scripts/**/*.js',
             '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
             '<%= yeoman.app %>/scripts/templates/**/*.{ejs,mustache,hbs}',
+            '<%= yeoman.app %>/i18n/**/*.json',
             'test/spec/**/*.js',
             'test/index.html'
         ]
@@ -29,10 +30,11 @@ module.exports = {
     jst: {
 
         files: [
+            '<%= yeoman.app %>/i18n/**/*.json',
             '<%= yeoman.app %>/scripts/templates/**/*.ejs'
         ],
 
-        tasks: ['jst']
+        tasks: ['json', 'jst', ]
     },
 
     test: {

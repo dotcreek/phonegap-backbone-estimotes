@@ -33,6 +33,8 @@ module.exports = function(grunt) {
             'clean:server',
             'createDefaultTemplate',
             'jst',
+            'json:es',
+            'json:en',
             'concat:unit',
             'connect:livereload',
             'open:server',
@@ -137,5 +139,13 @@ module.exports = function(grunt) {
         });
 
         return grunt.task.run(tasks);
+    });
+
+    grunt.registerTask('concatLocales', function(language) {
+        console.log(language);
+
+        var tasks = ['json'];
+        grunt.task.run(tasks);
+        // return object;
     });
 };

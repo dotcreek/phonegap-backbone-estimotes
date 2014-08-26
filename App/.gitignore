@@ -5,3 +5,5 @@ test/temp
 app/bower_components
 .tmp
 test/bower_components/
+app/i18n/en.js
+app/i18n/es.js

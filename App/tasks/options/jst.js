@@ -8,7 +8,8 @@ module.exports = {
              * Remove whitespaces frm the beginning and end of each line
              */
             processContent: function(src) {
-                return src.replace(/(^\s+|\s+$)/gm, '');
+                var source = src.replace(/<%t /g, '<%= App.polyglot.t');
+                return source.replace(/(^\s+|\s+$)/gm, '');
             }
         }
     }

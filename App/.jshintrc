@@ -33,6 +33,8 @@
         "should": true,
         "Scope": true,
         "alert": true,
+        "Polyglot": true,
+        "languages": true,
         "PageSlider": true
     }
 }

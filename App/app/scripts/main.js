@@ -98,5 +98,11 @@ $(document).ready(function() {
     };
 
     new App.Router();
+    App.polyglot = new Polyglot();
+    /**
+     * Get language here, should be either ES or EN by now
+     */
+    var language = 'ES';// get language here;
+    App.polyglot.extend(languages[language]);
     Backbone.history.start();
 });

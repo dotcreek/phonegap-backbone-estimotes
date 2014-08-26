@@ -22,15 +22,21 @@
         <!-- endbuild -->
     </head>
     <body>
+        <script type="text/javascript">
+            var languages = {};
+        </script>
         <!-- build:js scripts/vendor.js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/underscore/underscore.js"></script>
         <script src="bower_components/backbone/backbone.js"></script>
         <script src="scripts/vendor/ratchet.js"></script>
         <script src="bower_components/store.js/store.js"></script>
+        <script src="bower_components/polyglot/build/polyglot.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/main.js -->
+        <script src="i18n/es.js"></script>
+        <script src="i18n/en.js"></script>
 
         <script src="scripts/vendor/slider.js"></script>
         <script src="scripts/main.js"></script>

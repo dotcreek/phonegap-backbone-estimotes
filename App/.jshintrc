@@ -32,6 +32,8 @@
         "expect": true,
         "should": true,
         "Scope": true,
+        "Polyglot": true,
+        "languages": true,
         "PageSlider": true
     }
 }

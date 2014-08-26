@@ -8,10 +8,9 @@
         defaults: {},
 
         parse: function(data) {
-            debugger;
             this.currentEvent = data.currentEvent;
             this.upcoming = data.upcoming;
-            return data.room;
+            return data;
         }
     });
 })();

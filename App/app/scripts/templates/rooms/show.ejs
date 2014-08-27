@@ -5,17 +5,43 @@
     </button>
     <h1 class="title"><%= model.get("name") %></h1>
 </header>
+
 <div class="content">
    <ul class="table-view">
-        <li class="table-view-cell media">
-            <a class="" href='#rooms/<%= model.get("id")%>'>
-                <div class="media-body">
-                    <%=model.get( '') %>
-                    <p> <%= model.get('') %> </p>
-                    <img src='<%= model.get("image") %>'>
-                </div>
-            </a>
-        </li>
+
+        <% if(model.currentEvent){ %>
+
+            <li class="table-view-cell table-view-divider">
+                <%t ('rooms.current') %>
+            </li>
+            <li class="table-view-cell media">
+                <a class="" href='#rooms/<%= model.get("id")%>'>
+                    <div class="media-body">
+                        <p> <%= model.currentEvent || 'No Current Event :(' %> </p>
+                    </div>
+                </a>
+            </li>
+
+        <% } %>
+
+        <% if(model.upcomming.length){ %>
+
+            <li class="table-view-cell table-view-divider">
+                <%t ('rooms.upcomming') %>
+            </li>
+
+            <% model.upcomming.forEach(function (event) { %>
+                <li class="table-view-cell media">
+                    <%- event.title %>
+                </li>
+            <% }) %>
+
+        <% } else { %>
+            <li class="table-view-cell table-view-divider">
+                Nothing to display
+            </li>
+        <% } %>
+
     </ul>
 </div>
 

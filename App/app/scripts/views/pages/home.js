@@ -6,7 +6,9 @@
         template: JST['app/scripts/templates/pages/home.ejs'],
 
         render: function() {
-            this.$el.html(this.template());
+            this.$el.html(this.template({
+                collection: this.collection
+            }));
             return this;
         }
     });

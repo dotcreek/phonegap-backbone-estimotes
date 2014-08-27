@@ -9,7 +9,10 @@
 
         parse: function(data) {
             this.currentEvent = data.currentEvent;
-            this.upcomingEvent = data.upcoming;
+            if (_.isEmpty(data.currentEvent)) {
+                this.currentEvent = false;
+            }
+            this.upcomming = data.upcomming || [];
             return data;
         }
     });

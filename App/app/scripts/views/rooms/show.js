@@ -1,12 +1,14 @@
-(function () {
+(function() {
     'use strict';
 
     App.Views.RoomsShow = Backbone.View.extend({
 
         template: JST['app/scripts/templates/rooms/show.ejs'],
 
-        render: function () {
-            this.$el.html(this.template({model:this.model}));
+        render: function() {
+            this.$el.html(this.template({
+                model: this.model
+            }));
             return this;
         },
 
@@ -14,11 +16,9 @@
             'click .btn-back': 'back'
         },
 
-        back: function(){
+        back: function() {
             window.history.back();
             return false;
         }
-
     });
-
 })();

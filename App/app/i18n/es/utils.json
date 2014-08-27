@@ -3,5 +3,11 @@
     "settings": "Configuración",
     "profile": "Perfil",
     "favorites": "Favoritos",
-    "refresh": "Recargar"
+    "refresh": "Recargar",
+    "languages": "Lenguage",
+    "notifications": "Notificaciones",
+    "about": "Acerca de [app name]",
+
+    "english": "Inglés",
+    "notify": "Notificar cambios"
 }

@@ -4,23 +4,49 @@
 
 <div class="content">
     <ul class="table-view">
-      <li class="table-view-cell">
-        Item 1
-        <div class="toggle">
-          <div class="toggle-handle"></div>
-        </div>
-      </li>
-      <li class="table-view-cell">
-        Item 2
-        <div class="toggle active">
-          <div class="toggle-handle"></div>
-        </div>
-      </li>
-      <li class="table-view-cell">
-        Item 3
-        <div class="toggle">
-          <div class="toggle-handle"></div>
-        </div>
-      </li>
+        <li class="table-view-cell table-view-divider">
+            <%t ('utils.languages') %>
+        </li>
+        <li class="table-view-cell">
+            <span class="media-object pull-left fa fa-language"></span>
+            <%t ('utils.english') %>
+            <div class="toggle">
+                <div class="toggle-handle"></div>
+            </div>
+        </li>
+        <li class="table-view-cell table-view-divider">
+            <%t ('utils.notifications') %>
+        </li>
+        <li class="table-view-cell media">
+            <span class="media-object pull-left fa fa-bullhorn"></span>
+            <%t ('utils.notify') %>
+            <div class="toggle">
+                <div class="toggle-handle"></div>
+            </div>
+        </li>
+
+        <!-- About -->
+        <li class="table-view-cell table-view-divider">
+            <%t ('utils.about') %>
+        </li>
+        <li class="table-view-cell media">
+             <div class="media-body">
+            App Name
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor
+                 sit amet.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor
+                 sit amet.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor
+                 sit amet.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor
+                 sit amet.
+            </p>
+          </div>
+        </li>
     </ul>
 </div>

@@ -28,12 +28,6 @@ window.App = {
     config: {
 
         /**
-         * Document selector used on Backbone views as 'el' elment
-         * @type {String}
-         */
-        el: document.getElementById('page'),
-
-        /**
          * API URL
          * @type {String}
          */
@@ -68,7 +62,7 @@ window.App = {
             var lang = '';
             var iso = '';
             var succes = function(locale) {
-                lang = locale.value.split("-");
+                lang = locale.value.split('-');
                 iso = lang[0].toUpperCase();
                 return callback(iso);
             };
@@ -77,32 +71,38 @@ window.App = {
             };
             return navigator.globalization.getLocaleName(succes, error);
         }
+    },
+
+    init: function() {
+        'use strict';
+        /**
+         * Override remove function from View
+         * @return {Object} view instance
+         */
+        Backbone.View.prototype.remove = function() {
+            // this.$el.html('');
+            this.stopListening();
+            this.undelegateEvents();
+            return this;
+        };
+
+        new App.Router();
+        App.polyglot = new Polyglot();
+        /**
+         * Get language here, should be either ES or EN by now
+         */
+        var language = 'ES'; // get language here;
+        App.polyglot.extend(languages[language]);
+        Backbone.history.start();
     }
 };
 
-/**
- * Start application
- */
-$(document).ready(function() {
-    'use strict';
-
+if (!PHONEGAP) {
     /**
-     * Override remove function from View
-     * @return {Object} view instance
+     * Start application
      */
-    Backbone.View.prototype.remove = function() {
-        // this.$el.html('');
-        this.stopListening();
-        this.undelegateEvents();
-        return this;
-    };
-
-    new App.Router();
-    App.polyglot = new Polyglot();
-    /**
-     * Get language here, should be either ES or EN by now
-     */
-    var language = 'ES';// get language here;
-    App.polyglot.extend(languages[language]);
-    Backbone.history.start();
-});
+    $(document).ready(function() {
+        'use strict';
+        App.init();
+    });
+}

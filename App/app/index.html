@@ -13,8 +13,9 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
-            <link rel="stylesheet" href="scripts/vendor/ratchet-theme-android.css">
             <link rel="stylesheet" href="styles/ratchet.css">
+            <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
+            <link rel="stylesheet" href="scripts/vendor/ratchet-theme-android.css">
             <link rel="stylesheet" href="styles/style.css">
         <!-- endbuild -->
         <!-- build:js scripts/vendor/modernizr.js -->
@@ -24,6 +25,7 @@
     <body>
         <script type="text/javascript">
             var languages = {};
+            var PHONEGAP = false;
         </script>
         <!-- build:js scripts/vendor.js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>

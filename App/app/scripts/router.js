@@ -16,7 +16,15 @@ App.Router = Backbone.Router.extend({
          */
         '': 'home',
         'settings': 'settings',
+
+        /**
+         * GET /rooms
+         */
         'rooms': 'rooms',
+
+        /**
+         * GET /rooms/:id
+         */
         'rooms/:id': 'showRoom',
 
         /**
@@ -37,27 +45,109 @@ App.Router = Backbone.Router.extend({
         this.currentView = view;
     },
 
+    handleProgress: function(event) {
+        var percentComplete = 0;
+        if (event.lengthComputable) {
+            percentComplete = event.loaded / event.total;
+        }
+        console.log('completed', percentComplete);
+    },
+
+    /**
+     * Visit /
+     */
     home: function() {
-        var view = new App.Views.Home();
-        App.slider.slidePage(view.render().$el);
-        this.cleanView(view);
+        var self = this;
+
+        /**
+         * GET /rooms
+         */
+        new App.Collections.Rooms({}).fetch({
+
+            // xhr: function() {
+            //     var xhr = $.ajaxSettings.xhr();
+            //     xhr.onprogress = self.handleProgress;
+            //     return xhr;
+            // },
+
+            success: function(collection) {
+
+                /**
+                 * Instantiate a new Home View
+                 * use collection just fetched
+                 */
+                var view = new App.Views.Home({
+                    collection: collection
+                });
+
+                /**
+                 * Transition to home by slide[left/right]
+                 */
+                App.slider.slidePage(view.render().$el);
+
+                /**
+                 * Clean view
+                 */
+                self.cleanView(view);
+            },
+
+            error: function(error) {
+                /**
+                 * Do something with the error
+                 */
+                console.log(error);
+            }
+        });
     },
 
+    /**
+     * Visit /#settings
+     */
     settings: function() {
+        /**
+         * Create a new instance of Settings View
+         */
         var view = new App.Views.Settings();
+
+        /**
+         * Transition to settings
+         */
         App.slider.slidePage(view.render().$el);
+
+        /**
+         * Clean view
+         */
         this.cleanView(view);
     },
 
+    /**
+     * Visit /#rooms
+     */
     rooms: function() {
         var self = this;
-        var collection = new App.Collections.Room({});
-        collection.fetch({
-            success: function() {
+
+        /**
+         * GET /rooms
+         */
+        new App.Collections.Rooms({}).fetch({
+            success: function(collection) {
+
+                /**
+                 * Instantiate a new Rooms View
+                 * using collection fetched
+                 */
                 var view = new App.Views.Rooms({
                     collection: collection
                 });
+
+                /**
+                 * Slide View left/right
+                 */
                 App.slider.slidePage(view.render().$el);
+
+                /**
+                 * Clean View
+                 */
                 self.cleanView(view);
             },
 

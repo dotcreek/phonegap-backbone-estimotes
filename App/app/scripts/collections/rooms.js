@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	App.Collections.Room = Backbone.Collection.extend({
+	App.Collections.Rooms = Backbone.Collection.extend({
 
 		model: App.Models.Room,
 

@@ -142,10 +142,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('concatLocales', function(language) {
-        console.log(language);
-
         var tasks = ['json'];
         grunt.task.run(tasks);
-        // return object;
     });
 };

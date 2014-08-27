@@ -21,8 +21,8 @@ module.exports = {
         files: {
             '<%= yeoman.dist %>/styles/main.css': [
                 '.tmp/styles/{,*/}*.css',
-                '<%= yeoman.app %>/scripts/vendor/ratchet-theme-android.css',
-                '<%= yeoman.app %>/styles/{,*/}*.css'
+                '<%= yeoman.app %>/styles/{,*/}*.css',
+                '<%= yeoman.app %>/scripts/vendor/ratchet-theme-android.css'
             ]
         }
     },

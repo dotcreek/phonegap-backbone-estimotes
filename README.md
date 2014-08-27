@@ -20,13 +20,6 @@ to your repository.
 ~$ phonegap -v # 3.5.0-0.20.9 or greater
 ~~~
 
-### Add platform
-Use this if you need to add a new platform
-~~~
-~$ cordova platform add android
-~$ cordova platform add ios
-~~~
-
 
 ### Install Required plugins
 
@@ -146,7 +139,7 @@ You can use an icon placed ~/.genymotion/genymotion/
 
 ~~~
 ~$ cd App
-~$ grunt server
+~$ grunt serve
 ~~~
 
 
@@ -154,14 +147,20 @@ You can use an icon placed ~/.genymotion/genymotion/
 ### Emulate on Hardware
 * cd /App
 
-Copy the modified files to the phonegap folder structure
+Copy the modified files to the phonegap folder structure, it also add the corresponding ratchet styling files dependingo n the platform
 
 ~~~
-~$ grunt phonegap
+~$ grunt phonegap:android
+~~~
+or
+~~~
+~$ grunt phonegap:ios
 ~~~
 
-Build and run the project in the specific platform.
+
+Now build and run the project in the specific platform.
 * In case of Android with one device connected. (genymotion will work)
+* For iOS you need to have the iOS Simulator it will try to run there, but you can follow the steps 
 
 
 *phonegap run **platform***
@@ -173,11 +172,11 @@ or
 ~$ phonegap run ios
 ~~~
 
-#### iOS
-- Open the Xcode recent generate project
+#### iOS (optional)
+- Open the Xcode recent generate project and build and run the project from there for debugging
 
 ~~~
-~$ open platforms/ios/*.xcodeproj
+~$ open platforms/ios/SCTSummit.xcodeproj
 ~~~
 
 - Now compile and run on the iOS Simulator

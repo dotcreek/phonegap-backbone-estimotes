@@ -17,7 +17,7 @@
     "grunt-contrib-jst": "~0.5.1",
     "grunt-contrib-uglify": "~0.3.1",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-json": "git+https://git@github.com/AndiOxidant/grunt-json.git#patch-1",
+    "grunt-json": "git+https://git@github.com/lesterzone/grunt-json.git#v0.1.3",
     "grunt-mocha": "~0.4.10",
     "grunt-open": "~0.2.3",
     "grunt-rev": "~0.1.0",

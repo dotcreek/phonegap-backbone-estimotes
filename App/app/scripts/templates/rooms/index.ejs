@@ -9,13 +9,13 @@
                         <%=item.get( 'name') %>
 
                         <% if(item.currentEvent){ %>
-                            <p>Current event: <%= item.currentEvent %></p>
+                            <p>Current event: <%= item.currentEvent.content.description %></p>
                         <% }else{ %>
                             <p>No Current Event</p>
                         <% } %>
 
-                        <% if(item.upcomming.length){ %>
-                            <p>Upcoming Event: <%- item.upcomming[0].title %></p>
+                        <% if(!_.isEmpty(item.get('upcoming'))){ %>
+                            <p>Upcoming Event: <%- item.upcomming[0].content.description %></p>
                         <% }else{ %>
                             <p>No Upcoming Events</p>
                         <% } %>

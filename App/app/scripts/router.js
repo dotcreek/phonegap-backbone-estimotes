@@ -28,6 +28,11 @@ App.Router = Backbone.Router.extend({
         'rooms/:id': 'showRoom',
 
         /**
+         * GET /content/:id
+         */
+        'contents/:id': 'showContent',
+
+        /**
          * This route must be at the end of this object
          */
         '*404': 'notFound'
@@ -63,6 +68,9 @@ App.Router = Backbone.Router.extend({
          * GET /rooms
          */
         new App.Collections.Rooms({}).fetch({
+            data: {
+                currentTime: new Date()
+            },
 
             // xhr: function() {
             //     var xhr = $.ajaxSettings.xhr();
@@ -130,8 +138,10 @@ App.Router = Backbone.Router.extend({
          * GET /rooms
          */
         new App.Collections.Rooms({}).fetch({
+            data: {
+                currentTime: new Date().getTime()
+            },
             success: function(collection) {
-
                 /**
                  * Instantiate a new Rooms View
                  * using collection fetched
@@ -167,8 +177,32 @@ App.Router = Backbone.Router.extend({
         });
 
         model.fetch({
+            data: {
+                currentTime: new Date().getTime()
+            },
             success: function() {
                 var view = new App.Views.RoomsShow({
+                    model: model
+                });
+                App.slider.slidePage(view.render().$el);
+                self.cleanView(view);
+            },
+
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    },
+
+    showContent: function(id) {
+        var self = this;
+        var model = new App.Models.Content({
+            id: id
+        });
+
+        model.fetch({
+            success: function() {
+                var view = new App.Views.ContentsShow({
                     model: model
                 });
                 App.slider.slidePage(view.render().$el);

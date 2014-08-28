@@ -91,8 +91,12 @@ window.App = {
         /**
          * Get language here, should be either ES or EN by now
          */
-        var language = 'ES'; // get language here;
-        App.polyglot.extend(languages[language]);
+        var userLanguage = 'ES';
+        /*var language = App.utils.getLanguaje(function(lang) {
+            alert(lang);
+            userLanguage = lang;
+        }); // get language here;*/
+        App.polyglot.extend(languages[userLanguage]);
         Backbone.history.start();
     }
 };

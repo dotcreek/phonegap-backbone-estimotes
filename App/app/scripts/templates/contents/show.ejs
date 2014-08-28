@@ -1,0 +1,18 @@
+<header class="bar bar-nav">
+    <button class="btn btn-link btn-back btn-nav pull-left">
+        <span class="icon icon-left-nav"></span>
+        Back
+    </button>
+    <h1 class="title"><%= model.get('description') %></h1>
+</header>
+<div class="content">
+    <ul class="table-view">
+        <li class="table-view-cell media">
+            <a class="navigate-right" href='#rooms/<%= model.get("id")%>'>
+                <div class="media-body">
+                    <%=model.get( 'content') %>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

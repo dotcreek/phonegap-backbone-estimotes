@@ -15,16 +15,16 @@
                 <%t ('rooms.current') %>
             </li>
             <li class="table-view-cell media">
-                <a class="" href='#rooms/<%= model.get("id")%>'>
+                <a class="" href='#contents/<%= model.currentEvent.contentId%>'>
                     <div class="media-body">
-                        <p> <%= model.currentEvent || 'No Current Event :(' %> </p>
+                        <p> <%= model.currentEvent.content.description || 'No Current Event :(' %> </p>
                     </div>
                 </a>
             </li>
 
         <% } %>
 
-        <% if(model.upcomming.length){ %>
+        <% if(!_.isEmpty(model.upcomming)){ %>
 
             <li class="table-view-cell table-view-divider">
                 <%t ('rooms.upcomming') %>
@@ -32,7 +32,9 @@
 
             <% model.upcomming.forEach(function (event) { %>
                 <li class="table-view-cell media">
-                    <%- event.title %>
+                    <a class="navigate-right" href='#contents/<%=event.contentId%>'>
+                        <%- event.content.description %>
+                    </a>
                 </li>
             <% }) %>
 

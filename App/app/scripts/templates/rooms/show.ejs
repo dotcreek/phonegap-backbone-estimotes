@@ -16,10 +16,8 @@
             </li>
             <li class="table-view-cell media">
                 <a class="" href='#contents/<%= model.currentEvent.contentId%>'>
-                    <div class="media-body">
-                        <p> <%= model.currentEvent.content.description || 'No Current Event :(' %> </p>
-                    </div>
-                </a>
+                    <%- model.currentEvent.content.description || 'No Current Event :(' %>
+               </a>
             </li>
 
         <% } %>

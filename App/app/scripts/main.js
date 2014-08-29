@@ -61,7 +61,7 @@ window.App = {
             'use strict';
             var lang = '';
             var iso = '';
-            var succes = function(locale) {
+            var success = function(locale) {
                 lang = locale.value.split('-');
                 iso = lang[0].toUpperCase();
                 return callback(iso);
@@ -69,7 +69,7 @@ window.App = {
             var error = function() {
                 alert('Error');
             };
-            return navigator.globalization.getLocaleName(succes, error);
+            return navigator.globalization.getLocaleName(success, error);
         }
     },
 
@@ -91,12 +91,11 @@ window.App = {
         /**
          * Get language here, should be either ES or EN by now
          */
-        var userLanguage = 'ES';
-        /*var language = App.utils.getLanguaje(function(lang) {
+        var language = App.utils.getLanguaje(function(lang) {
             alert(lang);
-            userLanguage = lang;
-        }); // get language here;*/
-        App.polyglot.extend(languages[userLanguage]);
+            App.polyglot.extend(languages[lang]);
+        }); // get language here;
+
         Backbone.history.start();
     }
 };

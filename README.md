@@ -185,3 +185,7 @@ or
 ### Emulate on Google Chrome 
 
 click on "show drawer" next to the "settings" button in the dev tools
+
+### Remote debugging with Google Chrome
+
+https://developer.chrome.com/devtools/docs/remote-debugging

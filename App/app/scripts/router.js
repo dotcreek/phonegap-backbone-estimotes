@@ -28,7 +28,7 @@ App.Router = Backbone.Router.extend({
         'rooms/:id': 'showRoom',
 
         /**
-         * GET /content/:id
+         * GET /contents/:id
          */
         'contents/:id': 'showContent',
 

@@ -12,7 +12,10 @@
             if (_.isEmpty(data.currentEvent)) {
                 this.currentEvent = false;
             }
-            this.upcomming = data.upcoming || [];
+            this.upcoming = data.upcoming || [];
+            this.upcomingFirst = data.upcoming ? data.upcoming[0] : false;
+            if (this.upcomingFirst) {delete data.upcoming[0];}
+
             return data;
         }
     });

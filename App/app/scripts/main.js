@@ -70,6 +70,21 @@ window.App = {
                 alert('Error');
             };
             return navigator.globalization.getLocaleName(success, error);
+        },
+
+        convertDate: function(utcDate) {
+            'use strict';
+            var date = moment(utcDate).tz('America/Costa_Rica');
+            var hour = date.hour();
+            var minutes = '';
+            if (date.minutes().toString().length < 2) {
+                minutes = '0' + date.minutes();
+            } else {
+                minutes = date.minutes();
+            }
+            var timezone = date.format('Z');
+            var newDate = hour + ':' + minutes + ' GMT' + timezone;
+            return newDate;
         }
     },
 
@@ -95,6 +110,8 @@ window.App = {
             alert(lang);
             App.polyglot.extend(languages[lang]);
         }); // get language here;
+
+        //App.polyglot.extend(languages[]);
 
         Backbone.history.start();
     }

@@ -1,7 +1,7 @@
 <%= JST['app/scripts/templates/partials/_navigation.ejs']({nav: 'home'}) %>
 
 <div class="content">
-    <ul class="table-view">
+    <ul class="table-view rooms-home">
         <% collection.forEach(function(item){ %>
             <li class="table-view-cell media">
                 <a class="navigate-right" href='#rooms/<%= item.get("id")%>'>

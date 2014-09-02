@@ -139,7 +139,7 @@ App.Router = Backbone.Router.extend({
          */
         new App.Collections.Rooms({}).fetch({
             data: {
-                currentTime: new Date().getTime()
+                currentTime: new Date().toISOString()
             },
             success: function(collection) {
                 /**
@@ -178,7 +178,7 @@ App.Router = Backbone.Router.extend({
 
         model.fetch({
             data: {
-                currentTime: new Date().getTime()
+                currentTime: new Date().toISOString()
             },
             success: function() {
                 var view = new App.Views.RoomsShow({

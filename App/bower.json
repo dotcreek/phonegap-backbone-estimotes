@@ -9,7 +9,9 @@
     "ratchet": "https://github.com/twbs/ratchet.git",
     "store.js": "~1.3.16",
     "polyglot": "~0.4.1",
-    "fontawesome": "~4.2.0"
+    "fontawesome": "~4.2.0",
+    "moment": "~2.8.2",
+    "moment-timezone": "~0.2.1"
   },
   "devDependencies": {}
 }

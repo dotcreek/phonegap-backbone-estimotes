@@ -69,22 +69,29 @@ window.App = {
             var error = function() {
                 alert('Error');
             };
-            return navigator.globalization.getLocaleName(success, error);
+            if (navigator.globalization) {
+                return navigator.globalization.getLocaleName(success, error);
+            }
+            return callback('ES');
         },
 
-        convertDate: function(utcDate) {
+        convertDate: function(dates) {
             'use strict';
-            var date = moment(utcDate).tz('America/Costa_Rica');
-            var hour = date.hour();
-            var minutes = '';
-            if (date.minutes().toString().length < 2) {
-                minutes = '0' + date.minutes();
-            } else {
-                minutes = date.minutes();
-            }
-            var timezone = date.format('Z');
-            var newDate = hour + ':' + minutes + ' GMT' + timezone;
-            return newDate;
+            var date, day, hour, minutes, newDate = '';
+            for (var i = 0; i < dates.length; i++) {
+                date = moment(dates[i]).tz('America/Costa_Rica');
+                hour = date.hour();
+                minutes = '';
+                if (date.minutes().toString().length < 2) {
+                    minutes = '0' + date.minutes();
+                } else {
+                    minutes = date.minutes();
+                }
+                newDate += hour + ':' + minutes + ' -';
+            };
+            day = date._locale._weekdays[date.days()];
+            newDate = newDate.substring(0, newDate.length - 1);
+            return day + ' ' + newDate;
         }
     },
 
@@ -107,11 +114,10 @@ window.App = {
          * Get language here, should be either ES or EN by now
          */
         var language = App.utils.getLanguaje(function(lang) {
-            alert(lang);
             App.polyglot.extend(languages[lang]);
-        }); // get language here;
-
-        //App.polyglot.extend(languages[]);
+            lang.toLowerCase();
+            moment.locale(lang);
+        });
 
         Backbone.history.start();
     }

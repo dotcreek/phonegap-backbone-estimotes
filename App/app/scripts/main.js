@@ -69,30 +69,34 @@ window.App = {
             var error = function() {
                 console.log('Error loading locale');
             };
-
             // try to identify the phone's locale
             if (navigator.globalization) {
                 return navigator.globalization.getLocaleName(success, error);
-            } else {
-                // responding with a default locale
-                return callback('ES');
             }
-
+            // responding with a default locale
+            return callback('ES');
         },
 
-        convertDate: function(utcDate) {
+        convertDate: function(dates) {
             'use strict';
-            var date = moment(utcDate).tz('America/Costa_Rica');
-            var hour = date.hour();
-            var minutes = '';
-            if (date.minutes().toString().length < 2) {
-                minutes = '0' + date.minutes();
-            } else {
-                minutes = date.minutes();
-            }
-            var timezone = date.format('Z');
-            var newDate = hour + ':' + minutes + ' GMT' + timezone;
-            return newDate;
+            var date, day, hour, minutes, newDate = '';
+            for (var i = 0; i < dates.length; i++) {
+                date = moment(dates[i]).tz('America/Costa_Rica');
+                hour = date.hour();
+                minutes = '';
+                if (date.minutes().toString().length < 2) {
+                    //add 0 if minutes  is a one digit number
+                    minutes = '0' + date.minutes();
+                } else {
+                    minutes = date.minutes();
+                }
+                newDate += hour + ':' + minutes + ' -';
+            };
+            //get name of day
+            day = date._locale._weekdays[date.days()];
+
+            newDate = newDate.substring(0, newDate.length - 1);
+            return day + ' ' + newDate;
         }
     },
 
@@ -116,9 +120,10 @@ window.App = {
          */
         App.utils.getLanguaje(function(lang) {
             App.polyglot.extend(languages[lang]);
-        }); // get language here;
-
-        //App.polyglot.extend(languages[]);
+            lang.toLowerCase();
+            //set locale to moment.js
+            moment.locale(lang);
+        });
 
         Backbone.history.start();
     }

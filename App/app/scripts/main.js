@@ -67,9 +67,17 @@ window.App = {
                 return callback(iso);
             };
             var error = function() {
-                alert('Error');
+                console.log('Error loading locale');
             };
-            return navigator.globalization.getLocaleName(success, error);
+
+            // try to identify the phone's locale
+            if (navigator.globalization) {
+                return navigator.globalization.getLocaleName(success, error);
+            } else {
+                // responding with a default locale
+                return callback('ES');
+            }
+
         },
 
         convertDate: function(utcDate) {
@@ -106,8 +114,7 @@ window.App = {
         /**
          * Get language here, should be either ES or EN by now
          */
-        var language = App.utils.getLanguaje(function(lang) {
-            alert(lang);
+        App.utils.getLanguaje(function(lang) {
             App.polyglot.extend(languages[lang]);
         }); // get language here;
 

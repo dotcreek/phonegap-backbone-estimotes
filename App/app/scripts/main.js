@@ -67,11 +67,13 @@ window.App = {
                 return callback(iso);
             };
             var error = function() {
-                alert('Error');
+                console.log('Error loading locale');
             };
+            // try to identify the phone's locale
             if (navigator.globalization) {
                 return navigator.globalization.getLocaleName(success, error);
             }
+            // responding with a default locale
             return callback('ES');
         },
 
@@ -83,13 +85,16 @@ window.App = {
                 hour = date.hour();
                 minutes = '';
                 if (date.minutes().toString().length < 2) {
+                    //add 0 if minutes  is a one digit number
                     minutes = '0' + date.minutes();
                 } else {
                     minutes = date.minutes();
                 }
                 newDate += hour + ':' + minutes + ' -';
             };
+            //get name of day
             day = date._locale._weekdays[date.days()];
+
             newDate = newDate.substring(0, newDate.length - 1);
             return day + ' ' + newDate;
         }
@@ -113,9 +118,10 @@ window.App = {
         /**
          * Get language here, should be either ES or EN by now
          */
-        var language = App.utils.getLanguaje(function(lang) {
+        App.utils.getLanguaje(function(lang) {
             App.polyglot.extend(languages[lang]);
             lang.toLowerCase();
+            //set locale to moment.js
             moment.locale(lang);
         });
 

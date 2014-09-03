@@ -17,9 +17,9 @@
             <li class="table-view-cell media">
                 <a class="" href='#contents/<%= model.currentEvent.contentId%>'>
                     <div class="media-body">
-                        <h3 class="content-title">
+                        <h4 class="content-title">
                             <%- model.currentEvent.content.description || 'No Current Event :(' %>
-                        </h3>
+                        </h4>
                         <p>
                             <%- model.currentEvent.summary %>
                         </p>
@@ -42,9 +42,9 @@
                 <li class="table-view-cell media">
                     <a class="navigate-right" href='#contents/<%=model.upcomingFirst.contentId%>'>
                         <div class="media-body">
-                            <h3 class="content-title">
+                            <h4 class="content-title">
                                 <%- model.upcomingFirst.content.description || 'No Current Event :(' %>
-                            </h3>
+                            </h4>
                             <p>
                                 <%- model.upcomingFirst.summary %>
                             </p>

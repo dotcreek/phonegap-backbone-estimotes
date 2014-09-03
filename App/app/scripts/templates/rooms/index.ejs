@@ -6,7 +6,9 @@
             <li class="table-view-cell media">
                 <a class="navigate-right" href='#rooms/<%= item.get("id")%>'>
                     <div class="media-body">
-                        <%=item.get( 'name') %>
+                        <h4>
+                            <%=item.get( 'name') %>
+                        </h4>
 
                         <% if(item.currentEvent){ %>
                             <p><%t ('rooms.current') %>: <%= item.currentEvent.content.description %></p>

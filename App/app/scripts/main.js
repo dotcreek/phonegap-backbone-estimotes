@@ -79,23 +79,23 @@ window.App = {
 
         convertDate: function(dates) {
             'use strict';
-            var date, day, hour, minutes, newDate = '';
+            var date, day, newDate = '';
             for (var i = 0; i < dates.length; i++) {
                 date = moment(dates[i]).tz('America/Costa_Rica');
-                hour = date.hour();
-                minutes = '';
-                if (date.minutes().toString().length < 2) {
-                    //add 0 if minutes  is a one digit number
-                    minutes = '0' + date.minutes();
+                if (date._locale._abbr === 'es') {
+                    date.locale('en');
+                    newDate += date.format('LT') + ' - ';
+                    date.locale('es');
                 } else {
-                    minutes = date.minutes();
+                    newDate += date.format('LT') + ' - ';
                 }
-                newDate += hour + ':' + minutes + ' -';
-            };
+
+            }
             //get name of day
             day = date._locale._weekdays[date.days()];
+            day = day.substring(0,1).toUpperCase() + day.substring(1);
 
-            newDate = newDate.substring(0, newDate.length - 1);
+            newDate = newDate.substring(0, newDate.length - 2);
             return day + ' ' + newDate;
         }
     },

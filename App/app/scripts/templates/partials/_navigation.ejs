@@ -1,9 +1,9 @@
 <nav class="bar ios-title">
-  <% if(title){ %>
-    <%t (title) %>
-  <% } else { %>
-    <%t ('utils.home') %>
-  <% } %>
+    <% if(title){ %>
+        <h1 class="title"><%t (title) %></h1>
+    <% } else { %>
+        <h1 class="title"><%t ('utils.home') %></h1>
+    <% } %>
 </nav>
 <header class="bar bar-tab">
   <a class="tab-item <%= nav === 'home' ? 'active' : '' %>" href="#">

@@ -67,11 +67,10 @@ App.Router = Backbone.Router.extend({
         /**
          * GET /rooms
          */
-        new App.Collections.Rooms({}).fetch({
+        new App.Collections.Events({}).fetch({
             data: {
-                currentTime: new Date()
+                currentTime: new Date().toISOString()
             },
-
             // xhr: function() {
             //     var xhr = $.ajaxSettings.xhr();
             //     xhr.onprogress = self.handleProgress;
@@ -176,6 +175,9 @@ App.Router = Backbone.Router.extend({
             id: id
         });
 
+        /**
+         * GET /rooms/:id
+         */
         model.fetch({
             data: {
                 currentTime: new Date().toISOString()
@@ -201,6 +203,9 @@ App.Router = Backbone.Router.extend({
             eventId : eventId
         });
 
+        /**
+         * GET /contents/:id
+         */
         model.fetch({
             success: function() {
                 var view = new App.Views.ContentsShow({

@@ -12,15 +12,16 @@
                 <% model.get('events').forEach(function (event) { %>
                     <% if (event.id === model._previousAttributes.eventId) {%>
                         <h4 class="room-name">
-                            <%= event.room.name%>
+                            <%- event.room.name%>
                         </h4>
                         <p class="content-date">
                             <%- App.utils.convertDate([event.startAt, event.endAt]) %>
                         </p>
                     <% } %>
                 <% })%>
-
-                <%=model.get( 'content') %>
+                <p>
+                    <%-model.get( 'content') %>
+                </p>
             </div>
         </li>
     </ul>

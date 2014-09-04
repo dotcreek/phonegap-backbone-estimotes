@@ -3,7 +3,7 @@
         <span class="icon icon-left-nav"></span>
         Back
     </button>
-    <h1 class="title"><%= model.get("name") %></h1>
+    <h1 class="title"><%- model.get("name") %></h1>
 </header>
 
 <div class="content show-room">
@@ -15,7 +15,7 @@
                 <%t ('rooms.current') %>
             </li>
             <li class="table-view-cell media">
-                <a class="" href='#contents/<%= model.currentEvent.contentId%>/<%= model.currentEvent.id%>'>
+                <a href='#contents/<%- model.currentEvent.contentId%>/<%- model.currentEvent.id%>'>
                     <div class="media-body">
                         <h4 class="content-title">
                             <%- model.currentEvent.content.description || 'No Current Event :(' %>
@@ -40,7 +40,7 @@
 
             <% if (model.upcomingFirst) { %>
                 <li class="table-view-cell media">
-                    <a class="navigate-right" href='#contents/<%=model.upcomingFirst.contentId%>/<%= model.upcomingFirst.id%>'>
+                    <a href='#contents/<%-model.upcomingFirst.contentId%>/<%- model.upcomingFirst.id%>'>
                         <div class="media-body">
                             <h4 class="content-title">
                                 <%- model.upcomingFirst.content.description || 'No Current Event :(' %>
@@ -58,7 +58,7 @@
 
             <% model.upcoming.forEach(function (event) { %>
                 <li class="table-view-cell media">
-                    <a class="navigate-right" href='#contents/<%=event.contentId%>/<%= event.id%>'>
+                    <a href='#contents/<%=event.contentId%>/<%= event.id%>'>
                         <h4 class="content-title">
                             <%- event.content.description %>
                         </h4>

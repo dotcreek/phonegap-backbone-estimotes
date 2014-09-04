@@ -1,5 +1,6 @@
 {
     "rooms": "Salas",
     "current": "Evento actual",
-    "upcoming": "Siguiente"
+    "upcoming": "Siguiente evento",
+    "upcoming-events": "Siguientes eventos"
 }

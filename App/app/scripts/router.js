@@ -30,7 +30,7 @@ App.Router = Backbone.Router.extend({
         /**
          * GET /contents/:id
          */
-        'contents/:id': 'showContent',
+        'contents/:id/:eventId': 'showContent',
 
         /**
          * This route must be at the end of this object
@@ -194,10 +194,11 @@ App.Router = Backbone.Router.extend({
         });
     },
 
-    showContent: function(id) {
+    showContent: function(id, eventId) {
         var self = this;
         var model = new App.Models.Content({
-            id: id
+            id: id,
+            eventId : eventId
         });
 
         model.fetch({

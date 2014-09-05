@@ -19,7 +19,7 @@
     },
     "installed_plugins": {
         "org.apache.cordova.globalization": {
-            "PACKAGE_NAME": "com.dotcreek.appphonegap"
+            "PACKAGE_NAME": "com.dotcreek.sctsummit"
         }
     },
     "dependent_plugins": {}

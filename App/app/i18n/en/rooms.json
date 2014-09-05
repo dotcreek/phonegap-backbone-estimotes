@@ -1,5 +1,7 @@
 {
     "rooms": "Rooms",
     "current": "Current Event",
-    "upcoming": "Upcoming Events"
+    "current-events": "Current Events",
+    "upcoming": "Upcoming Event",
+    "upcoming-events": "Upcoming Events"
 }

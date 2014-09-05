@@ -30,7 +30,7 @@ App.Router = Backbone.Router.extend({
         /**
          * GET /contents/:id
          */
-        'contents/:id': 'showContent',
+        'contents/:id/:eventId': 'showContent',
 
         /**
          * This route must be at the end of this object
@@ -67,11 +67,10 @@ App.Router = Backbone.Router.extend({
         /**
          * GET /rooms
          */
-        new App.Collections.Rooms({}).fetch({
+        new App.Collections.Events({}).fetch({
             data: {
-                currentTime: new Date()
+                currentTime: new Date().toISOString()
             },
-
             // xhr: function() {
             //     var xhr = $.ajaxSettings.xhr();
             //     xhr.onprogress = self.handleProgress;
@@ -176,6 +175,9 @@ App.Router = Backbone.Router.extend({
             id: id
         });
 
+        /**
+         * GET /rooms/:id
+         */
         model.fetch({
             data: {
                 currentTime: new Date().toISOString()
@@ -194,12 +196,16 @@ App.Router = Backbone.Router.extend({
         });
     },
 
-    showContent: function(id) {
+    showContent: function(id, eventId) {
         var self = this;
         var model = new App.Models.Content({
-            id: id
+            id: id,
+            eventId : eventId
         });
 
+        /**
+         * GET /contents/:id
+         */
         model.fetch({
             success: function() {
                 var view = new App.Views.ContentsShow({

@@ -3,7 +3,7 @@
         <span class="icon icon-left-nav"></span>
         Back
     </button>
-    <h1 class="title"><%= model.get("name") %></h1>
+    <h1 class="title"><%- model.get("name") %></h1>
 </header>
 
 <div class="content show-room">
@@ -15,15 +15,15 @@
                 <%t ('rooms.current') %>
             </li>
             <li class="table-view-cell media">
-                <a class="" href='#contents/<%= model.currentEvent.contentId%>'>
+                <a href='#contents/<%- model.currentEvent.contentId%>/<%- model.currentEvent.id%>'>
                     <div class="media-body">
-                        <h3 class="content-title">
+                        <h4 class="content-title">
                             <%- model.currentEvent.content.description || 'No Current Event :(' %>
-                        </h3>
+                        </h4>
                         <p>
                             <%- model.currentEvent.summary %>
                         </p>
-                        <p>
+                        <p class="content-date">
                             <%- App.utils.convertDate([model.currentEvent.startAt,model.currentEvent.endAt]) %>
                         </p>
                     </div>
@@ -35,20 +35,20 @@
         <% if(!_.isEmpty(model.upcoming)){ %>
 
             <li class="table-view-cell table-view-divider">
-                <%t ('rooms.upcoming') %>
+                <%t ('rooms.upcoming-events') %>
             </li>
 
             <% if (model.upcomingFirst) { %>
                 <li class="table-view-cell media">
-                    <a class="navigate-right" href='#contents/<%=model.upcomingFirst.contentId%>'>
+                    <a href='#contents/<%-model.upcomingFirst.contentId%>/<%- model.upcomingFirst.id%>'>
                         <div class="media-body">
-                            <h3 class="content-title">
+                            <h4 class="content-title">
                                 <%- model.upcomingFirst.content.description || 'No Current Event :(' %>
-                            </h3>
+                            </h4>
                             <p>
                                 <%- model.upcomingFirst.summary %>
                             </p>
-                            <p>
+                            <p class="content-date">
                                 <%- App.utils.convertDate([model.upcomingFirst.startAt,model.upcomingFirst.endAt]) %>
                             </p>
                         </div>
@@ -58,8 +58,10 @@
 
             <% model.upcoming.forEach(function (event) { %>
                 <li class="table-view-cell media">
-                    <a class="navigate-right" href='#contents/<%=event.contentId%>'>
-                        <%- event.content.description %>
+                    <a href='#contents/<%=event.contentId%>/<%= event.id%>'>
+                        <h4 class="content-title">
+                            <%- event.content.description %>
+                        </h4>
                     </a>
                 </li>
             <% }) %>

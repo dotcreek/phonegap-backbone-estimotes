@@ -1,15 +1,20 @@
-<%= JST[ 'app/scripts/templates/partials/_navigation.ejs']({ nav: 'rooms' }) %>
+<%= JST[ 'app/scripts/templates/partials/_navigation.ejs']({
+    nav: 'rooms',
+    title: 'rooms.rooms'
+})%>
 
 <div class="content">
     <ul class="table-view rooms-index">
         <% collection.forEach(function(item){ %>
             <li class="table-view-cell media">
-                <a class="navigate-right" href='#rooms/<%= item.get("id")%>'>
+                <a class="navigate-right" href='#rooms/<%- item.get("id")%>'>
                     <div class="media-body">
-                        <%=item.get( 'name') %>
+                        <h4>
+                            <%-item.get( 'name') %>
+                        </h4>
 
                         <% if(item.currentEvent){ %>
-                            <p><%t ('rooms.current') %>: <%= item.currentEvent.content.description %></p>
+                            <p><%t ('rooms.current') %>: <%- item.currentEvent.content.description %></p>
                         <% }else{ %>
                             <p>No Current Event</p>
                         <% } %>

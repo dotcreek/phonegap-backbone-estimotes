@@ -8,11 +8,21 @@
 <div class="content">
     <ul class="table-view">
         <li class="table-view-cell media">
-            <a class="navigate-right" href='#rooms/<%= model.get("id")%>'>
-                <div class="media-body">
-                    <%=model.get( 'content') %>
-                </div>
-            </a>
+            <div class="media-body">
+                <% model.get('events').forEach(function (event) { %>
+                    <% if (event.id === model._previousAttributes.eventId) {%>
+                        <h4 class="room-name">
+                            <%- event.room.name%>
+                        </h4>
+                        <p class="content-date">
+                            <%- App.utils.convertDate([event.startAt, event.endAt]) %>
+                        </p>
+                    <% } %>
+                <% })%>
+                <p>
+                    <%-model.get( 'content') %>
+                </p>
+            </div>
         </li>
     </ul>
 </div>

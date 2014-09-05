@@ -31,7 +31,8 @@ window.App = {
          * API URL
          * @type {String}
          */
-        api: 'http://localhost:4000/',
+        // api: 'http://localhost:4000/',
+        api: 'https://summit.dotcreek.com:4000/',
 
         /**
          * Min value for start searching values to API or autocomplete fields

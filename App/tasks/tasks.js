@@ -47,6 +47,7 @@ module.exports = function(grunt) {
         var testTasks = [
             'clean:server',
             'createDefaultTemplate',
+            'concat:unit',
             'jst',
             'connect:test',
             'mocha',

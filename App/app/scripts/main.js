@@ -94,7 +94,7 @@ window.App = {
             }
             //get name of day
             day = date._locale._weekdays[date.days()];
-            day = day.substring(0,1).toUpperCase() + day.substring(1);
+            day = day.substring(0, 1).toUpperCase() + day.substring(1);
 
             newDate = newDate.substring(0, newDate.length - 2);
             return day + ' ' + newDate;
@@ -126,6 +126,20 @@ window.App = {
             moment.locale(lang);
         });
 
+        /**
+         * Instantiate Favorites collection
+         * @type {App}
+         */
+        App.Favorites = new App.Collections.Favorites();
+
+        /**
+         * Fetch favorites from local storage
+         */
+        App.Favorites.fetch();
+
+        /**
+         * Instantiate Backbone.
+         */
         Backbone.history.start();
     }
 };

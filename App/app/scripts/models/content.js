@@ -13,9 +13,9 @@
             });
 
             if (model) {
-                return 'fa fa-star';
+                return 'icon-star-filled';
             }
-            return 'fa fa-star-o';
+            return 'icon-star';
         }
     });
 })();

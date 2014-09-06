@@ -124,6 +124,11 @@ window.App = {
             lang.toLowerCase();
             //set locale to moment.js
             moment.locale(lang);
+            //once we are ready to show the app, show the splash
+            //for 3 seconds and then hide
+            setTimeout(function() {
+                navigator.splashscreen.hide();
+            }, 3000);
         });
 
         Backbone.history.start();

@@ -127,7 +127,9 @@ window.App = {
             //once we are ready to show the app, show the splash
             //for 3 seconds and then hide
             setTimeout(function() {
-                navigator.splashscreen.hide();
+                if (navigator.splashscreen) {
+                    navigator.splashscreen.hide();
+                }
             }, 3000);
         });
 

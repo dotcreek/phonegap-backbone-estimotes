@@ -25,9 +25,29 @@
                 });
 
             if (!model) {
-                App.Favorites.create({
-                    favoriteId: this.model.id
-                });
+                /**
+                 * Create a clone of current model properties
+                 */
+                var obj = _.clone(this.model.attributes);
+
+                /**
+                 * Store current model id as favoriteId
+                 */
+                obj.favoriteId = this.model.id;
+
+                /**
+                 * Remove id from object cloned
+                 */
+                delete obj.id;
+
+                /**
+                 * Create a new object attached to Favorites collection
+                 */
+                App.Favorites.create(obj);
+
+                /**
+                 * Update the view
+                 */
                 return this.render();
             }
 

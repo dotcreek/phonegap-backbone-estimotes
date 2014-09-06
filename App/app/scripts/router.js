@@ -33,6 +33,11 @@ App.Router = Backbone.Router.extend({
         'contents/:id/:eventId': 'showContent',
 
         /**
+         * GET /favorites
+         */
+        'favorites': 'favorites',
+
+        /**
          * This route must be at the end of this object
          */
         '*404': 'notFound'
@@ -56,6 +61,31 @@ App.Router = Backbone.Router.extend({
             percentComplete = event.loaded / event.total;
         }
         console.log('completed', percentComplete);
+    },
+
+    /**
+     * Visit /favorites
+     */
+    favorites: function() {
+        var self = this;
+
+        /**
+         * Instantiate a new Home View
+         * use collection just fetched
+         */
+        var view = new App.Views.Favorites({
+            collection: App.Favorites
+        });
+
+        /**
+         * Transition to favorites by slide[left/right]
+         */
+        App.slider.slidePage(view.render().$el);
+
+        /**
+         * Clean view
+         */
+        self.cleanView(view);
     },
 
     /**
@@ -200,7 +230,7 @@ App.Router = Backbone.Router.extend({
         var self = this;
         var model = new App.Models.Content({
             id: id,
-            eventId : eventId
+            eventId: eventId
         });
 
         /**
@@ -208,8 +238,10 @@ App.Router = Backbone.Router.extend({
          */
         model.fetch({
             success: function() {
+                model.set('eventId', eventId);
                 var view = new App.Views.ContentsShow({
-                    model: model
+                    model: model,
+                    eventId: eventId
                 });
                 App.slider.slidePage(view.render().$el);
                 self.cleanView(view);

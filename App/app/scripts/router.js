@@ -28,6 +28,11 @@ App.Router = Backbone.Router.extend({
         'rooms/:id': 'showRoom',
 
         /**
+         * GET /rooms/:id
+         */
+        'maps/:query': 'roomMap',
+
+        /**
          * GET /contents/:id
          */
         'contents/:id/:eventId': 'showContent',
@@ -41,6 +46,28 @@ App.Router = Backbone.Router.extend({
          * This route must be at the end of this object
          */
         '*404': 'notFound'
+    },
+
+    roomMap: function(query) {
+        query = query.split('&');
+        /**
+         * Instantiate a new Home View
+         * use collection just fetched
+         */
+        var view = new App.Views.RoomsMap({});
+
+        /**
+         * Transition to favorites by slide[left/right]
+         */
+        App.slider.slidePage(view.render({
+            img: query[0],
+            name: query[1]
+        }).$el);
+
+        /**
+         * Clean view
+         */
+        this.cleanView(view);
     },
 
     /**

@@ -32,7 +32,8 @@ window.App = {
          * @type {String}
          */
         // api: 'http://localhost:4000/',
-        api: 'https://summit.dotcreek.com:4000/',
+        api: 'http://summit.dotcreek.com:4000/',
+        // api: 'http://54.221.208.159:4000/',
 
         /**
          * Min value for start searching values to API or autocomplete fields

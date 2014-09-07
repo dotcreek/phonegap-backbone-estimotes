@@ -1,8 +1,6 @@
 <header class="bar bar-nav">
-    <button class="btn btn-link btn-back btn-nav pull-left">
-        <span class="icon icon-left-nav"></span>
-        Back
-    </button>
+    <a class="icon icon-left-nav pull-left btn-back"></a>
+    <a class="icon fa fa-map-marker pull-right" href="#maps/<%- encodeURIComponent(model.get('image'))%>&<%= model.get('name') %>"></a>
     <h1 class="title"><%- model.get("name") %></h1>
 </header>
 
@@ -74,5 +72,4 @@
 
     </ul>
 </div>
-
 

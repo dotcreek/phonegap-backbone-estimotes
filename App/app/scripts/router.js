@@ -55,7 +55,14 @@ App.Router = Backbone.Router.extend({
         if (event.lengthComputable) {
             percentComplete = event.loaded / event.total;
         }
-        console.log('completed', percentComplete);
+    },
+
+    handleErrors: function(error, status) {
+        if (status && status.statusText) {
+            App.noConnectionAlert(status);
+        } else {
+            console.log('there was an error:', error);
+        }
     },
 
     /**
@@ -98,11 +105,9 @@ App.Router = Backbone.Router.extend({
                 self.cleanView(view);
             },
 
-            error: function(error) {
-                /**
-                 * Do something with the error
-                 */
-                console.log(error);
+            error: function(error, status) {
+                //TODO: find a DRYer way to handle all errors
+                self.handleErrors(error,status);
             }
         });
     },
@@ -160,11 +165,9 @@ App.Router = Backbone.Router.extend({
                 self.cleanView(view);
             },
 
-            error: function(error) {
-                /**
-                 * Do something with the error
-                 */
-                console.log(error);
+            error: function(error, status) {
+                //TODO: find a DRYer way to handle all errors
+                self.handleErrors(error,status);
             }
         });
     },
@@ -190,8 +193,9 @@ App.Router = Backbone.Router.extend({
                 self.cleanView(view);
             },
 
-            error: function(error) {
-                console.log(error);
+            error: function(error, status) {
+                //TODO: find a DRYer way to handle all errors
+                self.handleErrors(error,status);
             }
         });
     },
@@ -215,8 +219,9 @@ App.Router = Backbone.Router.extend({
                 self.cleanView(view);
             },
 
-            error: function(error) {
-                console.log(error);
+            error: function(error, status) {
+                //TODO: find a DRYer way to handle all errors
+                self.handleErrors(error,status);
             }
         });
     }

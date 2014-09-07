@@ -1,0 +1,14 @@
+2014-09-06 17:08:12.183 SCTSummit[39719:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-06 17:08:12.201 SCTSummit[39719:70b] Unlimited access to network resources
+2014-09-06 17:08:12.211 SCTSummit[39719:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-06 17:08:12.333 SCTSummit[39719:70b] [CDVTimer][splashscreen] 15.514970ms
+2014-09-06 17:08:12.334 SCTSummit[39719:70b] [CDVTimer][TotalPluginStartup] 15.884995ms
+2014-09-06 17:08:12.531 SCTSummit[39719:70b] Resetting plugins due to page load.
+2014-09-06 17:08:12.859 SCTSummit[39719:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/E1FA48F8-066E-42B4-AF22-30F6ACC37B10/SCTSummit.app/www/index.html
+2014-09-06 17:08:13.678 SCTSummit[39719:4f07] NSURLConnection/CFURLConnection HTTP load failed (kCFStreamErrorDomainSSL, -9813)

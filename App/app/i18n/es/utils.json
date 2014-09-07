@@ -6,8 +6,9 @@
     "refresh": "Recargar",
     "languages": "Lenguage",
     "notifications": "Notificaciones",
-    "about": "Acerca de [app name]",
-
+    "about": "Acerca del SCT Summit 2014",
     "english": "Inglés",
-    "notify": "Notificar cambios"
+    "notify": "Notificar cambios",
+    "error-no-conectivity": "Hubo un error de conexión, intente más tarde.",
+    "error-no-conectivity-title": "No hay conexión",
 }

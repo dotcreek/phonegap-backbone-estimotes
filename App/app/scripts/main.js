@@ -32,13 +32,20 @@ window.App = {
          * @type {String}
          */
         // api: 'http://localhost:4000/',
-        api: 'https://summit.dotcreek.com:4000/',
+        api: 'http://summit.dotcreek.com:4000/',
 
         /**
          * Min value for start searching values to API or autocomplete fields
          * @type {Number}
          */
         minSearch: 3,
+
+        /**
+         * Number of seconds for the ajax requests to timeout
+         *
+         * @type {Number}
+         */
+        ajaxTimeOut: 5,
     },
 
     /**
@@ -103,6 +110,7 @@ window.App = {
 
     init: function() {
         'use strict';
+        $.ajaxSetup({ timeout: (App.config.ajaxTimeOut * 1000) });
         /**
          * Override remove function from View
          * @return {Object} view instance
@@ -124,14 +132,30 @@ window.App = {
             lang.toLowerCase();
             //set locale to moment.js
             moment.locale(lang);
-            //once we are ready to show the app, show the splash
-            //for 3 seconds and then hide
-            setTimeout(function() {
-                navigator.splashscreen.hide();
-            }, 3000);
+            if (navigator.splashscreen) {
+                //once we are ready to show the app, show the splash
+                //for 3 seconds and then hide
+                setTimeout(function() {
+                    navigator.splashscreen.hide();
+                    Backbone.history.start();
+                }, 3000);
+            } else {
+                Backbone.history.start();
+            }
         });
-
-        Backbone.history.start();
+    },
+    noConnectionAlert: function(statusError) {
+        if (navigator.notification) {
+            navigator.notification.alert(
+                App.polyglot.t('utils.error-no-conectivity'),
+                function() {},
+                App.polyglot.t('utils.error-no-conectivity-title'),
+                'Ok'
+            );
+        } else {
+            alert(App.polyglot.t('utils.error-no-conectivity'));
+        }
+        console.log('noConnectionAlert');
     }
 };
 

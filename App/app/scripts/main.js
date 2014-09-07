@@ -165,7 +165,7 @@ window.App = {
             }
         });
     },
-    noConnectionAlert: function(statusError) {
+    noConnectionAlert: function(statusError, statusText) {
         'use strict';
         if (navigator.notification) {
             navigator.notification.alert(
@@ -177,7 +177,7 @@ window.App = {
         } else {
             alert(App.polyglot.t('utils.error-no-conectivity'));
         }
-        console.log('noConnectionAlert', statusError);
+        console.log('noConnectionAlert:'+ statusError + ' '+ statusText);
     }
 };
 

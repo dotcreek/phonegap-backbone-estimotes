@@ -3,5 +3,8 @@
     "current": "Current Event",
     "current-events": "Current Events",
     "upcoming": "Upcoming Event",
-    "upcoming-events": "Upcoming Events"
+    "upcoming-events": "Upcoming Events",
+    "no_current_events": "No current events",
+    "no_upcoming_events": "No upcoming events"
+
 }

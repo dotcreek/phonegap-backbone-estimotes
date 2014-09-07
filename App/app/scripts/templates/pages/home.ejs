@@ -5,54 +5,22 @@
 
 <div class="content">
     <ul class="table-view rooms-home">
-        <% var currentTitle = true, upcomingTitle = true; %>
         <% collection.forEach(function(item){ %>
-            <% var now = new Date(), date = new Date(item.get('startAt'));%>
-            <% if ( date <= now) { %>
-                <% if (currentTitle) {%>
-                    <li class="table-view-cell table-view-divider">
-                        <%t ('rooms.current-events') %>
-                    </li>
-                <% } %>
-                <% currentTitle = false %>
-                <li class="table-view-cell media">
-                    <a href='#contents/<%- item.get("contentId")%>/<%- item.get("id")%>'>
-                        <div class="media-body">
-                            <h4 class="content-title">
-                                <%- item.get('content').description %>
-                            </h4>
-                            <h4 class="room-name">
-                                <%- item.get('room').name %>
-                            </h4>
-                            <p class="content-date">
-                                <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')]) %>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-            <% }else{ %>
-                <% if (upcomingTitle) {%>
-                    <li class="table-view-cell table-view-divider">
-                        <%t ('rooms.upcoming-events') %>
-                    </li>
-                <% } %>
-                <% upcomingTitle = false%>
-                <li class="table-view-cell media">
-                    <a href='#contents/<%- item.get("contentId")%>/<%- item.get("id")%>'>
-                        <div class="media-body">
-                            <h4 class="content-title">
-                                <%- item.get('content').description %>
-                            </h4>
-                            <h4 class="room-name">
-                                <%- item.get('room').name %>
-                            </h4>
-                            <p class="content-date">
-                                <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')]) %>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-            <% }%>
-        <% }) %>
+            <li class="table-view-cell media">
+                <a href='#contents/<%- item.get("contentId")%>/<%- item.get("id")%>'>
+                    <div class="media-body">
+                        <h4 class="content-title">
+                            <%- item.get('content').description %>
+                        </h4>
+                        <h4 class="room-name">
+                            <%- item.get('room').name %>
+                        </h4>
+                        <p class="content-date">
+                            <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')]) %>
+                        </p>
+                    </div>
+                </a>
+            </li>
+        <% })%>
     </ul>
 </div>

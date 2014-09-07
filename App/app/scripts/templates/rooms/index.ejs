@@ -16,13 +16,13 @@
                         <% if(item.currentEvent){ %>
                             <p><%t ('rooms.current') %>: <%- item.currentEvent.content.description %></p>
                         <% }else{ %>
-                            <p>No Current Event</p>
+                            <p><%t ('rooms.no_current_events') %></p>
                         <% } %>
 
                         <% if(item.upcomingFirst){ %>
                             <p><%t ('rooms.upcoming') %>: <%- item.upcomingFirst.content.description %></p>
                         <% }else{ %>
-                            <p>No Upcoming Events</p>
+                            <p><%t ('rooms.no_upcoming_events') %></p>
                         <% } %>
                     </div>
                 </a>

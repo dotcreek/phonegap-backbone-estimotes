@@ -620,3 +620,7 @@ textarea,
 .icon-up-nav:before {
   content: '\e809';
 }
+
+.content > .table-view:first-child {
+    margin-top: 0px !important;
+}

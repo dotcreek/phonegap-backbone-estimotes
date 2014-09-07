@@ -3,5 +3,7 @@
     "current": "Evento actual",
     "current-events": "Eventos actuales",
     "upcoming": "Siguiente evento",
-    "upcoming-events": "Siguientes eventos"
+    "upcoming-events": "Siguientes eventos",
+    "no_current_events": "No hay eventos en este momento",
+    "no_upcoming_events": "No hay más eventos"
 }

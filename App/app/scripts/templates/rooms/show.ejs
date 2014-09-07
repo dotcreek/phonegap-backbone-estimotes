@@ -16,7 +16,7 @@
                 <a href='#contents/<%- model.currentEvent.contentId%>/<%- model.currentEvent.id%>'>
                     <div class="media-body">
                         <h4 class="content-title">
-                            <%- model.currentEvent.content.description || 'No Current Event :(' %>
+                            <%- model.currentEvent.content.description || t ('rooms.no_current_events') %>
                         </h4>
                         <p>
                             <%- model.currentEvent.summary %>
@@ -41,7 +41,7 @@
                     <a href='#contents/<%-model.upcomingFirst.contentId%>/<%- model.upcomingFirst.id%>'>
                         <div class="media-body">
                             <h4 class="content-title">
-                                <%- model.upcomingFirst.content.description || 'No Current Event :(' %>
+                                <%- model.upcomingFirst.content.description || t ('rooms.no_current_events') %>
                             </h4>
                             <p>
                                 <%- model.upcomingFirst.summary %>

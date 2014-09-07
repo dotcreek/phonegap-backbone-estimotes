@@ -91,7 +91,7 @@ App.Router = Backbone.Router.extend({
 
     handleErrors: function(error, status) {
         if (status && status.statusText) {
-            App.noConnectionAlert(status);
+            App.noConnectionAlert(status, statusText);
         } else {
             console.log('there was an error:', error);
         }

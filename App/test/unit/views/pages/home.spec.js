@@ -1,5 +1,6 @@
 'use strict';
 
-describe('Pages Home View', function () {
+describe('Pages Home View', function() {
+
     Scope.viewDefaults('Home');
 });

@@ -28,14 +28,46 @@ App.Router = Backbone.Router.extend({
         'rooms/:id': 'showRoom',
 
         /**
+         * GET /rooms/:id
+         */
+        'maps/:query': 'roomMap',
+
+        /**
          * GET /contents/:id
          */
         'contents/:id/:eventId': 'showContent',
 
         /**
+         * GET /favorites
+         */
+        'favorites': 'favorites',
+
+        /**
          * This route must be at the end of this object
          */
         '*404': 'notFound'
+    },
+
+    roomMap: function(query) {
+        query = query.split('&');
+        /**
+         * Instantiate a new Home View
+         * use collection just fetched
+         */
+        var view = new App.Views.RoomsMap({});
+
+        /**
+         * Transition to favorites by slide[left/right]
+         */
+        App.slider.slidePage(view.render({
+            img: query[0],
+            name: query[1]
+        }).$el);
+
+        /**
+         * Clean view
+         */
+        this.cleanView(view);
     },
 
     /**
@@ -63,6 +95,31 @@ App.Router = Backbone.Router.extend({
         } else {
             console.log('there was an error:', error);
         }
+    },
+
+    /**
+     * Visit /favorites
+     */
+    favorites: function() {
+        var self = this;
+
+        /**
+         * Instantiate a new Home View
+         * use collection just fetched
+         */
+        var view = new App.Views.Favorites({
+            collection: App.Favorites
+        });
+
+        /**
+         * Transition to favorites by slide[left/right]
+         */
+        App.slider.slidePage(view.render().$el);
+
+        /**
+         * Clean view
+         */
+        self.cleanView(view);
     },
 
     /**
@@ -204,7 +261,7 @@ App.Router = Backbone.Router.extend({
         var self = this;
         var model = new App.Models.Content({
             id: id,
-            eventId : eventId
+            eventId: eventId
         });
 
         /**
@@ -212,8 +269,10 @@ App.Router = Backbone.Router.extend({
          */
         model.fetch({
             success: function() {
+                model.set('eventId', eventId);
                 var view = new App.Views.ContentsShow({
-                    model: model
+                    model: model,
+                    eventId: eventId
                 });
                 App.slider.slidePage(view.render().$el);
                 self.cleanView(view);

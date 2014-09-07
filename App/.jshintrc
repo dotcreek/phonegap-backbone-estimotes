@@ -36,6 +36,7 @@
         "Polyglot": true,
         "languages": true,
         "PHONEGAP": true,
+        "moment": true,
         "PageSlider": true
     }
 }

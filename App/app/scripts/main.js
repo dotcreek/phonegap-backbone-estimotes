@@ -101,7 +101,7 @@ window.App = {
             }
             //get name of day
             day = date._locale._weekdays[date.days()];
-            day = day.substring(0,1).toUpperCase() + day.substring(1);
+            day = day.substring(0, 1).toUpperCase() + day.substring(1);
 
             newDate = newDate.substring(0, newDate.length - 2);
             return day + ' ' + newDate;
@@ -137,14 +137,36 @@ window.App = {
                 //for 3 seconds and then hide
                 setTimeout(function() {
                     navigator.splashscreen.hide();
+                    /**
+                     * Instantiate Favorites collection
+                     * @type {App}
+                     */
+                    App.Favorites = new App.Collections.Favorites();
+
+                    /**
+                     * Fetch favorites from local storage
+                     */
+                    App.Favorites.fetch();
                     Backbone.history.start();
                 }, 3000);
             } else {
+                /**
+                 * Instantiate Favorites collection
+                 * @type {App}
+                 */
+                App.Favorites = new App.Collections.Favorites();
+
+                /**
+                 * Fetch favorites from local storage
+                 */
+                App.Favorites.fetch();
                 Backbone.history.start();
+
             }
         });
     },
     noConnectionAlert: function(statusError) {
+        'use strict';
         if (navigator.notification) {
             navigator.notification.alert(
                 App.polyglot.t('utils.error-no-conectivity'),
@@ -155,7 +177,7 @@ window.App = {
         } else {
             alert(App.polyglot.t('utils.error-no-conectivity'));
         }
-        console.log('noConnectionAlert');
+        console.log('noConnectionAlert', statusError);
     }
 };
 

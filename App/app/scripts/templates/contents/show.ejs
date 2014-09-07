@@ -1,10 +1,9 @@
 <header class="bar bar-nav">
-    <button class="btn btn-link btn-back btn-nav pull-left">
-        <span class="icon icon-left-nav"></span>
-        Back
-    </button>
-    <h1 class="title"><%= model.get('description') %></h1>
+    <a class="icon icon-left-nav pull-left btn-back"></a>
+    <a class="icon <%= model.isFavorite() %> pull-right" id="add-favorite"></a>
+    <h1 class="title"><%- model.get('description') %></h1>
 </header>
+
 <div class="content">
     <ul class="table-view">
         <li class="table-view-cell media">
@@ -12,7 +11,7 @@
                 <% model.get('events').forEach(function (event) { %>
                     <% if (event.id === model._previousAttributes.eventId) {%>
                         <h4 class="room-name">
-                            <%- event.room.name%>
+                            <%- event.room.name %>
                         </h4>
                         <p class="content-date">
                             <%- App.utils.convertDate([event.startAt, event.endAt]) %>
@@ -20,7 +19,7 @@
                     <% } %>
                 <% })%>
                 <p>
-                    <%-model.get( 'content') %>
+                    <%= model.get('content') %>
                 </p>
             </div>
         </li>

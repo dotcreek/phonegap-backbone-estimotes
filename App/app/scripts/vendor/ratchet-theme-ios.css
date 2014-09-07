@@ -469,3 +469,14 @@ textarea,
             box-shadow: 0 0 10px rgba(0, 0, 0, .3), -320px 0 0 rgba(0, 0, 0, .1);
   }
 }
+
+/* dotcreek custom overrides */
+/* TODO find a more scalable approach */
+.page {
+    top: 15px !important;
+}
+
+.content {
+  top: 25px !important;
+}
+/*************/

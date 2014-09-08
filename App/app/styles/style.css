@@ -34,3 +34,11 @@
     -webkit-transition-duration: .25s;
     transition-duration: .25s;
 }
+
+.truncated {
+    display: inline-block;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

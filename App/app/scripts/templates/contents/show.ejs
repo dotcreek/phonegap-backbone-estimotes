@@ -1,7 +1,7 @@
 <header class="bar bar-nav">
     <a class="icon icon-left-nav pull-left btn-back"></a>
     <a class="icon <%= model.isFavorite() %> pull-right" id="add-favorite"></a>
-    <h1 class="title"><%- model.get('description') %></h1>
+    <h1 class="title truncated"><%- model.get('description') %></h1>
 </header>
 
 <div class="content">

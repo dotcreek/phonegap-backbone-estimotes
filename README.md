@@ -8,8 +8,9 @@ to your repository.
 ### Install dependencies
 
 ~~~
-~$ [sudo] npm install phonegap -g
-~$ [sudo] npm install cordova -g
+~$ [sudo] npm install -g phonegap
+~$ [sudo] npm install -g grunt
+~$ [sudo] npm install -g grunt-cli
 
 ~$ cd App
 ~$ [sudo] npm install
@@ -27,6 +28,8 @@ To install the cordova globalization plugin use this command:
 
 ~~~
 ~$ phonegap plugin add org.apache.cordova.globalization
+~$ phonegap plugin add org.apache.cordova.dialogs
+~$ phonegap plugin add org.apache.cordova.splashscreen
 ~~~
 
 ### About special "grunt phonegap" task

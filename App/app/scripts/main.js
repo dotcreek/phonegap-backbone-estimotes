@@ -85,32 +85,72 @@ window.App = {
             return callback('ES');
         },
 
-        convertDate: function(dates) {
+        getMomentDate: function(date) {
             'use strict';
-            var date, day, newDate = '';
-            for (var i = 0; i < dates.length; i++) {
-                date = moment(dates[i]).tz('America/Costa_Rica');
-                if (date._locale._abbr === 'es') {
-                    date.locale('en');
-                    newDate += date.format('LT') + ' - ';
-                    date.locale('es');
-                } else {
-                    newDate += date.format('LT') + ' - ';
+            var momentDate;
+            momentDate = moment(date).tz('America/Costa_Rica');
+
+            return momentDate;
+        },
+
+        convertDate: function(date, method) {
+            'use strict';
+
+            var options = {
+                day: function(date) {
+                    var moment = App.utils.getMomentDate(date);
+                    return moment.date();
+                },
+                dayString: function(date) {
+                    var moment = App.utils.getMomentDate(date);
+                    var day;
+                    day = moment._locale._weekdays[moment.days()];
+                    day = day.substring(0, 1).toUpperCase() + day.substring(1);
+                    return day;
+                },
+                dayStringShort: function(date) {
+                    var moment = App.utils.getMomentDate(date);
+                    var day;
+                    day = moment._locale._weekdaysShort[moment.days()];
+                    return day.toUpperCase();
+                },
+                times: function(date) {
+                    var moment, hours = '';
+                    for (var i = 0; i < date.length; i++) {
+                        moment = App.utils.getMomentDate(date[i]);
+                        if (moment._locale._abbr === 'es') {
+                            moment.locale('en');
+                            hours += moment.format('LT') + ' - ';
+                            moment.locale('es');
+                        } else {
+                            hours += moment.format('LT') + ' - ';
+                        }
+                    }
+
+                    hours = hours.substring(0, hours.length - 2);
+                    return hours;
+                },
+                month: function(date) {
+                    var moment = App.utils.getMomentDate(date);
+                    return moment._locale._monthsShort[moment.month()];
+
                 }
+            };
 
-            }
+            return options[method](date);
+
+
             //get name of day
-            day = date._locale._weekdays[date.days()];
-            day = day.substring(0, 1).toUpperCase() + day.substring(1);
 
-            newDate = newDate.substring(0, newDate.length - 2);
-            return day + ' ' + newDate;
+            // return day + ' ' + newDate;
         }
     },
 
     init: function() {
         'use strict';
-        $.ajaxSetup({ timeout: (App.config.ajaxTimeOut * 1000) });
+        $.ajaxSetup({
+            timeout: (App.config.ajaxTimeOut * 1000)
+        });
         /**
          * Override remove function from View
          * @return {Object} view instance
@@ -177,7 +217,7 @@ window.App = {
         } else {
             alert(App.polyglot.t('utils.error-no-conectivity'));
         }
-        console.log('noConnectionAlert:'+ statusError + ' '+ statusText);
+        console.log('noConnectionAlert:' + statusError + ' ' + statusText);
     }
 };
 

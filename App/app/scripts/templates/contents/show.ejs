@@ -14,7 +14,7 @@
                             <%- event.room.name %>
                         </h4>
                         <p class="content-date">
-                            <%- App.utils.convertDate([event.startAt, event.endAt]) %>
+                            <%- App.utils.convertDate([event.startAt, event.endAt],'times') %>
                         </p>
                     <% } %>
                 <% })%>

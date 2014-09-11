@@ -116,6 +116,7 @@ App.Router = Backbone.Router.extend({
          */
         App.slider.slidePage(view.render().$el);
 
+        document.body.className = 'fav';
         /**
          * Clean view
          */
@@ -156,6 +157,8 @@ App.Router = Backbone.Router.extend({
                  */
                 App.slider.slidePage(view.render().$el);
 
+                document.body.className = 'home';
+
                 /**
                  * Clean view
                  */
@@ -164,7 +167,7 @@ App.Router = Backbone.Router.extend({
 
             error: function(error, status) {
                 //TODO: find a DRYer way to handle all errors
-                self.handleErrors(error,status);
+                self.handleErrors(error, status);
             }
         });
     },
@@ -183,6 +186,7 @@ App.Router = Backbone.Router.extend({
          */
         App.slider.slidePage(view.render().$el);
 
+        document.body.className = 'info';
         /**
          * Clean view
          */
@@ -216,6 +220,7 @@ App.Router = Backbone.Router.extend({
                  */
                 App.slider.slidePage(view.render().$el);
 
+                document.body.className = 'list';
                 /**
                  * Clean View
                  */
@@ -224,7 +229,7 @@ App.Router = Backbone.Router.extend({
 
             error: function(error, status) {
                 //TODO: find a DRYer way to handle all errors
-                self.handleErrors(error,status);
+                self.handleErrors(error, status);
             }
         });
     },
@@ -252,7 +257,7 @@ App.Router = Backbone.Router.extend({
 
             error: function(error, status) {
                 //TODO: find a DRYer way to handle all errors
-                self.handleErrors(error,status);
+                self.handleErrors(error, status);
             }
         });
     },
@@ -280,7 +285,7 @@ App.Router = Backbone.Router.extend({
 
             error: function(error, status) {
                 //TODO: find a DRYer way to handle all errors
-                self.handleErrors(error,status);
+                self.handleErrors(error, status);
             }
         });
     }

@@ -6,19 +6,19 @@
     <% } %>
 </nav>
 <header class="bar bar-tab">
-  <a class="tab-item <%= nav === 'home' ? 'active' : '' %>" href="#">
+  <a class="tab-item home <%= nav === 'home' ? 'active' : '' %>" href="#">
     <span class="icon icon-home"></span>
     <span class="tab-label"><%t ('utils.home') %></span>
   </a>
-  <a class="tab-item <%= nav === 'rooms' ? 'active' : '' %>" href="#rooms">
+  <a class="tab-item list <%= nav === 'rooms' ? 'active' : '' %>" href="#rooms">
     <span class="icon icon-list"></span>
     <span class="tab-label"><%t ('rooms.rooms') %></span>
   </a>
-  <a class="tab-item <%= nav === 'favorites' ? 'active' : '' %>" href="#favorites">
+  <a class="tab-item star <%= nav === 'favorites' ? 'active' : '' %>" href="#favorites">
     <span class="icon icon-star"></span>
     <span class="tab-label"><%t ('utils.favorites') %></span>
   </a>
-  <a class="tab-item <%= nav === 'settings' ? 'active' : '' %>" href="#settings">
+  <a class="tab-item info <%= nav === 'settings' ? 'active' : '' %>" href="#settings">
     <span class="icon icon-info"></span>
     <span class="tab-label"><%t ('utils.settings') %></span>
   </a>

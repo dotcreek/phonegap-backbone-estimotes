@@ -9,12 +9,12 @@
             <li class="table-view-cell media">
                 <a href='#contents/<%- item.get("favoriteId")%>/<%- item.get("eventId")%>'>
                     <div class="media-body">
-                        <h4 class="content-title">
-                            <%- item.get('description') %>
-                        </h4>
                         <p class="content-hour">
                             <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') %>
                         </p>
+                        <h4 class="content-title">
+                            <%- item.get('description') %>
+                        </h4>
                         <%= item.get('content') %>
                     </div>
                 </a>

@@ -9,15 +9,17 @@
             <li class="table-view-cell media">
                 <a href='#contents/<%- item.get("contentId")%>/<%- item.get("id")%>'>
                     <div class="media-body">
-                        <h4 class="content-title">
-                            <%- item.get('content').description %>
-                        </h4>
                         <h4 class="room-name">
                             <%- item.get('room').name %>
                         </h4>
-                        <p class="content-date">
-                            <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') %>
-                        </p>
+                        <div class="room-content">
+                            <p class="content-date">
+                                <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') %>
+                            </p>
+                            <h4 class="content-title">
+                                <%- item.get('content').description %>
+                            </h4>
+                        </div>
                     </div>
                 </a>
             </li>

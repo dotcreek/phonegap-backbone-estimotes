@@ -1,8 +1,88 @@
-body{
+/* Home Style */
+body, .page.center {
     background: url(/images/bg.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    background-size: cover;
+    background-size: 100%;
 }
+
+body.home .title {
+    color: #D6FFB2;
+}
+
+body.home .media-body p {
+    padding: 0 20px;
+}
+
+body.home .room-content p {
+    padding: 4px 0px 0px 0px;
+}
+
+body.home .content {
+    top: 44px !important;
+}
+
+
+
+
+/* List Style */
+
+
+body.list .title {
+    color: #D6FFB2;
+}
+
+body.list li.table-view-cell.media {
+    padding: 7px 0 0 0;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 8px 9px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 9px 0 rgba(0,0,0,0.2);
+}
+
+body.list h4 {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 15px;
+    color: #D6FFB2;
+}
+
+body.list p{
+    padding: 0px 15px;
+    color: #fff;
+}
+
+body.list .media-body {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 0px 0px 20px 0;
+}
+
+body.list .content {
+    top: 30px !important;
+}
+
+
+/* Fav Style */
+
+body.fav  .content > .table-view:first-child {
+    margin-top: 19px;
+}
+
+body.fav .rooms-home li.table-view-cell:nth-child(odd) {
+    padding: 5px;
+}
+
+body.fav h4.content-title {
+    text-align: right;
+    width: 100%;
+    padding: 0px 4% 0px 1.5%;
+}
+
+body.fav .rooms-home .media-body {
+    height: 150px;
+}
+
+
+
+
+
+
 
 #container {
     position: absolute;
@@ -14,12 +94,16 @@ body{
     background-size: cover;
 }
 
+.navigate-left:after, .navigate-right:after, .push-left:after, .push-right:after {
+    top: 62%;
+}
+
 .page {
     position: fixed;
-    top: 0;
+    top: 0 !important;
     left: 0;
     right:0;
-    bottom: 0;
+    bottom: 0 !important;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
@@ -53,7 +137,7 @@ body{
 }
 
 .event-moment {
-    height: 38px;
+    height: 30px;
     background: rgba(0, 0, 0, 0.13);
     -webkit-box-shadow: 0 17px 25px 1px rgba(0, 0, 0, 0.3);
     box-shadow: 0 5px 8px 1px rgba(0, 0, 0, 0.3);
@@ -61,16 +145,25 @@ body{
 }
 .event-moment p {
     font-family: "HelveticaNeue-Light";
-    font-size:  1.3em;
-    color:  #c6fe94;
-    margin-top: -15px;
+    font-size:  1em;
+    color:  #D6FFB2 !important;
+    margin-top: 0px;
+    font-weight: 200;
 }
 
 .current-event {
     height: 179px;
-    background: url(/images/event-bg.jpg) no-repeat center center fixed;
+    background: url(/images/event-bg.jpg) no-repeat center top fixed !important;
     -webkit-background-size: cover;
     background-size: cover;
+    padding: 20px 5px 0 5px !important;
+    text-align: center;
+}
+
+
+
+.content > .table-view:first-child {
+    margin-top: 0px;
 }
 
 .content-hour{
@@ -95,6 +188,7 @@ body{
     text-align: center;
     background: rgba(0,0,0,0.13);
     color: #a0a0a0;
+    padding-top: 10px;
 }
 
 .day{
@@ -112,25 +206,41 @@ body{
     width: 80%;
     height: inherit;
     text-align: center;
-    background: rgba(256, 256, 256, 0.13);
 }
 
-.content-summary{
+.content-details p {
+    text-align: right;
+    padding: 0px 6% 0px 1.5%;
+    width: 100%;
+}
+
+p.content-hour {
+    padding-top: 5px !important;
+}
+
+p.content-summary{
     font-size: 1.2em;
     color: #fff;
     display: inline-block;
-    max-width: 90%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-family: "HelveticaNeue-Light";
 }
 
 .content {
     background: none !important;
 }
 
+.table-view .table-view-divider {
+    padding-top: 0px;
+}
+
+.bar{
+    box-shadow: none;
+    background: transparent;
+}
+
 .show-room li.table-view-cell.media.upcoming-event {
     padding: 0;
+    background: rgba(256, 256, 256, 0.13);
 }
 
 .show-room a.navigate-right {
@@ -143,8 +253,160 @@ body{
 
 .table-view .table-view-divider, .table-view .table-view-cell,.table-view .table-view-cell,.table-view{
     border: none !important;
+    background: none;
 }
 
 .show-room .upcoming-event{
     padding-top: 5px;
 }
+
+.rooms-home li.table-view-cell:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.13);
+}
+
+.rooms-home li.table-view-cell:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+h4, .h4 {
+    font-size: 1.3em;
+    font-family: Helvetica Neue;
+    font-weight: 200;
+}
+
+.table-view-cell {
+    padding: 0px;
+}
+
+.table-view-cell > a:not(.btn) {
+    margin: 0px;
+}
+
+.rooms-home .media-body > *{
+    float: left;
+}
+
+.rooms-home h4.room-name {
+    width: 30%;
+    background: rgba(0, 0, 0, 0.1);
+    color: #CCC;
+    font-size: 1.1em;
+    text-align: center;
+    height: inherit;
+    padding: 34px 5px;
+}
+
+.rooms-home .media-body {
+    height: 95px;
+}
+
+.room-content {
+    width: 70%;
+    text-align: right;
+    padding: 5px 4% 0px 1.5%;
+}
+
+h4.content-title {
+    color: #fff;
+}
+
+p.content-date {
+    color: #D6FFB2 !important;
+}
+
+.title {
+    color: #D6FFB2;
+    font-weight: 200;
+}
+
+.bar-tab .tab-item {
+    color: #fff;
+}
+
+
+a.tab-item {
+    background: #259fc2;
+}
+
+
+.bar-tab .tab-item.active, .bar-tab .tab-item:active {
+    color: #D6FFB2;
+    background: #1F86A3;
+    -webkit-box-shadow:inset 1px 1px 8px 1px rgba(0,0,0,0.3);
+    box-shadow:inset 1px 1px 8px 1px rgba(0,0,0,0.3);
+}
+
+.bar .icon {
+    color: #fff;
+}
+
+.bar-tab .tab-item.active span, .bar-tab .tab-item:active span{
+    color: #D6FFB2
+}
+
+
+.center {
+    background: none;
+}
+
+.table-view-cell > a:not(.btn):active {
+    background-color: rgba(255, 255, 255, 0.2);
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.media-body p {
+    color: #fff;
+}
+
+h6 b {
+    color: #D6FFB2;
+    font-size: 0.7em;
+}
+
+ h6 {
+    text-transform: uppercase;
+    font-size: 1em;
+    color: #fff;
+}
+
+.table-view .media-body {
+    padding: 0 5px;
+}
+
+p.content-hour {
+    margin: 6px 0px;
+}
+
+body.fav p.content-hour {
+    text-align: right;
+    width: 100%;
+    padding: 0px 4% 0px 1.5% !important;
+    color: #D6FFB2;
+}
+
+li.table-view-cell.table-view-divider.event-moment {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+
+.fav .rooms-home li.table-view-cell.media {
+    margin-bottom: 15px;
+    -webkit-box-shadow: 0 8px 9px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 9px 0 rgba(0,0,0,0.1);
+    padding-bottom: 7px !important;
+}
+
+.bar-tab {
+-webkit-box-shadow: 0 -5px 9px 0 rgba(0,0,0,0.1);
+box-shadow: 0 -5px 9px 0 rgba(0,0,0,0.1);
+}
+
+
+
+
+
+

@@ -128,12 +128,22 @@ body.fav .rooms-home .media-body {
     transition-duration: .25s;
 }
 
-.truncated .content-title{
+.content-title{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-height: 25px;
+    -webkit-box-orient: vertical;
+}
+
+.truncated{
     display: inline-block;
-    max-width: 90%;
+    max-width: 78%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-left: 1px;
 }
 
 .event-moment {
@@ -234,8 +244,9 @@ p.content-summary{
 }
 
 .bar{
-    box-shadow: none;
-    background: transparent;
+    box-shadow: none !important;
+    background: transparent !important;
+    border: none !important;
 }
 
 .show-room li.table-view-cell.media.upcoming-event {

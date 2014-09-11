@@ -1,6 +1,6 @@
 /* Home Style */
 body, .page.center {
-    background: url(/images/bg.jpg) no-repeat center center fixed;
+    background: url(../images/bg.jpg) no-repeat center center fixed;
     background-size: 100%;
 }
 
@@ -128,7 +128,7 @@ body.fav .rooms-home .media-body {
     transition-duration: .25s;
 }
 
-.truncated {
+.truncated .content-title{
     display: inline-block;
     max-width: 90%;
     overflow: hidden;

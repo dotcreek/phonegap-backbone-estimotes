@@ -21,7 +21,7 @@
                             <%- model.currentEvent.summary %>
                         </p>
                         <p class="content-hour">
-                            <%- App.utils.convertDate(model.upcomingFirst.startAt,'dayString')%>
+                            <%- App.utils.convertDate(model.currentEvent.startAt,'dayString')%>
                             <%- App.utils.convertDate([model.currentEvent.startAt,model.currentEvent.endAt],'times') %>
                         </p>
                     </div>

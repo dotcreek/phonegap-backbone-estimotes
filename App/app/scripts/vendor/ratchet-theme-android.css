@@ -624,3 +624,11 @@ textarea,
 .content > .table-view:first-child {
     margin-top: 0px !important;
 }
+
+.bar-tab ~ .content {
+  padding-top: 23px;
+}
+
+body.fav .content ul.rooms-home {
+  margin-top: 0px !important;
+}

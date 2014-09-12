@@ -404,6 +404,15 @@ a.tab-item {
     color: #fff;
 }
 
+.media-body {
+    color: #fff;
+}
+
+.media-body b {
+    color: #D6FFB2;
+    font-size: 0.8em;
+}
+
 h6 b {
     color: #D6FFB2;
     font-size: 0.7em;

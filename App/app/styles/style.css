@@ -43,7 +43,7 @@ body.list li.table-view-cell.media {
     box-shadow: 0 8px 9px 0 rgba(0,0,0,0.2);
 }
 
-body.list h4 {
+body.list h4, h4.room-name {
     background: rgba(255, 255, 255, 0.2);
     padding: 5px 15px;
     color: #D6FFB2;
@@ -164,7 +164,7 @@ body.fav .content ul.rooms-home{
 
 .truncated{
     display: inline-block !important;
-    max-width: 78%;
+    max-width: 70%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -404,6 +404,10 @@ a.tab-item {
     color: #fff;
 }
 
+.media-body div {
+    color: #fff;
+}
+
 h6 b {
     color: #D6FFB2;
     font-size: 0.7em;
@@ -499,6 +503,9 @@ h4.room-name {
     color: #D6FFB2;
 }
 
+.icon {
+    width: 40px;
+}
 
 
 

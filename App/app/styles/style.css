@@ -9,7 +9,7 @@ body.home .title {
 }
 
 body.home .media-body p {
-    padding: 0 20px;
+    padding: 0;
 }
 
 body.home .room-content p {
@@ -25,6 +25,10 @@ body.home .rooms-home li.table-view-cell.media, .show-room li.table-view-cell.me
     -webkit-box-shadow: 0 3px 9px 0 rgba(0,0,0,0.2); 
     box-shadow: 0 3px 9px 0 rgba(0,0,0,0.2);
     margin-bottom: 10px;
+}
+
+body.home p.content-date {
+    text-align: center;
 }
 
 /* List Style */
@@ -117,6 +121,7 @@ body.fav .content ul.rooms-home{
 
 .navigate-left:after, .navigate-right:after, .push-left:after, .push-right:after {
     top: 62%;
+    color: #D6FFB2;
 }
 
 .page {
@@ -158,7 +163,7 @@ body.fav .content ul.rooms-home{
 }
 
 .truncated{
-    display: inline-block;
+    display: inline-block !important;
     max-width: 78%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -185,8 +190,7 @@ body.fav .content ul.rooms-home{
 .current-event {
     height: 179px;
     background: url(/images/event-bg.jpg) no-repeat center top 100% !important;
-    -webkit-background-size: cover;
-    background-size: cover;
+    background-size: 100% !important;
     padding: 20px 5px 0 5px !important;
     text-align: center;
 }
@@ -351,6 +355,7 @@ p.content-date {
 .title {
     color: #D6FFB2;
     font-weight: 200;
+    text-align: center;
 }
 
 .bar-tab .tab-item {
@@ -384,7 +389,7 @@ a.tab-item {
 }
 
 .table-view-cell > a:not(.btn):active {
-    background: rgba(0, 0, 0, 0.2) url(/images/summit.png) no-repeat center ;
+    background: rgba(0, 0, 0, 0.2) url(../images/summit.png) no-repeat center ;
 }
 
 .table-view-cell > a:not(.btn):active .media-body {
@@ -402,6 +407,7 @@ a.tab-item {
 h6 b {
     color: #D6FFB2;
     font-size: 0.7em;
+    font-weight: 200;
 }
 
  h6 {
@@ -482,6 +488,14 @@ ul.table-view.about li.table-view-cell.table-view-divider {
 }
 
 a {
+    color: #D6FFB2;
+}
+
+h4.room-name {
+    background: none !important;
+    text-align: center;
+    padding: 0px 15px;
+    margin-bottom: 0px;
     color: #D6FFB2;
 }
 

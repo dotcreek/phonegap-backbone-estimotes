@@ -5,21 +5,25 @@ languages.ES.rooms = {
     "current": "Evento actual",
     "current-events": "Eventos actuales",
     "upcoming": "Siguiente evento",
-    "upcoming-events": "Siguientes eventos"
+    "upcoming-events": "Siguientes eventos",
+    "no_current_events": "No hay eventos en este momento",
+    "no_upcoming_events": "No hay más eventos"
 }
 ;
 languages.ES.utils = {
-    "home": "Inicio",
-    "settings": "Configuración",
+    "home": "Agenda",
+    "settings": "Acerca",
     "profile": "Perfil",
     "favorites": "Favoritos",
     "refresh": "Recargar",
     "languages": "Lenguage",
     "notifications": "Notificaciones",
-    "about": "Acerca de [app name]",
-
+    "about": "Acerca del SCT Summit 2014",
+    "about_credits": "Creditos",
     "english": "Inglés",
-    "notify": "Notificar cambios"
+    "notify": "Notificar cambios",
+    "error-no-conectivity": "Hubo un error de conexión, intente más tarde.",
+    "error-no-conectivity-title": "No hay conexión",
 }
 ;
 
@@ -30,14 +34,26 @@ languages.EN.rooms = {
     "current": "Current Event",
     "current-events": "Current Events",
     "upcoming": "Upcoming Event",
-    "upcoming-events": "Upcoming Events"
+    "upcoming-events": "Upcoming Events",
+    "no_current_events": "No current events",
+    "no_upcoming_events": "No upcoming events"
+
 }
 ;
 languages.EN.utils = {
-    "home": "Home",
-    "settings": "Configuration",
+    "home": "Agenda",
+    "settings": "About",
     "profile": "Profile",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "refresh": "Refresh",
+    "languages": "Language",
+    "notifications": "Notifications",
+    "about": "About the SCT Summit 2014",
+    "about_credits": "Credits",
+    "english": "English",
+    "notify": "Notify changes",
+    "error-no-conectivity": "There was a connectivity error. Please try again later.",
+    "error-no-conectivity-title": "No conectivity"
 }
 ;
 
@@ -215,32 +231,72 @@ window.App = {
             return callback('ES');
         },
 
-        convertDate: function(dates) {
+        getMomentDate: function(date) {
             'use strict';
-            var date, day, newDate = '';
-            for (var i = 0; i < dates.length; i++) {
-                date = moment(dates[i]).tz('America/Costa_Rica');
-                if (date._locale._abbr === 'es') {
-                    date.locale('en');
-                    newDate += date.format('LT') + ' - ';
-                    date.locale('es');
-                } else {
-                    newDate += date.format('LT') + ' - ';
+            var momentDate;
+            momentDate = moment(date).tz('America/Costa_Rica');
+
+            return momentDate;
+        },
+
+        convertDate: function(date, method) {
+            'use strict';
+
+            var options = {
+                day: function(date) {
+                    var moment = App.utils.getMomentDate(date);
+                    return moment.date();
+                },
+                dayString: function(date) {
+                    var moment = App.utils.getMomentDate(date);
+                    var day;
+                    day = moment._locale._weekdays[moment.days()];
+                    day = day.substring(0, 1).toUpperCase() + day.substring(1);
+                    return day;
+                },
+                dayStringShort: function(date) {
+                    var moment = App.utils.getMomentDate(date);
+                    var day;
+                    day = moment._locale._weekdaysShort[moment.days()];
+                    return day.toUpperCase();
+                },
+                times: function(date) {
+                    var moment, hours = '';
+                    for (var i = 0; i < date.length; i++) {
+                        moment = App.utils.getMomentDate(date[i]);
+                        if (moment._locale._abbr === 'es') {
+                            moment.locale('en');
+                            hours += moment.format('LT') + ' - ';
+                            moment.locale('es');
+                        } else {
+                            hours += moment.format('LT') + ' - ';
+                        }
+                    }
+
+                    hours = hours.substring(0, hours.length - 2);
+                    return hours;
+                },
+                month: function(date) {
+                    var moment = App.utils.getMomentDate(date);
+                    return moment._locale._monthsShort[moment.month()];
+
                 }
+            };
 
-            }
+            return options[method](date);
+
+
             //get name of day
-            day = date._locale._weekdays[date.days()];
-            day = day.substring(0,1).toUpperCase() + day.substring(1);
 
-            newDate = newDate.substring(0, newDate.length - 2);
-            return day + ' ' + newDate;
+            // return day + ' ' + newDate;
         }
     },
 
     init: function() {
         'use strict';
-        $.ajaxSetup({ timeout: (App.config.ajaxTimeOut * 1000) });
+        $.ajaxSetup({
+            timeout: (App.config.ajaxTimeOut * 1000)
+        });
         /**
          * Override remove function from View
          * @return {Object} view instance
@@ -267,25 +323,48 @@ window.App = {
                 //for 3 seconds and then hide
                 setTimeout(function() {
                     navigator.splashscreen.hide();
+                    /**
+                     * Instantiate Favorites collection
+                     * @type {App}
+                     */
+                    App.Favorites = new App.Collections.Favorites();
+
+                    /**
+                     * Fetch favorites from local storage
+                     */
+                    App.Favorites.fetch();
                     Backbone.history.start();
                 }, 3000);
             } else {
+                /**
+                 * Instantiate Favorites collection
+                 * @type {App}
+                 */
+                App.Favorites = new App.Collections.Favorites();
+
+                /**
+                 * Fetch favorites from local storage
+                 */
+                App.Favorites.fetch();
                 Backbone.history.start();
+
             }
         });
     },
-    noConnectionAlert: function() {
+    noConnectionAlert: function(statusError, statusText) {
+        'use strict';
         if (navigator.notification) {
             navigator.notification.alert(
-                'There is no connection to the Summit API, try again later',  // message
-                function() {},         // callback
-                'No conectivity',            // title
-                'Ok'                  // buttonName
+                App.polyglot.t('utils.error-no-conectivity'),
+                function() {},
+                App.polyglot.t('utils.error-no-conectivity-title'),
+                'Ok'
             );
         } else {
-            alert('There is no connection to the Summit API, try again later');
+            alert(App.polyglot.t('utils.error-no-conectivity'));
         }
-        console.log('noConnectionAlert');
+        navigator.app.exitApp();
+        console.log('noConnectionAlert:' + statusError + ' ' + statusText);
     }
 };
 
@@ -329,14 +408,46 @@ App.Router = Backbone.Router.extend({
         'rooms/:id': 'showRoom',
 
         /**
+         * GET /rooms/:id
+         */
+        'maps/:query': 'roomMap',
+
+        /**
          * GET /contents/:id
          */
         'contents/:id/:eventId': 'showContent',
 
         /**
+         * GET /favorites
+         */
+        'favorites': 'favorites',
+
+        /**
          * This route must be at the end of this object
          */
         '*404': 'notFound'
+    },
+
+    roomMap: function(query) {
+        query = query.split('&');
+        /**
+         * Instantiate a new Home View
+         * use collection just fetched
+         */
+        var view = new App.Views.RoomsMap({});
+
+        /**
+         * Transition to favorites by slide[left/right]
+         */
+        App.slider.slidePage(view.render({
+            img: query[0],
+            name: query[1]
+        }).$el);
+
+        /**
+         * Clean view
+         */
+        this.cleanView(view);
     },
 
     /**
@@ -360,17 +471,36 @@ App.Router = Backbone.Router.extend({
 
     handleErrors: function(error, status) {
         if (status && status.statusText) {
-
-            switch (status.statusText) {
-                case 'timeout':
-                    App.noConnectionAlert();
-                    break;
-                default:
-                    App.noConnectionAlert();
-            }
+            App.noConnectionAlert(status, status.statusText);
         } else {
             console.log('there was an error:', error);
         }
+    },
+
+    /**
+     * Visit /favorites
+     */
+    favorites: function() {
+        var self = this;
+
+        /**
+         * Instantiate a new Home View
+         * use collection just fetched
+         */
+        var view = new App.Views.Favorites({
+            collection: App.Favorites
+        });
+
+        /**
+         * Transition to favorites by slide[left/right]
+         */
+        App.slider.slidePage(view.render().$el);
+
+        document.body.className = 'fav';
+        /**
+         * Clean view
+         */
+        self.cleanView(view);
     },
 
     /**
@@ -407,6 +537,8 @@ App.Router = Backbone.Router.extend({
                  */
                 App.slider.slidePage(view.render().$el);
 
+                document.body.className = 'home';
+
                 /**
                  * Clean view
                  */
@@ -414,10 +546,8 @@ App.Router = Backbone.Router.extend({
             },
 
             error: function(error, status) {
-                /**
-                 * Do something with the error
-                 */
-                self.handleErrors(error,status);
+                //TODO: find a DRYer way to handle all errors
+                self.handleErrors(error, status);
             }
         });
     },
@@ -436,6 +566,7 @@ App.Router = Backbone.Router.extend({
          */
         App.slider.slidePage(view.render().$el);
 
+        document.body.className = 'info';
         /**
          * Clean view
          */
@@ -469,6 +600,7 @@ App.Router = Backbone.Router.extend({
                  */
                 App.slider.slidePage(view.render().$el);
 
+                document.body.className = 'list';
                 /**
                  * Clean View
                  */
@@ -476,10 +608,8 @@ App.Router = Backbone.Router.extend({
             },
 
             error: function(error, status) {
-                /**
-                 * Do something with the error
-                 */
-                self.handleErrors(error,status);
+                //TODO: find a DRYer way to handle all errors
+                self.handleErrors(error, status);
             }
         });
     },
@@ -506,10 +636,8 @@ App.Router = Backbone.Router.extend({
             },
 
             error: function(error, status) {
-                /**
-                 * Do something with the error
-                 */
-                self.handleErrors(error,status);
+                //TODO: find a DRYer way to handle all errors
+                self.handleErrors(error, status);
             }
         });
     },
@@ -518,7 +646,7 @@ App.Router = Backbone.Router.extend({
         var self = this;
         var model = new App.Models.Content({
             id: id,
-            eventId : eventId
+            eventId: eventId
         });
 
         /**
@@ -526,18 +654,18 @@ App.Router = Backbone.Router.extend({
          */
         model.fetch({
             success: function() {
+                model.set('eventId', eventId);
                 var view = new App.Views.ContentsShow({
-                    model: model
+                    model: model,
+                    eventId: eventId
                 });
                 App.slider.slidePage(view.render().$el);
                 self.cleanView(view);
             },
 
             error: function(error, status) {
-                /**
-                 * Do something with the error
-                 */
-                self.handleErrors(error,status);
+                //TODO: find a DRYer way to handle all errors
+                self.handleErrors(error, status);
             }
         });
     }
@@ -550,23 +678,55 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<header class="bar bar-nav">\n<button class="btn btn-link btn-back btn-nav pull-left">\n<span class="icon icon-left-nav"></span>\nBack\n</button>\n<h1 class="title">' +
-((__t = ( model.get('description') )) == null ? '' : __t) +
-'</h1>\n</header>\n<div class="content">\n<ul class="table-view">\n<li class="table-view-cell media">\n<div class="media-body">\n';
+__p += '<header class="bar bar-nav">\n<a class="icon icon-left-nav pull-left btn-back"></a>\n<a class="icon ' +
+((__t = ( model.isFavorite() )) == null ? '' : __t) +
+' pull-right" id="add-favorite"></a>\n<h1 class="title truncated">' +
+__e( model.get('description') ) +
+'</h1>\n</header><div class="content">\n<ul class="table-view">\n<li class="table-view-cell media">\n<div class="media-body">\n';
  model.get('events').forEach(function (event) { ;
 __p += '\n';
  if (event.id === model._previousAttributes.eventId) {;
 __p += '\n<h4 class="room-name">\n' +
-__e( event.room.name) +
+__e( event.room.name ) +
 '\n</h4>\n<p class="content-date">\n' +
-__e( App.utils.convertDate([event.startAt, event.endAt]) ) +
+__e( App.utils.convertDate([event.startAt, event.endAt],'times') ) +
 '\n</p>\n';
  } ;
 __p += '\n';
  });
 __p += '\n<p>\n' +
-__e(model.get( 'content') ) +
+((__t = ( model.get('content') )) == null ? '' : __t) +
 '\n</p>\n</div>\n</li>\n</ul>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/scripts/templates/favorites/index.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p +=
+((__t = ( JST['app/scripts/templates/partials/_navigation.ejs']({
+nav: 'favorites',
+title: 'utils.favorites'
+}) )) == null ? '' : __t) +
+'<div class="content">\n<ul class="table-view rooms-home">\n';
+ collection.forEach(function(item){ ;
+__p += '\n<li class="table-view-cell media">\n<a href=\'#contents/' +
+__e( item.get("favoriteId")) +
+'/' +
+__e( item.get("eventId")) +
+'\'>\n<div class="media-body">\n<p class="content-hour">\n' +
+__e( App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') ) +
+'\n</p>\n<h4 class="content-title">\n' +
+__e( item.get('description') ) +
+'\n</h4>\n' +
+((__t = ( item.get('content') )) == null ? '' : __t) +
+'\n</div>\n</a>\n</li>\n';
+ }) ;
+__p += '\n</ul>\n</div>';
 
 }
 return __p
@@ -583,55 +743,19 @@ nav: 'home',
 title: 'utils.home'
 }) )) == null ? '' : __t) +
 '<div class="content">\n<ul class="table-view rooms-home">\n';
- var currentTitle = true, upcomingTitle = true; ;
-__p += '\n';
  collection.forEach(function(item){ ;
-__p += '\n';
- var now = new Date(), date = new Date(item.get('startAt'));;
-__p += '\n';
- if ( date <= now) { ;
-__p += '\n';
- if (currentTitle) {;
-__p += '\n<li class="table-view-cell table-view-divider">\n' +
-((__t = ( App.polyglot.t('rooms.current-events') )) == null ? '' : __t) +
-'\n</li>\n';
- } ;
-__p += '\n';
- currentTitle = false ;
 __p += '\n<li class="table-view-cell media">\n<a href=\'#contents/' +
 __e( item.get("contentId")) +
 '/' +
 __e( item.get("id")) +
-'\'>\n<div class="media-body">\n<h4 class="content-title">\n' +
-__e( item.get('content').description ) +
-'\n</h4>\n<h4 class="room-name">\n' +
+'\'>\n<div class="media-body">\n<h4 class="room-name">\n' +
 __e( item.get('room').name ) +
-'\n</h4>\n<p class="content-date">\n' +
-__e( App.utils.convertDate([item.get('startAt'), item.get('endAt')]) ) +
-'\n</p>\n</div>\n</a>\n</li>\n';
- }else{ ;
-__p += '\n';
- if (upcomingTitle) {;
-__p += '\n<li class="table-view-cell table-view-divider">\n' +
-((__t = ( App.polyglot.t('rooms.upcoming-events') )) == null ? '' : __t) +
-'\n</li>\n';
- } ;
-__p += '\n';
- upcomingTitle = false;
-__p += '\n<li class="table-view-cell media">\n<a href=\'#contents/' +
-__e( item.get("contentId")) +
-'/' +
-__e( item.get("id")) +
-'\'>\n<div class="media-body">\n<h4 class="content-title">\n' +
+'\n</h4>\n<div class="room-content">\n<p class="content-date">\n' +
+__e( App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') ) +
+'\n</p>\n<h4 class="content-title">\n' +
 __e( item.get('content').description ) +
-'\n</h4>\n<h4 class="room-name">\n' +
-__e( item.get('room').name ) +
-'\n</h4>\n<p class="content-date">\n' +
-__e( App.utils.convertDate([item.get('startAt'), item.get('endAt')]) ) +
-'\n</p>\n</div>\n</a>\n</li>\n';
- };
-__p += '\n';
- }) ;
+'\n</h4>\n</div>\n</div>\n</a>\n</li>\n';
+ });
 __p += '\n</ul>\n</div>';
 
 }
@@ -647,17 +771,19 @@ __p +=
 nav: 'settings',
 title: 'utils.settings'
 }) )) == null ? '' : __t) +
-'<div class="content">\n<ul class="table-view">\n<li class="table-view-cell table-view-divider">\n' +
+'<div class="content">\n<ul class="table-view">\n<!--         <li class="table-view-cell table-view-divider">\n' +
 ((__t = ( App.polyglot.t('utils.languages') )) == null ? '' : __t) +
 '\n</li>\n<li class="table-view-cell">\n<span class="media-object pull-left fa fa-language"></span>\n' +
 ((__t = ( App.polyglot.t('utils.english') )) == null ? '' : __t) +
-'\n<div class="toggle">\n<div class="toggle-handle"></div>\n</div>\n</li>\n<li class="table-view-cell table-view-divider">\n' +
+'\n<div class="toggle" id="language">\n<div class="toggle-handle"></div>\n</div>\n</li>\n<li class="table-view-cell table-view-divider">\n' +
 ((__t = ( App.polyglot.t('utils.notifications') )) == null ? '' : __t) +
 '\n</li>\n<li class="table-view-cell media">\n<span class="media-object pull-left fa fa-bullhorn"></span>\n' +
 ((__t = ( App.polyglot.t('utils.notify') )) == null ? '' : __t) +
-'\n<div class="toggle">\n<div class="toggle-handle"></div>\n</div>\n</li><!-- About -->\n<li class="table-view-cell table-view-divider">\n' +
+'\n<div class="toggle">\n<div class="toggle-handle"></div>\n</div>\n</li>About -->\n<li class="table-view-cell table-view-divider">\n' +
 ((__t = ( App.polyglot.t('utils.about') )) == null ? '' : __t) +
-'\n</li>\n<li class="table-view-cell media">\n<div class="media-body">\nApp Name\n<p>\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do\neiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor\nsit amet.\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do\neiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor\nsit amet.\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do\neiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor\nsit amet.\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do\neiusmod tempor incididunt ut labore et dolore. Lorem ipsum dolor\nsit amet.\n</p>\n</div>\n</li>\n</ul>\n</div>';
+'\n</li>\n<li class="table-view-cell media">\n<div class="media-body">\n<p>\nSan Carlos Technology Summit es el primer y único evento de referencia y actualización tecnológica dirigido a la Región Huetar Norte de Costa Rica, creado por las principales empresas, organizaciones y centros de educación universitaria de San Carlos relacionados con el sector tecnológico.\n</p>\n<p>\nMás en <a href="http://www.sancarlostechnologysummit.com/">www.sancarlostechnologysummit.com</a>\n</p>\n</div>\n</li>\n<li class="table-view-cell table-view-divider">\n' +
+((__t = ( App.polyglot.t('utils.about_credits') )) == null ? '' : __t) +
+'\n</li>\n<li class="table-view-cell media">\n<div class="media-body">\n<p>\nDesarrollado por DotCreek, especificamente gracias a:\n<ul>\n<li>Lester Angulo</li>\n<li>Allan Sibaja</li>\n<li>Hanzel Cruz</li>\n<li>Francisco Quesada</li>\n<li>Guillermo Arias</li>\n<li>Elizabeth Salas</li>\n</ul>\n</p>\n</div>\n</li>\n</ul>\n</div>';
 
 }
 return __p
@@ -678,21 +804,21 @@ __p += '\n<h1 class="title">' +
 ((__t = ( App.polyglot.t('utils.home') )) == null ? '' : __t) +
 '</h1>\n';
  } ;
-__p += '\n</nav>\n<header class="bar bar-tab">\n<a class="tab-item ' +
+__p += '\n</nav>\n<header class="bar bar-tab">\n<a class="tab-item home ' +
 ((__t = ( nav === 'home' ? 'active' : '' )) == null ? '' : __t) +
 '" href="#">\n<span class="icon icon-home"></span>\n<span class="tab-label">' +
 ((__t = ( App.polyglot.t('utils.home') )) == null ? '' : __t) +
-'</span>\n</a>\n<a class="tab-item ' +
-((__t = ( nav === 'favorites' ? 'active' : '' )) == null ? '' : __t) +
-'" href="#">\n<span class="icon icon-star-filled"></span>\n<span class="tab-label">' +
-((__t = ( App.polyglot.t('utils.favorites') )) == null ? '' : __t) +
-'</span>\n</a>\n<a class="tab-item ' +
+'</span>\n</a>\n<a class="tab-item list ' +
 ((__t = ( nav === 'rooms' ? 'active' : '' )) == null ? '' : __t) +
 '" href="#rooms">\n<span class="icon icon-list"></span>\n<span class="tab-label">' +
 ((__t = ( App.polyglot.t('rooms.rooms') )) == null ? '' : __t) +
-'</span>\n</a>\n<a class="tab-item ' +
+'</span>\n</a>\n<a class="tab-item star ' +
+((__t = ( nav === 'favorites' ? 'active' : '' )) == null ? '' : __t) +
+'" href="#favorites">\n<span class="icon icon-star"></span>\n<span class="tab-label">' +
+((__t = ( App.polyglot.t('utils.favorites') )) == null ? '' : __t) +
+'</span>\n</a>\n<a class="tab-item info ' +
 ((__t = ( nav === 'settings' ? 'active' : '' )) == null ? '' : __t) +
-'" href="#settings">\n<span class="icon icon-gear"></span>\n<span class="tab-label">' +
+'" href="#settings">\n<span class="icon icon-info"></span>\n<span class="tab-label">' +
 ((__t = ( App.polyglot.t('utils.settings') )) == null ? '' : __t) +
 '</span>\n</a>\n</header>';
 
@@ -724,7 +850,9 @@ __p += '\n<p>' +
 __e( item.currentEvent.content.description ) +
 '</p>\n';
  }else{ ;
-__p += '\n<p>No Current Event</p>\n';
+__p += '\n<p>' +
+((__t = ( App.polyglot.t('rooms.no_current_events') )) == null ? '' : __t) +
+'</p>\n';
  } ;
 
  if(item.upcomingFirst){ ;
@@ -734,11 +862,27 @@ __p += '\n<p>' +
 __e( item.upcomingFirst.content.description ) +
 '</p>\n';
  }else{ ;
-__p += '\n<p>No Upcoming Events</p>\n';
+__p += '\n<p>' +
+((__t = ( App.polyglot.t('rooms.no_upcoming_events') )) == null ? '' : __t) +
+'</p>\n';
  } ;
 __p += '\n</div>\n</a>\n</li>\n';
  }) ;
 __p += '\n</ul>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/scripts/templates/rooms/map.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<header class="bar bar-nav">\n<a class="icon icon-left-nav pull-left btn-back"></a>\n<h1 class="title"> ' +
+((__t = ( name )) == null ? '' : __t) +
+'</h1>\n</header><div class="content">\n<img src="' +
+((__t = ( img )) == null ? '' : __t) +
+'">\n</div>';
 
 }
 return __p
@@ -749,51 +893,67 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-__p += '<header class="bar bar-nav">\n<button class="btn btn-link btn-back btn-nav pull-left">\n<span class="icon icon-left-nav"></span>\nBack\n</button>\n<h1 class="title">' +
+__p += '<header class="bar bar-nav">\n<a class="icon icon-left-nav pull-left btn-back"></a>\n<a class="icon fa fa-map-marker pull-right" href="#maps/' +
+__e( encodeURIComponent(model.get('image'))) +
+'&' +
+((__t = ( model.get('name') )) == null ? '' : __t) +
+'"></a>\n<h1 class="title">' +
 __e( model.get("name") ) +
 '</h1>\n</header><div class="content show-room">\n<ul class="table-view rooms-show">';
  if(model.currentEvent){ ;
-__p += '<li class="table-view-cell table-view-divider">\n' +
+__p += '<li class="table-view-cell table-view-divider event-moment">\n<p>\n' +
 ((__t = ( App.polyglot.t('rooms.current') )) == null ? '' : __t) +
-'\n</li>\n<li class="table-view-cell media">\n<a href=\'#contents/' +
+'\n</p>\n</li>\n<li class="table-view-cell media current-event">\n<a href=\'#contents/' +
 __e( model.currentEvent.contentId) +
 '/' +
 __e( model.currentEvent.id) +
-'\'>\n<div class="media-body">\n<h4 class="content-title">\n' +
-__e( model.currentEvent.content.description || 'No Current Event :(' ) +
-'\n</h4>\n<p>\n' +
+'\'>\n<div class="media-body">\n<p class="content-summary">\n' +
 __e( model.currentEvent.summary ) +
-'\n</p>\n<p class="content-date">\n' +
-__e( App.utils.convertDate([model.currentEvent.startAt,model.currentEvent.endAt]) ) +
+'\n</p>\n<p class="content-hour">\n' +
+__e( App.utils.convertDate(model.currentEvent.startAt,'dayString')) +
+'\n' +
+__e( App.utils.convertDate([model.currentEvent.startAt,model.currentEvent.endAt],'times') ) +
 '\n</p>\n</div>\n</a>\n</li>';
  } ;
 
  if(!_.isEmpty(model.upcoming)){ ;
-__p += '<li class="table-view-cell table-view-divider">\n' +
+__p += '<li class="table-view-cell table-view-divider event-moment">\n<p>\n' +
 ((__t = ( App.polyglot.t('rooms.upcoming-events') )) == null ? '' : __t) +
-'\n</li>';
+'\n</p>\n</li>\n';
  if (model.upcomingFirst) { ;
-__p += '\n<li class="table-view-cell media">\n<a href=\'#contents/' +
-__e(model.upcomingFirst.contentId) +
+__p += '\n<li class="table-view-cell media upcoming-event">\n<a class="navigate-right" href=\'#contents/' +
+((__t = (model.upcomingFirst.contentId)) == null ? '' : __t) +
 '/' +
-__e( model.upcomingFirst.id) +
-'\'>\n<div class="media-body">\n<h4 class="content-title">\n' +
-__e( model.upcomingFirst.content.description || 'No Current Event :(' ) +
-'\n</h4>\n<p>\n' +
+((__t = ( model.upcomingFirst.id)) == null ? '' : __t) +
+'\'>\n<div class="media-body">\n<div class="date">\n<p class="day-name"> ' +
+__e( App.utils.convertDate(model.upcomingFirst.startAt,'dayStringShort')) +
+'</p>\n<p class="day"> ' +
+__e( App.utils.convertDate(model.upcomingFirst.startAt,'day')) +
+'</p>\n<p class="month"> ' +
+__e( App.utils.convertDate(model.upcomingFirst.startAt,'month')) +
+'</p>\n</div>\n<div class="content-details">\n<p class="content-hour">\n' +
+__e( App.utils.convertDate([model.upcomingFirst.startAt,model.upcomingFirst.endAt],'times') ) +
+'\n</p>\n<p class="content-summary">\n' +
 __e( model.upcomingFirst.summary ) +
-'\n</p>\n<p class="content-date">\n' +
-__e( App.utils.convertDate([model.upcomingFirst.startAt,model.upcomingFirst.endAt]) ) +
-'\n</p>\n</div>\n</a>\n</li>\n';
+'\n</p>\n</div>\n</div>\n</a>\n</li>\n';
  };
 
  model.upcoming.forEach(function (event) { ;
-__p += '\n<li class="table-view-cell media">\n<a href=\'#contents/' +
+__p += '\n<li class="table-view-cell media upcoming-event">\n<a class="navigate-right" href=\'#contents/' +
 ((__t = (event.contentId)) == null ? '' : __t) +
 '/' +
 ((__t = ( event.id)) == null ? '' : __t) +
-'\'>\n<h4 class="content-title">\n' +
-__e( event.content.description ) +
-'\n</h4>\n</a>\n</li>\n';
+'\'>\n<div class="media-body">\n<div class="date">\n<p class="day-name"> ' +
+__e( App.utils.convertDate(event.startAt,'dayStringShort')) +
+'</p>\n<p class="day"> ' +
+__e( App.utils.convertDate(event.startAt,'day')) +
+'</p>\n<p class="month"> ' +
+__e( App.utils.convertDate(event.startAt,'month')) +
+'</p>\n</div>\n<div class="content-details">\n<p class="content-hour">\n' +
+__e( App.utils.convertDate([event.startAt,event.endAt],'times') ) +
+'\n</p>\n<p class="content-summary">\n' +
+__e( event.summary ) +
+'\n</p>\n</div>\n</div>\n</a>\n</li>\n';
  }) ;
 
  } else { ;
@@ -808,7 +968,7 @@ return __p
     'use strict';
 
     App.Models.Session = Backbone.Model.extend({
-        url: '',
+        urlRoot: App.config.api + 'sessions',
         defaults: {},
     });
 })();
@@ -833,6 +993,90 @@ return __p
 
             return data;
         }
+    });
+})();
+
+(function() {
+    'use strict';
+
+    App.Models.Event = Backbone.Model.extend({
+
+        urlRoot: App.config.api + 'events',
+        defaults: {}
+    });
+})();
+
+(function() {
+    'use strict';
+
+    App.Models.Favorite = Backbone.Model.extend({
+        urlRoot: App.config.api + 'favorites',
+        defaults: {
+            favoriteId: ''
+        }
+    });
+})();
+
+(function() {
+    'use strict';
+
+    App.Models.Content = Backbone.Model.extend({
+
+        urlRoot: App.config.api + 'contents',
+
+        defaults: {},
+
+        isFavorite: function() {
+            var model = App.Favorites.findWhere({
+                favoriteId: this.get('id')
+            });
+
+            if (model) {
+                return 'icon-star-filled';
+            }
+            return 'icon-star';
+        }
+    });
+})();
+
+(function() {
+    'use strict';
+
+    App.Collections.Events = Backbone.Collection.extend({
+
+        model: App.Models.Event,
+
+        url: App.config.api + 'events'
+
+    });
+
+})();
+
+(function() {
+	'use strict';
+
+	App.Collections.Rooms = Backbone.Collection.extend({
+
+		model: App.Models.Room,
+
+		url: App.config.api + 'rooms',
+
+		parse: function(data) {
+			if (_.isArray(data)) {
+				return data;
+			}
+			return data.rooms;
+		}
+	});
+})();
+
+(function() {
+    'use strict';
+
+    App.Collections.Favorites = Backbone.Collection.extend({
+        url: App.config.api + 'favorites',
+        localStorage: new Backbone.LocalStorage('Favorites'),
+        model: App.Models.Favorite
     });
 })();
 
@@ -883,24 +1127,6 @@ return __p
 })();
 
 (function() {
-	'use strict';
-
-	App.Collections.Rooms = Backbone.Collection.extend({
-
-		model: App.Models.Room,
-
-		url: App.config.api + 'rooms',
-
-		parse: function(data) {
-			if (_.isArray(data)) {
-				return data;
-			}
-			return data.rooms;
-		}
-	});
-})();
-
-(function() {
     'use strict';
 
     App.Views.RoomsShow = Backbone.View.extend({
@@ -910,6 +1136,32 @@ return __p
         render: function() {
             this.$el.html(this.template({
                 model: this.model
+            }));
+            return this;
+        },
+
+        events: {
+            'click .btn-back': 'back'
+        },
+
+        back: function() {
+            window.history.back();
+            return false;
+        }
+    });
+})();
+
+(function() {
+    'use strict';
+
+    App.Views.RoomsMap = Backbone.View.extend({
+
+        template: JST['app/scripts/templates/rooms/map.ejs'],
+
+        render: function(options) {
+            this.$el.html(this.template({
+                img: options.img,
+                name: options.name
             }));
             return this;
         },
@@ -940,7 +1192,53 @@ return __p
         },
 
         events: {
-            'click .btn-back': 'back'
+            'click .btn-back': 'back',
+            'click #add-favorite': 'addFavorite'
+        },
+
+        addFavorite: function(event) {
+            event.preventDefault();
+            var id = this.model.id,
+                model = App.Favorites.findWhere({
+                    favoriteId: id
+                });
+
+            if (!model) {
+                /**
+                 * Create a clone of current model properties
+                 */
+                var obj = _.clone(this.model.attributes);
+
+                /**
+                 * Store current model id as favoriteId
+                 */
+                obj.favoriteId = this.model.id;
+
+                /**
+                 * Remove id from object cloned
+                 */
+                delete obj.id;
+
+                /**
+                 * Create a new object attached to Favorites collection
+                 */
+                App.Favorites.create(obj);
+
+                /**
+                 * Update the view
+                 */
+                return this.render();
+            }
+
+            /**
+             * Remove model from collection and local storage
+             */
+            model.destroy();
+
+            /**
+             * Update view
+             */
+            return this.render();
         },
 
         back: function() {
@@ -950,44 +1248,18 @@ return __p
     });
 })();
 
-(function () {
-    'use strict';
-
-    App.Models.Content = Backbone.Model.extend({
-
-        urlRoot: App.config.api + 'contents',
-
-        defaults: {}
-    });
-
-})();
-
-/*global App, Backbone*/
-
-App.Models = App.Models || {};
-
-(function () {
-    'use strict';
-
-    App.Models.Event = Backbone.Model.extend({
-
-        urlRoot: App.config.api + 'events',
-
-        defaults: {
-        }
-    });
-
-})();
-
 (function() {
     'use strict';
 
-    App.Collections.Events = Backbone.Collection.extend({
+    App.Views.Favorites = Backbone.View.extend({
 
-        model: App.Models.Event,
+        template: JST['app/scripts/templates/favorites/index.ejs'],
 
-        url: App.config.api + 'events'
-
+        render: function() {
+            this.$el.html(this.template({
+                collection: this.collection
+            }));
+            return this;
+        }
     });
-
 })();

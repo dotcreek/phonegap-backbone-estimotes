@@ -8,16 +8,12 @@
     <ul class="table-view">
         <li class="table-view-cell media">
             <div class="media-body">
-                <% model.get('events').forEach(function (event) { %>
-                    <% if (event.id === model._previousAttributes.eventId) {%>
-                        <h4 class="room-name">
-                            <%- event.room.name %>
-                        </h4>
-                        <p class="content-date">
-                            <%- App.utils.convertDate([event.startAt, event.endAt],'times') %>
-                        </p>
-                    <% } %>
-                <% })%>
+                <h4 class="room-name">
+                    <%- model.get('events')[0].room.name %>
+                </h4>
+                <p class="content-date">
+                    <%- App.utils.convertDate([model.get('events')[0].startAt, model.get('events')[0].endAt],'times') %>
+                </p>
                 <p>
                     <%= model.get('content') %>
                 </p>

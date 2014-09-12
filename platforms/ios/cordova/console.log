@@ -12,3 +12,177 @@ You could find it at the following address https://developer.apple.com/icloud/do
 2014-09-06 17:08:12.531 SCTSummit[39719:70b] Resetting plugins due to page load.
 2014-09-06 17:08:12.859 SCTSummit[39719:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/E1FA48F8-066E-42B4-AF22-30F6ACC37B10/SCTSummit.app/www/index.html
 2014-09-06 17:08:13.678 SCTSummit[39719:4f07] NSURLConnection/CFURLConnection HTTP load failed (kCFStreamErrorDomainSSL, -9813)
+2014-09-10 07:23:54.480 SCTSummit[41154:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-10 07:23:54.511 SCTSummit[41154:70b] Unlimited access to network resources
+2014-09-10 07:23:54.521 SCTSummit[41154:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-10 07:23:54.815 SCTSummit[41154:70b] [CDVTimer][splashscreen] 65.509021ms
+2014-09-10 07:23:54.815 SCTSummit[41154:70b] [CDVTimer][TotalPluginStartup] 66.073000ms
+2014-09-10 07:23:55.012 SCTSummit[41154:70b] Resetting plugins due to page load.
+2014-09-10 07:23:55.292 SCTSummit[41154:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/46AEB9EF-2215-400A-BF1A-E211B87E3CEE/SCTSummit.app/www/index.html
+2014-09-10 07:23:58.800 SCTSummit[41154:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 07:23:58.801 SCTSummit[41154:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 07:23:58.801 SCTSummit[41154:70b] WARN: WARNING: Missing translation for key: "rooms.rooms"
+2014-09-10 07:23:58.801 SCTSummit[41154:70b] WARN: WARNING: Missing translation for key: "utils.favorites"
+2014-09-10 07:23:58.802 SCTSummit[41154:70b] WARN: WARNING: Missing translation for key: "utils.settings"
+2014-09-10 07:23:58.802 SCTSummit[41154:70b] route: 
+2014-09-10 07:24:45.376 SCTSummit[41490:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-10 07:24:45.383 SCTSummit[41490:70b] Unlimited access to network resources
+2014-09-10 07:24:45.385 SCTSummit[41490:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-10 07:24:45.408 SCTSummit[41490:70b] [CDVTimer][splashscreen] 7.592976ms
+2014-09-10 07:24:45.408 SCTSummit[41490:70b] [CDVTimer][TotalPluginStartup] 8.077979ms
+2014-09-10 07:24:45.455 SCTSummit[41490:70b] Resetting plugins due to page load.
+2014-09-10 07:24:45.537 SCTSummit[41490:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/46AEB9EF-2215-400A-BF1A-E211B87E3CEE/SCTSummit.app/www/index.html
+2014-09-10 07:24:48.942 SCTSummit[41490:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 07:24:48.943 SCTSummit[41490:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 07:24:48.943 SCTSummit[41490:70b] WARN: WARNING: Missing translation for key: "rooms.rooms"
+2014-09-10 07:24:48.943 SCTSummit[41490:70b] WARN: WARNING: Missing translation for key: "utils.favorites"
+2014-09-10 07:24:48.943 SCTSummit[41490:70b] WARN: WARNING: Missing translation for key: "utils.settings"
+2014-09-10 07:24:48.944 SCTSummit[41490:70b] route: 
+2014-09-10 07:26:03.548 SCTSummit[41490:70b] Received memory warning.
+2014-09-10 18:57:29.747 SCTSummit[47941:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-10 18:57:29.791 SCTSummit[47941:70b] Unlimited access to network resources
+2014-09-10 18:57:29.801 SCTSummit[47941:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-10 18:57:30.028 SCTSummit[47941:70b] [CDVTimer][splashscreen] 63.068032ms
+2014-09-10 18:57:30.028 SCTSummit[47941:70b] [CDVTimer][TotalPluginStartup] 63.551009ms
+2014-09-10 18:57:30.337 SCTSummit[47941:70b] Resetting plugins due to page load.
+2014-09-10 18:57:30.535 SCTSummit[47941:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/46AEB9EF-2215-400A-BF1A-E211B87E3CEE/SCTSummit.app/www/index.html
+2014-09-10 18:57:34.767 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 18:57:34.767 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 18:57:34.767 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.rooms"
+2014-09-10 18:57:34.767 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.favorites"
+2014-09-10 18:57:34.768 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.settings"
+2014-09-10 18:57:34.768 SCTSummit[47941:70b] route: 
+2014-09-10 18:58:41.471 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.rooms"
+2014-09-10 18:58:41.472 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 18:58:41.472 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.rooms"
+2014-09-10 18:58:41.472 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.favorites"
+2014-09-10 18:58:41.472 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.settings"
+2014-09-10 18:58:41.473 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:41.473 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:41.473 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:41.473 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:41.473 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:41.474 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:41.474 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:41.474 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:41.474 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:41.474 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:41.475 SCTSummit[47941:70b] route: #rooms
+2014-09-10 18:58:44.382 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming-events"
+2014-09-10 18:58:44.383 SCTSummit[47941:70b] route: #rooms/A733034B-DDB1-4E3B-9AE0-4C63323FCE7F
+2014-09-10 18:58:53.284 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.rooms"
+2014-09-10 18:58:53.284 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 18:58:53.284 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.rooms"
+2014-09-10 18:58:53.284 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.favorites"
+2014-09-10 18:58:53.285 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.settings"
+2014-09-10 18:58:53.285 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:53.285 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:53.285 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:53.286 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:53.286 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:53.286 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:53.286 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:53.286 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:53.287 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.no_current_events"
+2014-09-10 18:58:53.287 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.upcoming"
+2014-09-10 18:58:53.287 SCTSummit[47941:70b] route: #rooms
+2014-09-10 18:58:56.211 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 18:58:56.212 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.home"
+2014-09-10 18:58:56.212 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "rooms.rooms"
+2014-09-10 18:58:56.212 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.favorites"
+2014-09-10 18:58:56.212 SCTSummit[47941:70b] WARN: WARNING: Missing translation for key: "utils.settings"
+2014-09-10 18:58:56.212 SCTSummit[47941:70b] route: 
+2014-09-11 17:13:16.284 SCTSummit[57055:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-11 17:13:16.322 SCTSummit[57055:70b] Unlimited access to network resources
+2014-09-11 17:13:16.334 SCTSummit[57055:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-11 17:13:16.398 SCTSummit[57055:70b] [CDVTimer][splashscreen] 30.473948ms
+2014-09-11 17:13:16.398 SCTSummit[57055:70b] [CDVTimer][TotalPluginStartup] 31.045020ms
+2014-09-11 17:13:16.471 SCTSummit[57055:70b] Resetting plugins due to page load.
+2014-09-11 17:13:16.618 SCTSummit[57055:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/46AEB9EF-2215-400A-BF1A-E211B87E3CEE/SCTSummit.app/www/index.html
+2014-09-11 17:13:20.188 SCTSummit[57055:70b] route: 
+2014-09-11 17:14:55.461 SCTSummit[57407:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-11 17:14:55.468 SCTSummit[57407:70b] Unlimited access to network resources
+2014-09-11 17:14:55.470 SCTSummit[57407:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-11 17:14:55.493 SCTSummit[57407:70b] [CDVTimer][splashscreen] 7.412016ms
+2014-09-11 17:14:55.494 SCTSummit[57407:70b] [CDVTimer][TotalPluginStartup] 7.920980ms
+2014-09-11 17:14:55.537 SCTSummit[57407:70b] Resetting plugins due to page load.
+2014-09-11 17:14:55.616 SCTSummit[57407:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/46AEB9EF-2215-400A-BF1A-E211B87E3CEE/SCTSummit.app/www/index.html
+2014-09-11 17:14:58.940 SCTSummit[57407:70b] route: 
+Terminating in response to SpringBoard's termination.
+2014-09-11 17:38:00.762 SCTSummit[58171:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-11 17:38:00.773 SCTSummit[58171:70b] Unlimited access to network resources
+2014-09-11 17:38:00.776 SCTSummit[58171:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-11 17:38:00.808 SCTSummit[58171:70b] [CDVTimer][splashscreen] 10.544002ms
+2014-09-11 17:38:00.809 SCTSummit[58171:70b] [CDVTimer][TotalPluginStartup] 11.516988ms
+2014-09-11 17:38:00.978 SCTSummit[58171:70b] Resetting plugins due to page load.
+2014-09-11 17:38:01.114 SCTSummit[58171:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/46AEB9EF-2215-400A-BF1A-E211B87E3CEE/SCTSummit.app/www/index.html
+2014-09-11 17:38:04.679 SCTSummit[58171:70b] route: 
+2014-09-11 17:38:17.251 SCTSummit[58171:70b] route: #contents/1853FC14-15F1-4A4A-BBB4-97FA11FC48B2/0CD04208-4E1D-48C7-8B6E-CFCE2A0DD3DD
+2014-09-11 17:38:18.988 SCTSummit[58171:70b] route: 
+2014-09-11 17:38:20.796 SCTSummit[58171:70b] route: #contents/11B42D28-3EB0-496D-9A51-E95173D2FB7D/7B9AAD5E-14D4-4680-ADFA-50A995858D8B
+2014-09-11 17:38:22.637 SCTSummit[58171:70b] route: 
+2014-09-11 17:39:43.514 SCTSummit[58896:70b] Multi-tasking -> Device: YES, App: YES
+2014-09-11 17:39:43.521 SCTSummit[58896:70b] Unlimited access to network resources
+2014-09-11 17:39:43.524 SCTSummit[58896:70b] 
+
+Started backup to iCloud! Please be careful.
+Your application might rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines"
+You could find it at the following address https://developer.apple.com/icloud/documentation/data-storage/ .
+
+2014-09-11 17:39:43.549 SCTSummit[58896:70b] [CDVTimer][splashscreen] 8.754969ms
+2014-09-11 17:39:43.550 SCTSummit[58896:70b] [CDVTimer][TotalPluginStartup] 9.350002ms
+2014-09-11 17:39:43.678 SCTSummit[58896:70b] Resetting plugins due to page load.
+2014-09-11 17:39:43.784 SCTSummit[58896:70b] Finished load of: file:///Users/bladimirarroyo/Library/Application%20Support/iPhone%20Simulator/7.1/Applications/46AEB9EF-2215-400A-BF1A-E211B87E3CEE/SCTSummit.app/www/index.html
+2014-09-11 17:39:47.164 SCTSummit[58896:70b] route: 
+2014-09-11 17:39:59.441 SCTSummit[58896:70b] route: #rooms
+2014-09-11 17:40:06.209 SCTSummit[58896:70b] route: #rooms/A733034B-DDB1-4E3B-9AE0-4C63323FCE7F
+2014-09-11 17:40:10.539 SCTSummit[58896:70b] route: #contents/11B42D28-3EB0-496D-9A51-E95173D2FB7D/7B9AAD5E-14D4-4680-ADFA-50A995858D8B
+2014-09-11 17:40:16.645 SCTSummit[58896:70b] route: #rooms/A733034B-DDB1-4E3B-9AE0-4C63323FCE7F
+2014-09-11 17:40:20.313 SCTSummit[58896:70b] route: #rooms
+2014-09-11 17:40:22.446 SCTSummit[58896:70b] route: #favorites
+2014-09-11 17:40:28.327 SCTSummit[58896:70b] route: #contents/11B42D28-3EB0-496D-9A51-E95173D2FB7D/7B9AAD5E-14D4-4680-ADFA-50A995858D8B
+2014-09-11 17:40:31.072 SCTSummit[58896:70b] route: #favorites
+2014-09-11 17:40:33.084 SCTSummit[58896:70b] route: #settings
+2014-09-11 17:40:38.912 SCTSummit[58896:70b] route: #favorites
+2014-09-11 17:40:40.646 SCTSummit[58896:70b] route: #rooms
+2014-09-11 17:40:42.162 SCTSummit[58896:70b] route: 
+2014-09-11 17:40:46.275 SCTSummit[58896:70b] route: #contents/58B39A60-DF47-4B2F-A7A8-BB136D68C9BC/6C11F97C-7F1C-4495-9EA4-994924F4AE6C
+2014-09-11 17:40:50.025 SCTSummit[58896:70b] route: 
+2014-09-11 17:41:05.421 SCTSummit[58896:70b] Received memory warning.

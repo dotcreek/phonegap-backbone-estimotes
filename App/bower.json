@@ -14,5 +14,8 @@
     "moment-timezone": "~0.2.1",
     "backbone.localStorage": "~1.1.13"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "backbone": "~1.1.0"
+  }
 }

@@ -32,6 +32,20 @@
     <feature name="Console">
         <param name="ios-package" value="CDVLogger" />
     </feature>
+    <icon height="60" src="www/res/icon/ios/icon-60.png" width="60" />
+    <icon height="120" src="www/res/icon/ios/icon-60@2x.png" width="120" />
+    <icon height="76" src="www/res/icon/ios/icon-76.png" width="76" />
+    <icon height="152" src="www/res/icon/ios/icon-76@2x.png" width="152" />
+    <icon height="40" src="www/res/icon/ios/icon-40.png" width="40" />
+    <icon height="80" src="www/res/icon/ios/icon-40@2x.png" width="80" />
+    <icon height="57" src="www/res/icon/ios/icon.png" width="57" />
+    <icon height="114" src="www/res/icon/ios/icon@2x.png" width="114" />
+    <icon height="72" src="www/res/icon/ios/icon-72.png" width="72" />
+    <icon height="144" src="www/res/icon/ios/icon-72@2x.png" width="144" />
+    <icon height="29" src="www/res/icon/ios/icon-small.png" width="29" />
+    <icon height="58" src="www/res/icon/ios/icon-small@2x.png" width="58" />
+    <icon height="50" src="www/res/icon/ios/icon-50.png" width="50" />
+    <icon height="100" src="www/res/icon/ios/icon-50@2x.png" width="100" />
     <name>SCTSummit</name>
     <description>
         San Carlos Technology Summit event application
@@ -81,10 +95,6 @@
     <icon gap:platform="android" gap:qualifier="mdpi" src="www/res/icon/android/icon-48-mdpi.png" />
     <icon gap:platform="android" gap:qualifier="hdpi" src="www/res/icon/android/icon-72-hdpi.png" />
     <icon gap:platform="android" gap:qualifier="xhdpi" src="www/res/icon/android/icon-96-xhdpi.png" />
-    <icon gap:platform="ios" height="57" src="www/res/icon/ios/icon-57.png" width="57" />
-    <icon gap:platform="ios" height="72" src="www/res/icon/ios/icon-72.png" width="72" />
-    <icon gap:platform="ios" height="114" src="www/res/icon/ios/icon-57-2x.png" width="114" />
-    <icon gap:platform="ios" height="144" src="www/res/icon/ios/icon-72-2x.png" width="144" />
     <gap:splash gap:platform="android" gap:qualifier="port-ldpi" src="www/res/screen/android/screen-ldpi-portrait.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-mdpi" src="www/res/screen/android/screen-mdpi-portrait.png" />
     <gap:splash gap:platform="android" gap:qualifier="port-hdpi" src="www/res/screen/android/screen-hdpi-portrait.png" />

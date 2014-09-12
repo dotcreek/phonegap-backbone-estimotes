@@ -121,7 +121,6 @@ body.fav .content ul.rooms-home{
 
 .page {
     position: fixed;
-    top: 0 !important;
     left: 0;
     right:0;
     bottom: 0 !important;

@@ -1,6 +1,10 @@
 /* Home Style */
+body {
+    background: url(/images/bg.jpg) no-repeat center center fixed;
+    background-color: #259fc2;
+}
+
 body, .page.center {
-    background: url(../images/bg.jpg) no-repeat center center fixed;
     background-size: 100%;
 }
 
@@ -37,10 +41,8 @@ body.list .title {
 }
 
 body.list li.table-view-cell.media {
-    padding: 7px 0 0 0;
+    padding: 2px 0 0 0;
     margin-bottom: 10px;
-    -webkit-box-shadow: 0 8px 9px 0 rgba(0,0,0,0.2);
-    box-shadow: 0 8px 9px 0 rgba(0,0,0,0.2);
 }
 
 body.list h4, h4.room-name {
@@ -56,58 +58,15 @@ body.list p{
 
 body.list .media-body {
     background: rgba(0, 0, 0, 0.08);
-    padding: 15px 15px 20px 15px;
 }
 
 body.list .content {
     top: 40px !important;
     padding-top: 10px;
 }
-
-
-/* Fav Style */
-
-body.fav  .content > .table-view:first-child {
-    margin-top: 19px;
-}
-
-body.fav h4.content-title {
-    text-align: right;
-    width: 100%;
-    padding: 0px;
-}
-
-body.fav .rooms-home .media-body {
-    height: 150px;
-}
-
-body.fav .rooms-home li.table-view-cell.media {
-    margin-bottom: 15px;
-    -webkit-box-shadow: 0 8px 9px 0 rgba(0,0,0,0.2);
-    box-shadow: 0 8px 9px 0 rgba(0,0,0,0.1);
-    padding: 5px 5px 7px 5px !important;
-}
-
-body.fav p.content-hour {
-    text-align: right;
-    width: 100%;
-    padding: 0px 4% 0px 1.5% !important;
+i {
     color: #D6FFB2;
 }
-
-body.fav .content ul.table-view {
-    padding: 0 10px 16px 10px;
-    margin-top: -20px !important;
-}
-
-body.fav .content ul.rooms-home{
-    margin-top: 19px !important;
-}
-
-
-
-
-
 
 #container {
     position: absolute;
@@ -211,7 +170,6 @@ body.fav .content ul.rooms-home{
 }
 
 .center{
-    background: url(/images/bg.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     background-size: cover;
 }
@@ -252,12 +210,9 @@ body.fav .content ul.rooms-home{
     width: 100%;
 }
 
-p.content-hour {
-    padding-top: 9px !important;
-}
 
 p.content-summary{
-    font-size: 1.2em;
+    font-size: 1em;
     color: #fff;
     font-family: "HelveticaNeue-Light";
 }
@@ -307,7 +262,7 @@ p.content-summary{
 }
 
 h4, .h4 {
-    font-size: 1.3em;
+    font-size: 1em;
     font-family: Helvetica Neue;
     font-weight: 200;
 }
@@ -323,12 +278,14 @@ h4, .h4 {
 .rooms-home .media-body > *{
     float: left;
 }
+h4.room-name {
+    color: #CCC;
+    font-size: 1.05em;
+}
 
 .rooms-home h4.room-name {
-    width: 30%;
+    width: 35%;
     background: rgba(0, 0, 0, 0.1);
-    color: #CCC;
-    font-size: 1.1em;
     text-align: center;
     height: inherit;
     padding: 34px 5px;
@@ -339,9 +296,13 @@ h4, .h4 {
 }
 
 .room-content {
-    width: 70%;
-    text-align: right;
-    padding: 5px 4% 0px 1.5%;
+    width: 65%;
+    padding: 5px;
+}
+
+.room-content-full {
+    width: 100%;
+    padding: 5px;
 }
 
 h4.content-title {
@@ -354,7 +315,6 @@ p.content-date {
 
 .title {
     color: #D6FFB2;
-    font-weight: 200;
     text-align: center;
 }
 
@@ -388,10 +348,6 @@ a.tab-item {
     background: none;
 }
 
-.table-view-cell > a:not(.btn):active {
-    background: rgba(0, 0, 0, 0.2) url(../images/summit.png) no-repeat center ;
-}
-
 .table-view-cell > a:not(.btn):active .media-body {
     -webkit-filter: blur(5px);
     -moz-filter: blur(5px);
@@ -404,8 +360,13 @@ a.tab-item {
     color: #fff;
 }
 
-.media-body div {
+.media-body {
     color: #fff;
+}
+
+.media-body b {
+    color: #D6FFB2;
+    font-size: 0.8em;
 }
 
 h6 b {
@@ -431,7 +392,7 @@ h6 b {
 }
 
 .navigate-right .media-body{
-    padding: 0px 0 20px 0 !important;
+    padding: 0px 30px 20px 0 !important;
 }
 
 .rooms-index .navigate-right .media-body p{
@@ -439,11 +400,12 @@ h6 b {
 }
 
 .rooms-show .content-details {
-    padding: 0 31px 0 10px;
+    padding: 5px 31px 0 10px;
 }
 
-p.content-hour {
-    margin: 6px 0 0 0;
+span.content-hour {
+    text-align: left;
+    padding: 5px;
 }
 
 li.table-view-cell.table-view-divider.event-moment {
@@ -460,10 +422,10 @@ li.table-view-cell.table-view-divider.event-moment {
     padding-top: 20px !important;
 }
 
-.content {
+/*.content {
     top: 40px !important;
 }
-
+*/
 .date p {
     font-family: "HelveticaNeue-Light";
 }
@@ -477,11 +439,15 @@ ul.table-view.about {
     padding: 1px 20px 14px 20px;
     margin-bottom: 0px;
     color: #fff;
-    font-size: 15px;
+    height: 100%;
 }
 
-ul.table-view.about ul {
+ul.table-view.about {
     -webkit-padding-start: 18px;
+}
+
+ul.table-view.about li {
+    font-size: 0.8em;
 }
 
 ul.table-view.about li.table-view-cell.table-view-divider {
@@ -495,17 +461,21 @@ a {
     color: #D6FFB2;
 }
 
-h4.room-name {
-    background: none !important;
-    text-align: center;
-    padding: 0px 15px;
-    margin-bottom: 0px;
-    color: #D6FFB2;
-}
-
 .icon {
     width: 40px;
+    text-align: center;
 }
 
+span.label {
+    font-weight: bold;
+}
 
+.event-content {
+    margin-top: 10px;
+    padding: 3px;
+}
+
+.table-view-cell > a:not(.btn):active {
+    background-color: transparent !important;
+}
 

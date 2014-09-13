@@ -1,9 +1,9 @@
 {
     "rooms": "Salas",
-    "current": "Evento actual",
-    "current-events": "Eventos actuales",
-    "upcoming": "Siguiente evento",
-    "upcoming-events": "Siguientes eventos",
-    "no_current_events": "No hay eventos en este momento",
+    "current": "En este momento",
+    "current-events": "Actuales",
+    "upcoming": "Siguiente",
+    "upcoming-events": "Siguientes",
+    "no_current_events": "Ninguno",
     "no_upcoming_events": "No hay más eventos"
 }

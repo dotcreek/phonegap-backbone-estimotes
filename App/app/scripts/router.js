@@ -116,7 +116,7 @@ App.Router = Backbone.Router.extend({
          */
         App.slider.slidePage(view.render().$el);
 
-        document.body.className = 'fav';
+        document.body.className = 'home';
         /**
          * Clean view
          */
@@ -186,7 +186,7 @@ App.Router = Backbone.Router.extend({
          */
         App.slider.slidePage(view.render().$el);
 
-        document.body.className = 'info';
+        document.body.className = 'home';
         /**
          * Clean view
          */
@@ -220,7 +220,7 @@ App.Router = Backbone.Router.extend({
                  */
                 App.slider.slidePage(view.render().$el);
 
-                document.body.className = 'list';
+                document.body.className = 'home';
                 /**
                  * Clean View
                  */

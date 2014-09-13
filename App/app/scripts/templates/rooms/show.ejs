@@ -4,27 +4,26 @@
     <h1 class="title"><%- model.get("name") %></h1>
 </header>
 
-<div class="content show-room">
-   <ul class="table-view rooms-show">
-
+<div class="content">
+    <ul class="table-view rooms-home">
         <% if(model.currentEvent){ %>
 
             <li class="table-view-cell table-view-divider event-moment">
                 <p>
-                    <%t ('rooms.current') %>
+                    <%t ('rooms.current') %>:
                 </p>
             </li>
-            <li class="table-view-cell media current-event">
+            <li class="table-view-cell media current-event navigate-right">
                 <a href='#contents/<%- model.currentEvent.contentId%>/<%- model.currentEvent.id%>'>
                     <div class="media-body">
                         <p class="content-summary">
                             <%- model.currentEvent.summary %>
                         </p>
-                        <p class="content-hour">
-                            <%- App.utils.convertDate(model.currentEvent.startAt,'dayString')%>
-                            <%- App.utils.convertDate([model.currentEvent.startAt,model.currentEvent.endAt],'times') %>
-                        </p>
                     </div>
+                    <span class="content-hour"><i class="fa fa-calendar"></i>
+                        <%- App.utils.convertDate(model.currentEvent.startAt,'dayString')%>
+                        <%- App.utils.convertDate([model.currentEvent.startAt,model.currentEvent.endAt],'times') %>
+                    </span>
                 </a>
             </li>
 
@@ -34,22 +33,22 @@
 
             <li class="table-view-cell table-view-divider event-moment">
                 <p>
-                    <%t ('rooms.upcoming-events') %>
+                    <%t ('rooms.upcoming-events') %>:
                 </p>
             </li>
             <% if (model.upcomingFirst) { %>
-                <li class="table-view-cell media upcoming-event">
-                    <a class="navigate-right" href='#contents/<%=model.upcomingFirst.contentId%>/<%= model.upcomingFirst.id%>'>
+                <li class="table-view-cell media upcoming-event navigate-right">
+                    <a href='#contents/<%=model.upcomingFirst.contentId%>/<%= model.upcomingFirst.id%>'>
                         <div class="media-body">
                             <div class="date">
                                 <p class="day-name"> <%- App.utils.convertDate(model.upcomingFirst.startAt,'dayStringShort')%></p>
                                 <p class="day"> <%- App.utils.convertDate(model.upcomingFirst.startAt,'day')%></p>
                                 <p class="month"> <%- App.utils.convertDate(model.upcomingFirst.startAt,'month')%></p>
                             </div>
-                            <div class="content-details">
-                                <p class="content-hour">
+                            <div class="room-content">
+                                <span class="content-hour"><i class="fa fa-calendar"></i>
                                     <%- App.utils.convertDate([model.upcomingFirst.startAt,model.upcomingFirst.endAt],'times') %>
-                                </p>
+                                </span>
                                 <p class="content-summary">
                                     <%- model.upcomingFirst.summary %>
                                 </p>
@@ -60,18 +59,18 @@
             <% }%>
 
             <% model.upcoming.forEach(function (event) { %>
-                <li class="table-view-cell media upcoming-event">
-                    <a class="navigate-right" href='#contents/<%=event.contentId%>/<%= event.id%>'>
+                <li class="navigate-right table-view-cell media upcoming-event">
+                    <a href='#contents/<%=event.contentId%>/<%= event.id%>'>
                         <div class="media-body">
                             <div class="date">
                                 <p class="day-name"> <%- App.utils.convertDate(event.startAt,'dayStringShort')%></p>
                                 <p class="day"> <%- App.utils.convertDate(event.startAt,'day')%></p>
                                 <p class="month"> <%- App.utils.convertDate(event.startAt,'month')%></p>
                             </div>
-                            <div class="content-details">
-                                <p class="content-hour">
+                            <div class="room-content">
+                                <span class="content-hour"> <i class="fa fa-calendar"></i>
                                     <%- App.utils.convertDate([event.startAt,event.endAt],'times') %>
-                                </p>
+                                </span>
                                 <p class="content-summary">
                                     <%- event.summary %>
                                 </p>
@@ -86,7 +85,7 @@
                 Nothing to display
             </li>
         <% } %>
-
     </ul>
 </div>
+
 

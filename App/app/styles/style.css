@@ -1,12 +1,13 @@
 /* Home Style */
 body {
-    background: url(/images/bg.jpg) no-repeat center center fixed;
+    background: url('../images/bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
     background-color: #259fc2;
 }
 
-body, .page.center {
-    background-size: 100%;
-}
 
 body.home .title {
     color: #D6FFB2;
@@ -67,7 +68,7 @@ body.list .content {
 i {
     color: #D6FFB2;
 }
-
+/*
 #container {
     position: absolute;
     width: 100%;
@@ -76,7 +77,7 @@ i {
     background: url(/images/bg.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     background-size: cover;
-}
+}*/
 
 .navigate-left:after, .navigate-right:after, .push-left:after, .push-right:after {
     top: 62%;
@@ -148,7 +149,7 @@ i {
 
 .current-event {
     height: 179px;
-    background: url(/images/event-bg.jpg) no-repeat center top 100% !important;
+    background: url('../images/event-bg.jpg') no-repeat center top 100% !important;
     background-size: 100% !important;
     padding: 20barpx 5px 0 5px !important;
     text-align: center;
@@ -479,3 +480,6 @@ span.label {
     background-color: transparent !important;
 }
 
+.fa {
+    font-family: FontAwesome !important;
+}

@@ -12,7 +12,8 @@
     "fontawesome": "~4.2.0",
     "moment": "~2.8.2",
     "moment-timezone": "~0.2.1",
-    "backbone.localStorage": "~1.1.13"
+    "backbone.localStorage": "~1.1.13",
+    "backbone-fetch-cache": "~1.4.0"
   },
   "devDependencies": {},
   "resolutions": {

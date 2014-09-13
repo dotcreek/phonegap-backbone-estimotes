@@ -32,7 +32,7 @@ window.App = {
          * @type {String}
          */
         // api: 'http://localhost:4000/',
-        api: 'http://summit.dotcreek.com:4000/',
+        api: 'http://summit.dotcreek.com/',
 
         /**
          * Min value for start searching values to API or autocomplete fields
@@ -46,6 +46,13 @@ window.App = {
          * @type {Number}
          */
         ajaxTimeOut: 5,
+
+        /**
+         * @name App#cacheExpires
+         * @description Time in seconds for cache to expire
+         * @default 1 hour
+         */
+        cacheExpire: 216000,
     },
 
     /**

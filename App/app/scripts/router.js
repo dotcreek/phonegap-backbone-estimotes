@@ -133,6 +133,8 @@ App.Router = Backbone.Router.extend({
          * GET /rooms
          */
         new App.Collections.Events({}).fetch({
+            cache: false,
+            expires: App.config.cacheExpire,
             data: {
                 currentTime: new Date().toISOString()
             },
@@ -203,6 +205,8 @@ App.Router = Backbone.Router.extend({
          * GET /rooms
          */
         new App.Collections.Rooms({}).fetch({
+            cache: true,
+            expires: App.config.cacheExpire,
             data: {
                 currentTime: new Date().toISOString()
             },
@@ -244,6 +248,8 @@ App.Router = Backbone.Router.extend({
          * GET /rooms/:id
          */
         model.fetch({
+            cache: true,
+            expires: App.config.cacheExpire,
             data: {
                 currentTime: new Date().toISOString()
             },
@@ -273,6 +279,8 @@ App.Router = Backbone.Router.extend({
          * GET /contents/:id
          */
         model.fetch({
+            cache: true,
+            expires: App.config.cacheExpire,
             success: function() {
                 model.set('eventId', eventId);
                 var view = new App.Views.ContentsShow({

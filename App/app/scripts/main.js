@@ -45,6 +45,13 @@ window.App = {
          * @type {Number}
          */
         ajaxTimeOut: 5,
+
+        /**
+         * @name App#cacheExpires
+         * @description Time in seconds for cache to expire
+         * @default 1 hour
+         */
+        cacheExpire: 216000,
     },
 
     /**

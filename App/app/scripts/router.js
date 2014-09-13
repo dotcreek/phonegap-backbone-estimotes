@@ -133,7 +133,7 @@ App.Router = Backbone.Router.extend({
          * GET /rooms
          */
         new App.Collections.Events({}).fetch({
-            cache: falsfalse,
+            cache: false,
             expires: App.config.cacheExpire,
             data: {
                 currentTime: new Date().toISOString()

@@ -1,13 +1,16 @@
 /* Home Style */
 body {
-    background: url('../images/bg.jpg') no-repeat center center fixed;
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+    background: url('../images/bg.jpg') repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     background-color: #259fc2;
 }
 
+body, .page.center {
+    background-size: 100%;
+}
 
 body.home .title {
     color: #D6FFB2;
@@ -298,6 +301,11 @@ h4.room-name {
 
 .room-content {
     width: 65%;
+    padding: 5px;
+}
+
+.room-content-partial{
+    width: 80%;
     padding: 5px;
 }
 

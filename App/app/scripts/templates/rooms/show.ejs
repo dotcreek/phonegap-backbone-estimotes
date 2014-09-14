@@ -45,7 +45,7 @@
                                 <p class="day"> <%- App.utils.convertDate(model.upcomingFirst.startAt,'day')%></p>
                                 <p class="month"> <%- App.utils.convertDate(model.upcomingFirst.startAt,'month')%></p>
                             </div>
-                            <div class="room-content">
+                            <div class="room-content-partial">
                                 <span class="content-hour"><i class="fa fa-calendar"></i>
                                     <%- App.utils.convertDate([model.upcomingFirst.startAt,model.upcomingFirst.endAt],'times') %>
                                 </span>
@@ -67,7 +67,7 @@
                                 <p class="day"> <%- App.utils.convertDate(event.startAt,'day')%></p>
                                 <p class="month"> <%- App.utils.convertDate(event.startAt,'month')%></p>
                             </div>
-                            <div class="room-content">
+                            <div class="room-content-partial">
                                 <span class="content-hour"> <i class="fa fa-calendar"></i>
                                     <%- App.utils.convertDate([event.startAt,event.endAt],'times') %>
                                 </span>

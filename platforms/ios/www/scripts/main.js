@@ -178,7 +178,7 @@ window.App = {
          * @type {String}
          */
         // api: 'http://localhost:4000/',
-        api: 'http://summit.dotcreek.com:4000/',
+        api: 'http://summit.dotcreek.com/',
 
         /**
          * Min value for start searching values to API or autocomplete fields
@@ -675,26 +675,17 @@ this["JST"] = this["JST"] || {};
 
 this["JST"]["app/scripts/templates/contents/show.ejs"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<header class="bar bar-nav">\n<a class="icon icon-left-nav pull-left btn-back"></a>\n<a class="icon ' +
 ((__t = ( model.isFavorite() )) == null ? '' : __t) +
 ' pull-right" id="add-favorite"></a>\n<h1 class="title truncated">' +
 __e( model.get('description') ) +
-'</h1>\n</header><div class="content">\n<ul class="table-view">\n<li class="table-view-cell media">\n<div class="media-body">\n';
- model.get('events').forEach(function (event) { ;
-__p += '\n';
- if (event.id === model._previousAttributes.eventId) {;
-__p += '\n<h4 class="room-name">\n' +
-__e( event.room.name ) +
+'</h1>\n</header><div class="content">\n<ul class="table-view">\n<li class="table-view-cell media">\n<div class="media-body">\n<h4 class="room-name">\n' +
+__e( model.get('events')[0].room.name ) +
 '\n</h4>\n<p class="content-date">\n' +
-__e( App.utils.convertDate([event.startAt, event.endAt],'times') ) +
-'\n</p>\n';
- } ;
-__p += '\n';
- });
-__p += '\n<p>\n' +
+__e( App.utils.convertDate([model.get('events')[0].startAt, model.get('events')[0].endAt],'times') ) +
+'\n</p>\n<p>\n' +
 ((__t = ( model.get('content') )) == null ? '' : __t) +
 '\n</p>\n</div>\n</li>\n</ul>\n</div>';
 
@@ -771,19 +762,9 @@ __p +=
 nav: 'settings',
 title: 'utils.settings'
 }) )) == null ? '' : __t) +
-'<div class="content">\n<ul class="table-view">\n<!--         <li class="table-view-cell table-view-divider">\n' +
-((__t = ( App.polyglot.t('utils.languages') )) == null ? '' : __t) +
-'\n</li>\n<li class="table-view-cell">\n<span class="media-object pull-left fa fa-language"></span>\n' +
-((__t = ( App.polyglot.t('utils.english') )) == null ? '' : __t) +
-'\n<div class="toggle" id="language">\n<div class="toggle-handle"></div>\n</div>\n</li>\n<li class="table-view-cell table-view-divider">\n' +
-((__t = ( App.polyglot.t('utils.notifications') )) == null ? '' : __t) +
-'\n</li>\n<li class="table-view-cell media">\n<span class="media-object pull-left fa fa-bullhorn"></span>\n' +
-((__t = ( App.polyglot.t('utils.notify') )) == null ? '' : __t) +
-'\n<div class="toggle">\n<div class="toggle-handle"></div>\n</div>\n</li>About -->\n<li class="table-view-cell table-view-divider">\n' +
-((__t = ( App.polyglot.t('utils.about') )) == null ? '' : __t) +
-'\n</li>\n<li class="table-view-cell media">\n<div class="media-body">\n<p>\nSan Carlos Technology Summit es el primer y único evento de referencia y actualización tecnológica dirigido a la Región Huetar Norte de Costa Rica, creado por las principales empresas, organizaciones y centros de educación universitaria de San Carlos relacionados con el sector tecnológico.\n</p>\n<p>\nMás en <a href="http://www.sancarlostechnologysummit.com/">www.sancarlostechnologysummit.com</a>\n</p>\n</div>\n</li>\n<li class="table-view-cell table-view-divider">\n' +
+'<div class="content">\n<ul class="table-view about">\n<li class="table-view-cell media">\n<div class="media-body">\n<p>\nSan Carlos Technology Summit es el primer y único evento de referencia y actualización tecnológica dirigido a la Región Huetar Norte de Costa Rica, creado por las principales empresas, organizaciones y centros de educación universitaria de San Carlos relacionados con el sector tecnológico.\n</p>\n</div>\n</li>\n<li class="table-view-cell table-view-divider">\n' +
 ((__t = ( App.polyglot.t('utils.about_credits') )) == null ? '' : __t) +
-'\n</li>\n<li class="table-view-cell media">\n<div class="media-body">\n<p>\nDesarrollado por DotCreek, especificamente gracias a:\n<ul>\n<li>Lester Angulo</li>\n<li>Allan Sibaja</li>\n<li>Hanzel Cruz</li>\n<li>Francisco Quesada</li>\n<li>Guillermo Arias</li>\n<li>Elizabeth Salas</li>\n</ul>\n</p>\n</div>\n</li>\n</ul>\n</div>';
+'\n</li>\n<li class="table-view-cell media">\n<div class="media-body">\n<p>\nDesarrollado por DotCreek, gracias a:\n<ul>\n<li>Lester Angulo</li>\n<li>Allan Sibaja</li>\n<li>Hanzel Cruz</li>\n<li>Francisco Quesada</li>\n<li>Guillermo Arias</li>\n<li>Elizabeth Salas</li>\n</ul>\n</p>\n</div>\n</li>\n</ul>\n</div>';
 
 }
 return __p

@@ -6,19 +6,20 @@
 <div class="content">
     <ul class="table-view rooms-home">
         <% collection.forEach(function(item){ %>
-            <li class="table-view-cell media">
+            <li class="table-view-cell media navigate-right">
                 <a href='#contents/<%- item.get("favoriteId")%>/<%- item.get("eventId")%>'>
                     <div class="media-body">
-                        <p class="content-hour">
-                            <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') %>
-                        </p>
-                        <h4 class="content-title">
-                            <%- item.get('description') %>
-                        </h4>
-                        <%= item.get('content') %>
+                        <div class="room-content-full">
+                            <span class="content-hour"> <i class="fa fa-calendar"></i>
+                                <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') %>
+                            </span>
+                            <h4 class="content-title">
+                                <%- item.get('description') %>
+                            </h4>
+                        </div>
                     </div>
                 </a>
             </li>
-        <% }) %>
+        <% })%>
     </ul>
 </div>

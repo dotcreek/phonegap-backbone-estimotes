@@ -29,7 +29,6 @@ window.PageSlider = function (container) {
         var length = stateHistory.length,
             state = window.location.hash;
 
-        console.log('route:', state);
         if (length === 0) {
             stateHistory.push(state);
             return this.slidePageFrom(page);

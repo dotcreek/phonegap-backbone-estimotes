@@ -31,7 +31,6 @@ window.App = {
          * API URL
          * @type {String}
          */
-        // api: 'http://localhost:4000/',
         api: 'http://summit.dotcreek.com/',
 
         /**
@@ -221,10 +220,10 @@ window.App = {
                 App.polyglot.t('utils.error-no-conectivity-title'),
                 'Ok'
             );
+            navigator.app.exitApp();
         } else {
             alert(App.polyglot.t('utils.error-no-conectivity'));
         }
-        navigator.app.exitApp();
         console.log('noConnectionAlert:' + statusError + ' ' + statusText);
     }
 };

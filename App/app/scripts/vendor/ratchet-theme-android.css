@@ -625,6 +625,9 @@ textarea,
     margin-top: 0px !important;
 }
 
+/* dotcreek custom overrides */
+/* TODO find a more scalable approach */
+
 .bar-tab ~ .content {
   padding-top: 23px;
 }
@@ -633,7 +636,8 @@ body.fav .content ul.rooms-home {
   margin-top: 0px !important;
 }
 
-
 .page {
     top: 0 !important;
 }
+
+/***/

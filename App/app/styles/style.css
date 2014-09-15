@@ -1,6 +1,10 @@
 /* Home Style */
 body {
-    background: url(/images/bg.jpg) no-repeat center center fixed;
+    background: url('../images/bg.jpg') repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     background-color: #259fc2;
 }
 
@@ -67,7 +71,7 @@ body.list .content {
 i {
     color: #D6FFB2;
 }
-
+/*
 #container {
     position: absolute;
     width: 100%;
@@ -76,7 +80,7 @@ i {
     background: url(/images/bg.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     background-size: cover;
-}
+}*/
 
 .navigate-left:after, .navigate-right:after, .push-left:after, .push-right:after {
     top: 62%;
@@ -148,7 +152,7 @@ i {
 
 .current-event {
     height: 179px;
-    background: url(/images/event-bg.jpg) no-repeat center top 100% !important;
+    background: url('../images/event-bg.jpg') no-repeat center top 100% !important;
     background-size: 100% !important;
     padding: 20barpx 5px 0 5px !important;
     text-align: center;
@@ -297,6 +301,11 @@ h4.room-name {
 
 .room-content {
     width: 65%;
+    padding: 5px;
+}
+
+.room-content-partial{
+    width: 80%;
     padding: 5px;
 }
 
@@ -505,4 +514,8 @@ span.label {
 
 .append-list {
     margin-bottom: 55px;
+}
+
+.fa {
+    font-family: FontAwesome !important;
 }

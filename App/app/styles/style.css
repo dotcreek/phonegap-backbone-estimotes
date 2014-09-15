@@ -328,7 +328,7 @@ a.tab-item {
 }
 
 
-.bar-tab .tab-item.active, .bar-tab .tab-item:active {
+.bar-tab .tab-item.active {
     color: #D6FFB2;
     background: #1F86A3;
     -webkit-box-shadow:inset 1px 1px 8px 1px rgba(0,0,0,0.3);
@@ -479,3 +479,30 @@ span.label {
     background-color: transparent !important;
 }
 
+.loader-spinner {
+    position: absolute;
+    top: 36%;
+    left: 46%;
+    font-size: 24px;
+    display: none;
+}
+
+.offline-msg {
+    line-height: 36px;
+    position: absolute;
+    top: 35%;
+    left: 44%;
+    font-size: 18px;
+    text-align: center;
+    display: none;
+}
+
+
+.offline-msg i {
+    color: #CBD1D3;
+    text-shadow: #259fc2 1px 0px 0px;
+}
+
+.append-list {
+    margin-bottom: 55px;
+}

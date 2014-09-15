@@ -5,7 +5,8 @@
 App.Router = Backbone.Router.extend({
 
     initialize: function() {
-        App.slider = new PageSlider($('body'));
+        App.slider = new PageSlider($('#main'));
+        this.container = $('#main');
         this.currentView = null;
     },
 
@@ -47,6 +48,8 @@ App.Router = Backbone.Router.extend({
          */
         '*404': 'notFound'
     },
+
+    views: {},
 
     roomMap: function(query) {
         query = query.split('&');
@@ -117,6 +120,8 @@ App.Router = Backbone.Router.extend({
         App.slider.slidePage(view.render().$el);
 
         document.body.className = 'home';
+
+        App.Header.setActive('.star');
         /**
          * Clean view
          */
@@ -127,57 +132,21 @@ App.Router = Backbone.Router.extend({
      * Visit /
      */
     home: function() {
-        var self = this;
-
         /**
          * GET /rooms
          */
-        new App.Collections.Events({}).fetch({
-            cache: false,
-            expires: App.config.cacheExpire,
-            data: {
-                currentTime: new Date().toISOString()
-            },
-            // xhr: function() {
-            //     var xhr = $.ajaxSettings.xhr();
-            //     xhr.onprogress = self.handleProgress;
-            //     return xhr;
-            // },
-
-            success: function(collection) {
-
-                /**
-                 * Instantiate a new Home View
-                 * use collection just fetched
-                 */
-                var view = new App.Views.Home({
-                    collection: collection
-                });
-
-                /**
-                 * Transition to home by slide[left/right]
-                 */
-                App.slider.slidePage(view.render().$el);
-
-                document.body.className = 'home';
-
-                /**
-                 * Clean view
-                 */
-                self.cleanView(view);
-            },
-
-            error: function(error, status) {
-                //TODO: find a DRYer way to handle all errors
-                self.handleErrors(error, status);
-            }
-        });
+        App.Header.setActive('.home');
+        App.slider.slidePage(this.getView('Home', 'Events').render().$el);
+        App.currentView = this.getView('Home');
+        document.body.className = 'home';
+        // this.cleanView(this.getView('Home', 'Events'));
     },
 
     /**
      * Visit /#settings
      */
     settings: function() {
+        App.Header.setActive('.info');
         /**
          * Create a new instance of Settings View
          */
@@ -199,43 +168,14 @@ App.Router = Backbone.Router.extend({
      * Visit /#rooms
      */
     rooms: function() {
-        var self = this;
-
+        App.Header.setActive('.list');
         /**
          * GET /rooms
          */
-        new App.Collections.Rooms({}).fetch({
-            cache: true,
-            expires: App.config.cacheExpire,
-            data: {
-                currentTime: new Date().toISOString()
-            },
-            success: function(collection) {
-                /**
-                 * Instantiate a new Rooms View
-                 * using collection fetched
-                 */
-                var view = new App.Views.Rooms({
-                    collection: collection
-                });
-
-                /**
-                 * Slide View left/right
-                 */
-                App.slider.slidePage(view.render().$el);
-
-                document.body.className = 'home';
-                /**
-                 * Clean View
-                 */
-                self.cleanView(view);
-            },
-
-            error: function(error, status) {
-                //TODO: find a DRYer way to handle all errors
-                self.handleErrors(error, status);
-            }
-        });
+        App.slider.slidePage(this.getView('Rooms', 'Rooms').render().$el);
+        document.body.className = 'list';
+        App.currentView = this.getView('Rooms');
+        // this.cleanView(this.getView('Rooms', 'Rooms'));
     },
 
     showRoom: function(id) {
@@ -296,5 +236,12 @@ App.Router = Backbone.Router.extend({
                 self.handleErrors(error, status);
             }
         });
+    },
+
+    getView: function(view, collectionName) {
+        var key = view.toLowerCase();
+        if (this.views[key]) { return this.views[key]; }
+        this.views[key] = new App.Views[view](collectionName);
+        return this.views[key];
     }
 });

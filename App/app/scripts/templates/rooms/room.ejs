@@ -1,0 +1,20 @@
+<a href='#rooms/<%- item.get("id")%>'>
+    <div class="media-body">
+        <h4 class="room-name">
+            <%-item.get( 'name') %>
+        </h4>
+        <div class="room-content">
+            <% if(item.currentEvent){ %>
+                <p><i class="fa fa-play"></i> <%- item.currentEvent.content.description %></p>
+            <% }else{ %>
+                <p><i class="fa fa-play"></i> <%t ('rooms.no_current_events') %></p>
+            <% } %>
+
+            <% if(item.upcomingFirst){ %>
+                <p><i class="fa fa-forward"></i> <%- item.upcomingFirst.content.description %></p>
+            <% }else{ %>
+                <p><i class="fa fa-forward"></i> <%t ('rooms.no_upcoming_events') %></p>
+            <% } %>
+        </div>
+    </div>
+</a>

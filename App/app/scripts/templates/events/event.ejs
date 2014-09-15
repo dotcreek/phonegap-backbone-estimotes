@@ -1,7 +1,8 @@
 <a href='#contents/<%- item.get("contentId")%>/<%- item.get("id")%>'>
     <div class="media-body">
         <h4 class="room-name">
-            <%- item.get('room').name %>
+            <%- moment(item.get('startAt')).format('DD MMM')%>
+            <%- /*App.utils.convertDate([item.get('startAt')],'month') */ %>
         </h4>
         <div class="room-content">
             <span class="content-hour"><i class="fa fa-calendar"></i>

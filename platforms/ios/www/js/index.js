@@ -27,7 +27,25 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('offline', this.onOffline, false);
+        document.addEventListener('online', this.onOnline, false);
     },
+
+    onOffline: function() {
+        console.log('offline');
+        if (!App.currentView || !App.currentView.collection.length) {
+            console.log('show message');
+            $('.offline-msg').show();
+        }
+    },
+
+    onOnline: function() {
+        $('.offline-msg').hide();
+        if (App.currentView) {
+            App.currentView.fetchCollection();
+        }
+    },
+
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'

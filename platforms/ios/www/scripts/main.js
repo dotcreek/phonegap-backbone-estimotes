@@ -2,11 +2,11 @@ languages.ES = languages.ES || {};
 languages.ES.pages = {};
 languages.ES.rooms = {
     "rooms": "Salas",
-    "current": "Evento actual",
-    "current-events": "Eventos actuales",
-    "upcoming": "Siguiente evento",
-    "upcoming-events": "Siguientes eventos",
-    "no_current_events": "No hay eventos en este momento",
+    "current": "En este momento",
+    "current-events": "Actuales",
+    "upcoming": "Siguiente",
+    "upcoming-events": "Siguientes",
+    "no_current_events": "Ninguno",
     "no_upcoming_events": "No hay más eventos"
 }
 ;
@@ -88,7 +88,6 @@ window.PageSlider = function (container) {
         var length = stateHistory.length,
             state = window.location.hash;
 
-        console.log('route:', state);
         if (length === 0) {
             stateHistory.push(state);
             return this.slidePageFrom(page);
@@ -149,6 +148,7 @@ window.PageSlider = function (container) {
  * @type {Object}
  */
 window.App = {
+    currentView: null,
     /**
      * Store all Backbone models instances
      * @type {Object}
@@ -177,7 +177,6 @@ window.App = {
          * API URL
          * @type {String}
          */
-        // api: 'http://localhost:4000/',
         api: 'http://summit.dotcreek.com/',
 
         /**
@@ -192,6 +191,13 @@ window.App = {
          * @type {Number}
          */
         ajaxTimeOut: 5,
+
+        /**
+         * @name App#cacheExpires
+         * @description Time in seconds for cache to expire
+         * @default 1 hour
+         */
+        cacheExpire: 216000,
     },
 
     /**
@@ -209,6 +215,11 @@ window.App = {
             while (wrap.firstChild) {
                 wrap.removeChild(wrap.firstChild);
             }
+        },
+
+        getTemplate: function(templatePath) {
+            'use strict';
+            return 'app/scripts/templates/' + templatePath + '.ejs';
         },
 
         getLanguaje: function(callback) {
@@ -294,9 +305,10 @@ window.App = {
 
     init: function() {
         'use strict';
-        $.ajaxSetup({
-            timeout: (App.config.ajaxTimeOut * 1000)
-        });
+
+        // $.ajaxSetup({
+        //     timeout: (App.config.ajaxTimeOut * 1000)
+        // });
         /**
          * Override remove function from View
          * @return {Object} view instance
@@ -323,6 +335,8 @@ window.App = {
                 //for 3 seconds and then hide
                 setTimeout(function() {
                     navigator.splashscreen.hide();
+
+                    App.Header = new App.Views.Header().render();
                     /**
                      * Instantiate Favorites collection
                      * @type {App}
@@ -336,6 +350,7 @@ window.App = {
                     Backbone.history.start();
                 }, 3000);
             } else {
+                App.Header = new App.Views.Header().render();
                 /**
                  * Instantiate Favorites collection
                  * @type {App}
@@ -360,10 +375,10 @@ window.App = {
                 App.polyglot.t('utils.error-no-conectivity-title'),
                 'Ok'
             );
+            navigator.app.exitApp();
         } else {
             alert(App.polyglot.t('utils.error-no-conectivity'));
         }
-        navigator.app.exitApp();
         console.log('noConnectionAlert:' + statusError + ' ' + statusText);
     }
 };
@@ -385,7 +400,8 @@ if (!PHONEGAP) {
 App.Router = Backbone.Router.extend({
 
     initialize: function() {
-        App.slider = new PageSlider($('body'));
+        App.slider = new PageSlider($('#main'));
+        this.container = $('#main');
         this.currentView = null;
     },
 
@@ -427,6 +443,8 @@ App.Router = Backbone.Router.extend({
          */
         '*404': 'notFound'
     },
+
+    views: {},
 
     roomMap: function(query) {
         query = query.split('&');
@@ -496,7 +514,9 @@ App.Router = Backbone.Router.extend({
          */
         App.slider.slidePage(view.render().$el);
 
-        document.body.className = 'fav';
+        document.body.className = 'home';
+
+        App.Header.setActive('.star');
         /**
          * Clean view
          */
@@ -507,55 +527,21 @@ App.Router = Backbone.Router.extend({
      * Visit /
      */
     home: function() {
-        var self = this;
-
         /**
          * GET /rooms
          */
-        new App.Collections.Events({}).fetch({
-            data: {
-                currentTime: new Date().toISOString()
-            },
-            // xhr: function() {
-            //     var xhr = $.ajaxSettings.xhr();
-            //     xhr.onprogress = self.handleProgress;
-            //     return xhr;
-            // },
-
-            success: function(collection) {
-
-                /**
-                 * Instantiate a new Home View
-                 * use collection just fetched
-                 */
-                var view = new App.Views.Home({
-                    collection: collection
-                });
-
-                /**
-                 * Transition to home by slide[left/right]
-                 */
-                App.slider.slidePage(view.render().$el);
-
-                document.body.className = 'home';
-
-                /**
-                 * Clean view
-                 */
-                self.cleanView(view);
-            },
-
-            error: function(error, status) {
-                //TODO: find a DRYer way to handle all errors
-                self.handleErrors(error, status);
-            }
-        });
+        App.Header.setActive('.home');
+        App.slider.slidePage(this.getView('Home', 'Events').render().$el);
+        App.currentView = this.getView('Home');
+        document.body.className = 'home';
+        // this.cleanView(this.getView('Home', 'Events'));
     },
 
     /**
      * Visit /#settings
      */
     settings: function() {
+        App.Header.setActive('.info');
         /**
          * Create a new instance of Settings View
          */
@@ -566,7 +552,7 @@ App.Router = Backbone.Router.extend({
          */
         App.slider.slidePage(view.render().$el);
 
-        document.body.className = 'info';
+        document.body.className = 'home';
         /**
          * Clean view
          */
@@ -577,41 +563,14 @@ App.Router = Backbone.Router.extend({
      * Visit /#rooms
      */
     rooms: function() {
-        var self = this;
-
+        App.Header.setActive('.list');
         /**
          * GET /rooms
          */
-        new App.Collections.Rooms({}).fetch({
-            data: {
-                currentTime: new Date().toISOString()
-            },
-            success: function(collection) {
-                /**
-                 * Instantiate a new Rooms View
-                 * using collection fetched
-                 */
-                var view = new App.Views.Rooms({
-                    collection: collection
-                });
-
-                /**
-                 * Slide View left/right
-                 */
-                App.slider.slidePage(view.render().$el);
-
-                document.body.className = 'list';
-                /**
-                 * Clean View
-                 */
-                self.cleanView(view);
-            },
-
-            error: function(error, status) {
-                //TODO: find a DRYer way to handle all errors
-                self.handleErrors(error, status);
-            }
-        });
+        App.slider.slidePage(this.getView('Rooms', 'Rooms').render().$el);
+        document.body.className = 'list';
+        App.currentView = this.getView('Rooms');
+        // this.cleanView(this.getView('Rooms', 'Rooms'));
     },
 
     showRoom: function(id) {
@@ -624,6 +583,8 @@ App.Router = Backbone.Router.extend({
          * GET /rooms/:id
          */
         model.fetch({
+            cache: true,
+            expires: App.config.cacheExpire,
             data: {
                 currentTime: new Date().toISOString()
             },
@@ -653,6 +614,8 @@ App.Router = Backbone.Router.extend({
          * GET /contents/:id
          */
         model.fetch({
+            cache: true,
+            expires: App.config.cacheExpire,
             success: function() {
                 model.set('eventId', eventId);
                 var view = new App.Views.ContentsShow({
@@ -668,6 +631,13 @@ App.Router = Backbone.Router.extend({
                 self.handleErrors(error, status);
             }
         });
+    },
+
+    getView: function(view, collectionName) {
+        var key = view.toLowerCase();
+        if (this.views[key]) { return this.views[key]; }
+        this.views[key] = new App.Views[view](collectionName);
+        return this.views[key];
     }
 });
 
@@ -681,13 +651,33 @@ __p += '<header class="bar bar-nav">\n<a class="icon icon-left-nav pull-left btn
 ((__t = ( model.isFavorite() )) == null ? '' : __t) +
 ' pull-right" id="add-favorite"></a>\n<h1 class="title truncated">' +
 __e( model.get('description') ) +
-'</h1>\n</header><div class="content">\n<ul class="table-view">\n<li class="table-view-cell media">\n<div class="media-body">\n<h4 class="room-name">\n' +
+'</h1>\n</header><div class="content ">\n<ul class="table-view">\n<li class="table-view-cell media">\n<div class="media-body">\n<h4 class="room-name">\n' +
 __e( model.get('events')[0].room.name ) +
-'\n</h4>\n<p class="content-date">\n' +
+'\n</h4>\n<span class="content-hour"><i class="fa fa-calendar"></i>\n' +
 __e( App.utils.convertDate([model.get('events')[0].startAt, model.get('events')[0].endAt],'times') ) +
-'\n</p>\n<p>\n' +
+'\n</span>\n<div class="event-content">\n' +
 ((__t = ( model.get('content') )) == null ? '' : __t) +
-'\n</p>\n</div>\n</li>\n</ul>\n</div>';
+'\n</div>\n</div>\n</li>\n</ul>\n</div>';
+
+}
+return __p
+};
+
+this["JST"]["app/scripts/templates/events/event.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<a href=\'#contents/' +
+__e( item.get("contentId")) +
+'/' +
+__e( item.get("id")) +
+'\'>\n<div class="media-body">\n<h4 class="room-name">\n' +
+__e( item.get('room').name ) +
+'\n</h4>\n<div class="room-content">\n<span class="content-hour"><i class="fa fa-calendar"></i>\n' +
+__e( App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') ) +
+'\n</span>\n<h4 class="content-title">\n' +
+__e( item.get('content').description ) +
+'\n</h4>\n</div>\n</div>\n</a>';
 
 }
 return __p
@@ -705,18 +695,16 @@ title: 'utils.favorites'
 }) )) == null ? '' : __t) +
 '<div class="content">\n<ul class="table-view rooms-home">\n';
  collection.forEach(function(item){ ;
-__p += '\n<li class="table-view-cell media">\n<a href=\'#contents/' +
+__p += '\n<li class="table-view-cell media navigate-right">\n<a href=\'#contents/' +
 __e( item.get("favoriteId")) +
 '/' +
 __e( item.get("eventId")) +
-'\'>\n<div class="media-body">\n<p class="content-hour">\n' +
+'\'>\n<div class="media-body">\n<div class="room-content-full">\n<span class="content-hour"> <i class="fa fa-calendar"></i>\n' +
 __e( App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') ) +
-'\n</p>\n<h4 class="content-title">\n' +
+'\n</span>\n<h4 class="content-title">\n' +
 __e( item.get('description') ) +
-'\n</h4>\n' +
-((__t = ( item.get('content') )) == null ? '' : __t) +
-'\n</div>\n</a>\n</li>\n';
- }) ;
+'\n</h4>\n</div>\n</div>\n</a>\n</li>\n';
+ });
 __p += '\n</ul>\n</div>';
 
 }
@@ -725,29 +713,13 @@ return __p
 
 this["JST"]["app/scripts/templates/pages/home.ejs"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p +=
-((__t = ( JST['app/scripts/templates/partials/_navigation.ejs']({
-nav: 'home',
+((__t = ( JST[ 'app/scripts/templates/partials/_navigation.ejs']({
 title: 'utils.home'
-}) )) == null ? '' : __t) +
-'<div class="content">\n<ul class="table-view rooms-home">\n';
- collection.forEach(function(item){ ;
-__p += '\n<li class="table-view-cell media">\n<a href=\'#contents/' +
-__e( item.get("contentId")) +
-'/' +
-__e( item.get("id")) +
-'\'>\n<div class="media-body">\n<h4 class="room-name">\n' +
-__e( item.get('room').name ) +
-'\n</h4>\n<div class="room-content">\n<p class="content-date">\n' +
-__e( App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') ) +
-'\n</p>\n<h4 class="content-title">\n' +
-__e( item.get('content').description ) +
-'\n</h4>\n</div>\n</div>\n</a>\n</li>\n';
- });
-__p += '\n</ul>\n</div>';
+}))) == null ? '' : __t) +
+'\n<div class="content">\n<ul class="table-view rooms-home append-list">\n</ul>\n</div>';
 
 }
 return __p
@@ -785,23 +757,25 @@ __p += '\n<h1 class="title">' +
 ((__t = ( App.polyglot.t('utils.home') )) == null ? '' : __t) +
 '</h1>\n';
  } ;
-__p += '\n</nav>\n<header class="bar bar-tab">\n<a class="tab-item home ' +
-((__t = ( nav === 'home' ? 'active' : '' )) == null ? '' : __t) +
-'" href="#">\n<span class="icon icon-home"></span>\n<span class="tab-label">' +
+__p += '\n</nav>';
+
+}
+return __p
+};
+
+this["JST"]["app/scripts/templates/partials/menu.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape;
+with (obj) {
+__p += '<a class="tab-item home" href="#">\n<span class="icon icon-home"></span>\n<span class="tab-label">' +
 ((__t = ( App.polyglot.t('utils.home') )) == null ? '' : __t) +
-'</span>\n</a>\n<a class="tab-item list ' +
-((__t = ( nav === 'rooms' ? 'active' : '' )) == null ? '' : __t) +
-'" href="#rooms">\n<span class="icon icon-list"></span>\n<span class="tab-label">' +
+'</span>\n</a>\n<a class="tab-item list" href="#rooms">\n<span class="icon icon-list"></span>\n<span class="tab-label">' +
 ((__t = ( App.polyglot.t('rooms.rooms') )) == null ? '' : __t) +
-'</span>\n</a>\n<a class="tab-item star ' +
-((__t = ( nav === 'favorites' ? 'active' : '' )) == null ? '' : __t) +
-'" href="#favorites">\n<span class="icon icon-star"></span>\n<span class="tab-label">' +
+'</span>\n</a>\n<a class="tab-item star" href="#favorites">\n<span class="icon icon-star"></span>\n<span class="tab-label">' +
 ((__t = ( App.polyglot.t('utils.favorites') )) == null ? '' : __t) +
-'</span>\n</a>\n<a class="tab-item info ' +
-((__t = ( nav === 'settings' ? 'active' : '' )) == null ? '' : __t) +
-'" href="#settings">\n<span class="icon icon-info"></span>\n<span class="tab-label">' +
+'</span>\n</a>\n<a class="tab-item info" href="#settings">\n<span class="icon icon-info"></span>\n<span class="tab-label">' +
 ((__t = ( App.polyglot.t('utils.settings') )) == null ? '' : __t) +
-'</span>\n</a>\n</header>';
+'</span>\n</a>';
 
 }
 return __p
@@ -809,47 +783,13 @@ return __p
 
 this["JST"]["app/scripts/templates/rooms/index.ejs"] = function(obj) {
 obj || (obj = {});
-var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
-function print() { __p += __j.call(arguments, '') }
+var __t, __p = '', __e = _.escape;
 with (obj) {
 __p +=
 ((__t = ( JST[ 'app/scripts/templates/partials/_navigation.ejs']({
-nav: 'rooms',
 title: 'rooms.rooms'
 }))) == null ? '' : __t) +
-'<div class="content">\n<ul class="table-view rooms-index">\n';
- collection.forEach(function(item){ ;
-__p += '\n<li class="table-view-cell media">\n<a class="navigate-right" href=\'#rooms/' +
-__e( item.get("id")) +
-'\'>\n<div class="media-body">\n<h4>\n' +
-__e(item.get( 'name') ) +
-'\n</h4>';
- if(item.currentEvent){ ;
-__p += '\n<p>' +
-((__t = ( App.polyglot.t('rooms.current') )) == null ? '' : __t) +
-': ' +
-__e( item.currentEvent.content.description ) +
-'</p>\n';
- }else{ ;
-__p += '\n<p>' +
-((__t = ( App.polyglot.t('rooms.no_current_events') )) == null ? '' : __t) +
-'</p>\n';
- } ;
-
- if(item.upcomingFirst){ ;
-__p += '\n<p>' +
-((__t = ( App.polyglot.t('rooms.upcoming') )) == null ? '' : __t) +
-': ' +
-__e( item.upcomingFirst.content.description ) +
-'</p>\n';
- }else{ ;
-__p += '\n<p>' +
-((__t = ( App.polyglot.t('rooms.no_upcoming_events') )) == null ? '' : __t) +
-'</p>\n';
- } ;
-__p += '\n</div>\n</a>\n</li>\n';
- }) ;
-__p += '\n</ul>\n</div>';
+'\n<div class="content">\n<ul class="table-view rooms-home append-list">\n</ul>\n</div>';
 
 }
 return __p
@@ -869,6 +809,41 @@ __p += '<header class="bar bar-nav">\n<a class="icon icon-left-nav pull-left btn
 return __p
 };
 
+this["JST"]["app/scripts/templates/rooms/room.ejs"] = function(obj) {
+obj || (obj = {});
+var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+with (obj) {
+__p += '<a href=\'#rooms/' +
+__e( item.get("id")) +
+'\'>\n<div class="media-body">\n<h4 class="room-name">\n' +
+__e(item.get( 'name') ) +
+'\n</h4>\n<div class="room-content">\n';
+ if(item.currentEvent){ ;
+__p += '\n<p><i class="fa fa-play"></i> ' +
+__e( item.currentEvent.content.description ) +
+'</p>\n';
+ }else{ ;
+__p += '\n<p><i class="fa fa-play"></i> ' +
+((__t = ( App.polyglot.t('rooms.no_current_events') )) == null ? '' : __t) +
+'</p>\n';
+ } ;
+
+ if(item.upcomingFirst){ ;
+__p += '\n<p><i class="fa fa-forward"></i> ' +
+__e( item.upcomingFirst.content.description ) +
+'</p>\n';
+ }else{ ;
+__p += '\n<p><i class="fa fa-forward"></i> ' +
+((__t = ( App.polyglot.t('rooms.no_upcoming_events') )) == null ? '' : __t) +
+'</p>\n';
+ } ;
+__p += '\n</div>\n</div>\n</a>';
+
+}
+return __p
+};
+
 this["JST"]["app/scripts/templates/rooms/show.ejs"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
@@ -880,29 +855,29 @@ __e( encodeURIComponent(model.get('image'))) +
 ((__t = ( model.get('name') )) == null ? '' : __t) +
 '"></a>\n<h1 class="title">' +
 __e( model.get("name") ) +
-'</h1>\n</header><div class="content show-room">\n<ul class="table-view rooms-show">';
+'</h1>\n</header><div class="content">\n<ul class="table-view rooms-home">\n';
  if(model.currentEvent){ ;
 __p += '<li class="table-view-cell table-view-divider event-moment">\n<p>\n' +
 ((__t = ( App.polyglot.t('rooms.current') )) == null ? '' : __t) +
-'\n</p>\n</li>\n<li class="table-view-cell media current-event">\n<a href=\'#contents/' +
+':\n</p>\n</li>\n<li class="table-view-cell media current-event navigate-right">\n<a href=\'#contents/' +
 __e( model.currentEvent.contentId) +
 '/' +
 __e( model.currentEvent.id) +
 '\'>\n<div class="media-body">\n<p class="content-summary">\n' +
 __e( model.currentEvent.summary ) +
-'\n</p>\n<p class="content-hour">\n' +
+'\n</p>\n</div>\n<span class="content-hour"><i class="fa fa-calendar"></i>\n' +
 __e( App.utils.convertDate(model.currentEvent.startAt,'dayString')) +
 '\n' +
 __e( App.utils.convertDate([model.currentEvent.startAt,model.currentEvent.endAt],'times') ) +
-'\n</p>\n</div>\n</a>\n</li>';
+'\n</span>\n</a>\n</li>';
  } ;
 
  if(!_.isEmpty(model.upcoming)){ ;
 __p += '<li class="table-view-cell table-view-divider event-moment">\n<p>\n' +
 ((__t = ( App.polyglot.t('rooms.upcoming-events') )) == null ? '' : __t) +
-'\n</p>\n</li>\n';
+':\n</p>\n</li>\n';
  if (model.upcomingFirst) { ;
-__p += '\n<li class="table-view-cell media upcoming-event">\n<a class="navigate-right" href=\'#contents/' +
+__p += '\n<li class="table-view-cell media upcoming-event navigate-right">\n<a href=\'#contents/' +
 ((__t = (model.upcomingFirst.contentId)) == null ? '' : __t) +
 '/' +
 ((__t = ( model.upcomingFirst.id)) == null ? '' : __t) +
@@ -912,15 +887,15 @@ __e( App.utils.convertDate(model.upcomingFirst.startAt,'dayStringShort')) +
 __e( App.utils.convertDate(model.upcomingFirst.startAt,'day')) +
 '</p>\n<p class="month"> ' +
 __e( App.utils.convertDate(model.upcomingFirst.startAt,'month')) +
-'</p>\n</div>\n<div class="content-details">\n<p class="content-hour">\n' +
+'</p>\n</div>\n<div class="room-content">\n<span class="content-hour"><i class="fa fa-calendar"></i>\n' +
 __e( App.utils.convertDate([model.upcomingFirst.startAt,model.upcomingFirst.endAt],'times') ) +
-'\n</p>\n<p class="content-summary">\n' +
+'\n</span>\n<p class="content-summary">\n' +
 __e( model.upcomingFirst.summary ) +
 '\n</p>\n</div>\n</div>\n</a>\n</li>\n';
  };
 
  model.upcoming.forEach(function (event) { ;
-__p += '\n<li class="table-view-cell media upcoming-event">\n<a class="navigate-right" href=\'#contents/' +
+__p += '\n<li class="navigate-right table-view-cell media upcoming-event">\n<a href=\'#contents/' +
 ((__t = (event.contentId)) == null ? '' : __t) +
 '/' +
 ((__t = ( event.id)) == null ? '' : __t) +
@@ -930,9 +905,9 @@ __e( App.utils.convertDate(event.startAt,'dayStringShort')) +
 __e( App.utils.convertDate(event.startAt,'day')) +
 '</p>\n<p class="month"> ' +
 __e( App.utils.convertDate(event.startAt,'month')) +
-'</p>\n</div>\n<div class="content-details">\n<p class="content-hour">\n' +
+'</p>\n</div>\n<div class="room-content">\n<span class="content-hour"> <i class="fa fa-calendar"></i>\n' +
 __e( App.utils.convertDate([event.startAt,event.endAt],'times') ) +
-'\n</p>\n<p class="content-summary">\n' +
+'\n</span>\n<p class="content-summary">\n' +
 __e( event.summary ) +
 '\n</p>\n</div>\n</div>\n</a>\n</li>\n';
  }) ;
@@ -940,7 +915,7 @@ __e( event.summary ) +
  } else { ;
 __p += '\n<li class="table-view-cell table-view-divider">\nNothing to display\n</li>\n';
  } ;
-__p += '</ul>\n</div>';
+__p += '\n</ul>\n</div>';
 
 }
 return __p
@@ -1027,7 +1002,11 @@ return __p
 
         model: App.Models.Event,
 
-        url: App.config.api + 'events'
+        url: App.config.api + 'events',
+
+        comparator: function(m) {
+            return moment(m.get('startAt')).unix();
+        }
 
     });
 
@@ -1047,7 +1026,11 @@ return __p
 				return data;
 			}
 			return data.rooms;
-		}
+		},
+
+        comparator: function(m) {
+            return m.get('name');
+        }
 	});
 })();
 
@@ -1064,15 +1047,143 @@ return __p
 (function() {
     'use strict';
 
-    App.Views.Home = Backbone.View.extend({
+    // Extends main.js
+    App.Views.Header = Backbone.View.extend({
+        el: '.bar-tab',
+        template: JST['app/scripts/templates/partials/menu.ejs'],
 
-        template: JST['app/scripts/templates/pages/home.ejs'],
+
+        render: function() {
+            this.$el.html(this.template());
+
+            return this;
+        },
+
+        setActive: function(selector) {
+            this.$el.find('a').removeClass('active');
+            this.$el.find(selector).addClass('active');
+        }
+    });
+})();
+
+(function() {
+    'use strict';
+
+    App.Views.CellView = Backbone.View.extend({
+        tagName: 'li',
+        className: 'table-view-cell media navigate-right',
+        initialize: function(opt) {
+            this.template = JST[opt.template];
+            this.listenTo(this.model, 'destroy', this.removeModel);
+            this.listenTo(this.model, 'change', this.render);
+        },
 
         render: function() {
             this.$el.html(this.template({
-                collection: this.collection
+                item: this.model
             }));
+            return this.$el;
+        },
+
+        removeModel: function() {
+            this.$el.remove();
+        }
+    });
+})();
+
+(function() {
+    'use strict';
+
+    App.Views.Main = Backbone.View.extend({
+        rendered: false,
+
+        initialize: function(collectionName) {
+            this.collection = new App.Collections[collectionName]();
+            this.listenTo(this.collection, 'sort', this.addAll);
+            this.listenTo(this.collection, 'remove', this.removeModel);
+            this.listenTo(this.collection, 'sync', this.handleSuccess);
+            this.loader = $('.loader-spinner');
+            this.fetchCollection();
+            setInterval(_.bind(this.fetchCollection, this), 60000*10);
+        },
+
+        render: function() {
+            this.beforeRender();
+            if (!this.rendered) {
+                this.rendered = true;
+                this.$el.html(this.template());
+                this.listSelector = this.$el.find('.append-list');
+            } else {
+                this.fetchCollection();
+            }
+            this.afterRender();
             return this;
+        },
+
+        beforeRender: function() {
+
+        },
+
+        afterRender: function() {
+
+        },
+
+        removeModel: function(model) {
+            model.trigger('destroy', model);
+        },
+
+        addOne: function() {
+
+        },
+
+        addAll: function() {
+            this.listSelector.html('');
+            this.collection.each(this.addOne, this);
+        },
+
+        handleSuccess: function() {
+            this.loader.hide();
+            // this.collection.sort();
+        },
+
+        fetchCollection: function() {
+            if (!this.collection.length) {
+                this.loader.show();
+            }
+            this.collection.fetch({
+                cache: true,
+                // reset: true,
+                expires: App.config.cacheExpire,
+                data: {
+                    currentTime: new Date().toISOString()
+                },
+                error: _.bind(function(error, status) {
+                    this.loader.hide();
+                    // temporal
+                    if (status && status.statusText) {
+                        // App.noConnectionAlert(status, status.statusText);
+                    } else {
+                        console.log('there was an error:', error);
+                    }
+                }, this)
+            });
+        }
+    });
+})();
+
+(function() {
+    'use strict';
+
+    // Extends main.js
+    App.Views.Home = App.Views.Main.extend({
+
+        template: JST['app/scripts/templates/pages/home.ejs'],
+
+
+        addOne: function(model) {
+            var template  = App.utils.getTemplate('events/event'),
+                eventView = new App.Views.CellView({model: model, template: template});
+            this.listSelector.append(eventView.render());
         }
     });
 })();
@@ -1094,15 +1205,14 @@ return __p
 (function() {
     'use strict';
 
-    App.Views.Rooms = Backbone.View.extend({
+    App.Views.Rooms = App.Views.Main.extend({
 
         template: JST['app/scripts/templates/rooms/index.ejs'],
 
-        render: function() {
-            this.$el.html(this.template({
-                collection: this.collection
-            }));
-            return this;
+        addOne: function(model) {
+            var template  = App.utils.getTemplate('rooms/room'),
+                roomView  = new App.Views.CellView({model: model, template: template});
+            this.listSelector.append(roomView.render());
         }
     });
 })();

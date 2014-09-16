@@ -1,28 +1,7 @@
-<%= JST['app/scripts/templates/partials/_navigation.ejs']({
-    nav: 'home',
+<%= JST[ 'app/scripts/templates/partials/_navigation.ejs']({
     title: 'utils.home'
-}) %>
-
+})%>
 <div class="content">
-    <ul class="table-view rooms-home">
-        <% collection.forEach(function(item){ %>
-            <li class="table-view-cell media navigate-right">
-                <a href='#contents/<%- item.get("contentId")%>/<%- item.get("id")%>'>
-                    <div class="media-body">
-                        <h4 class="room-name">
-                            <%- item.get('room').name %>
-                        </h4>
-                        <div class="room-content">
-                            <span class="content-hour"><i class="fa fa-calendar"></i>
-                                <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') %>
-                            </span>
-                            <h4 class="content-title">
-                                <%- item.get('content').description %>
-                            </h4>
-                        </div>
-                    </div>
-                </a>
-            </li>
-        <% })%>
+    <ul class="table-view rooms-home append-list">
     </ul>
 </div>

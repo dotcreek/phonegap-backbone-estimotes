@@ -45,6 +45,9 @@
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		D9DF4A7B679C4B91809B5B3C /* CDVNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3505A2910E7748B18899F090 /* CDVNotification.m */; };
+		0955815B37BC43B0BBD953D9 /* CDVConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 176AE8A50035479E81708398 /* CDVConnection.m */; };
+		6014E1274F0D4132B031F572 /* CDVReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EAD26C056F4BEA9AA98952 /* CDVReachability.m */; };
+		6E3C1589C35348468649A7EC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88B58A5DF44F447FB1418F98 /* SystemConfiguration.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +122,11 @@
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = SCTSummit/config.xml; sourceTree = "<group>"; };
+		176AE8A50035479E81708398 /* CDVConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVConnection.m"; path = "org.apache.cordova.network-information/CDVConnection.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		33EAD26C056F4BEA9AA98952 /* CDVReachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVReachability.m"; path = "org.apache.cordova.network-information/CDVReachability.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		3D3A250A343D4B76B6B3CB1A /* CDVConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVConnection.h"; path = "org.apache.cordova.network-information/CDVConnection.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		7D670E3AAC774900B0EB47A2 /* CDVReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVReachability.h"; path = "org.apache.cordova.network-information/CDVReachability.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		88B58A5DF44F447FB1418F98 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +140,7 @@
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
 				7537ABDDE6E64A0FAAC60DEB /* AudioToolbox.framework in Frameworks */,
+				6E3C1589C35348468649A7EC /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +236,7 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
 				E75BF8006A8441E9B2CFB091 /* AudioToolbox.framework */,
+				88B58A5DF44F447FB1418F98 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -250,6 +260,10 @@
 				1AEA9A5EE54C49E2B0AB9645 /* CDVNotification.h */,
 				A9AFC74EDF9A43419A7F347A /* CDVLogger.m */,
 				DBE0A42BD87541F8BAD1703E /* CDVLogger.h */,
+				176AE8A50035479E81708398 /* CDVConnection.m */,
+				33EAD26C056F4BEA9AA98952 /* CDVReachability.m */,
+				3D3A250A343D4B76B6B3CB1A /* CDVConnection.h */,
+				7D670E3AAC774900B0EB47A2 /* CDVReachability.h */,
 			);
 			name = Plugins;
 			path = SCTSummit/Plugins;
@@ -455,6 +469,8 @@
 				1B4B5706F80C43378D94EF21 /* CDVSplashScreen.m in Sources */,
 				D9DF4A7B679C4B91809B5B3C /* CDVNotification.m in Sources */,
 				4E45C77B179F4303A73CFF5D /* CDVLogger.m in Sources */,
+				0955815B37BC43B0BBD953D9 /* CDVConnection.m in Sources */,
+				6014E1274F0D4132B031F572 /* CDVReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

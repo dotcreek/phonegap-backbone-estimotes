@@ -23,6 +23,10 @@
                         {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"ios-package\" value=\"CDVConnection\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -36,6 +40,12 @@
                         }
                     ],
                     "AudioToolbox.framework": [
+                        {
+                            "xml": "true",
+                            "count": 1
+                        }
+                    ],
+                    "SystemConfiguration.framework": [
                         {
                             "xml": "true",
                             "count": 1
@@ -56,6 +66,9 @@
             "PACKAGE_NAME": "com.dotcreek.sctsummit"
         },
         "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.dotcreek.sctsummit"
+        },
+        "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "com.dotcreek.sctsummit"
         }
     },

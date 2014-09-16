@@ -3,6 +3,7 @@
  * @type {Object}
  */
 window.App = {
+    currentView: null,
     /**
      * Store all Backbone models instances
      * @type {Object}
@@ -69,6 +70,11 @@ window.App = {
             while (wrap.firstChild) {
                 wrap.removeChild(wrap.firstChild);
             }
+        },
+
+        getTemplate: function(templatePath) {
+            'use strict';
+            return 'app/scripts/templates/' + templatePath + '.ejs';
         },
 
         getLanguaje: function(callback) {
@@ -183,6 +189,8 @@ window.App = {
                 //for 3 seconds and then hide
                 setTimeout(function() {
                     navigator.splashscreen.hide();
+
+                    App.Header = new App.Views.Header().render();
                     /**
                      * Instantiate Favorites collection
                      * @type {App}
@@ -196,6 +204,7 @@ window.App = {
                     Backbone.history.start();
                 }, 3000);
             } else {
+                App.Header = new App.Views.Header().render();
                 /**
                  * Instantiate Favorites collection
                  * @type {App}

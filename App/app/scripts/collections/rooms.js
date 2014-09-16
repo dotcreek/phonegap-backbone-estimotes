@@ -12,6 +12,10 @@
 				return data;
 			}
 			return data.rooms;
-		}
+		},
+
+        comparator: function(m) {
+            return m.get('name');
+        }
 	});
 })();

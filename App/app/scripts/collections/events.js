@@ -5,7 +5,11 @@
 
         model: App.Models.Event,
 
-        url: App.config.api + 'events'
+        url: App.config.api + 'events',
+
+        comparator: function(m) {
+            return moment(m.get('startAt')).unix();
+        }
 
     });
 

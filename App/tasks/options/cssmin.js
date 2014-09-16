@@ -20,7 +20,7 @@ module.exports = {
         },
 
         files: {
-            '<%= yeoman.dist %>/styles/main.css': [
+            '<%= yeoman.dist %>/styles/android.css': [
                 '.tmp/styles/{,*/}*.css',
                 '<%= yeoman.app %>/styles/{,*/}*.css',
                 '<%= yeoman.app %>/bower_components/fontawesome/css/font-awesome.css',
@@ -35,7 +35,7 @@ module.exports = {
         },
 
         files: {
-            '<%= yeoman.dist %>/styles/main.css': [
+            '<%= yeoman.dist %>/styles/ios.css': [
                 '.tmp/styles/{,*/}*.css',
                 '<%= yeoman.app %>/bower_components/fontawesome/css/font-awesome.css',
                 '<%= yeoman.app %>/scripts/vendor/ratchet-theme-ios.css',

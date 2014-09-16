@@ -103,10 +103,11 @@ module.exports = function(grunt) {
         'imagemin',
         'htmlmin',
         'concat',
-        'cssmin',
+        'cssmin:android',
+        'cssmin:ios',
         'uglify',
         'copy:dist',
-        'rev',
+        // 'rev',
         'usemin'
     ]);
 

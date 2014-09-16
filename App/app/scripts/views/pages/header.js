@@ -14,8 +14,17 @@
         },
 
         setActive: function(selector) {
+            if (this.$el.is(':hidden')) {
+                this.$el.show();
+            }
             this.$el.find('a').removeClass('active');
             this.$el.find(selector).addClass('active');
+        },
+
+        hide: function() {
+            if (device.platform === 'Android') {
+                this.$el.hide();
+            }
         }
     });
 })();

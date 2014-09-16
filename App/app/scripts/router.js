@@ -179,6 +179,7 @@ App.Router = Backbone.Router.extend({
     },
 
     showRoom: function(id) {
+
         var self = this;
         var model = new App.Models.Room({
             id: id
@@ -197,6 +198,7 @@ App.Router = Backbone.Router.extend({
                 var view = new App.Views.RoomsShow({
                     model: model
                 });
+                App.Header.hide();
                 App.slider.slidePage(view.render().$el);
                 self.cleanView(view);
             },
@@ -227,6 +229,7 @@ App.Router = Backbone.Router.extend({
                     model: model,
                     eventId: eventId
                 });
+                App.Header.hide();
                 App.slider.slidePage(view.render().$el);
                 self.cleanView(view);
             },

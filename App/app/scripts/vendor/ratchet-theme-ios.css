@@ -478,5 +478,11 @@ textarea,
 
 .content {
   top: 25px !important;
+  margin-top: 15px !important;
+  padding-top: 0px !important;
+}
+
+ul.append-list, ul.rooms-home, ul.about {
+    margin-bottom: 55px !important;
 }
 /*************/

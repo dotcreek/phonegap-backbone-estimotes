@@ -80,7 +80,8 @@
                 </li>
             <% }) %>
 
-        <% } else { %>
+        <% } %>
+        <% if ( !model.currentEvent && _.isEmpty(model.upcoming)) { %>
             <li class="table-view-cell table-view-divider">
                 No hay eventos en la Sala
             </li>

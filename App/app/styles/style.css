@@ -1,15 +1,7 @@
 /* Home Style */
 body {
     background: url('../images/bg.jpg') repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
     background-color: #259fc2;
-}
-
-body, .page.center {
-    background-size: 100%;
 }
 
 body.home .title {

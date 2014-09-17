@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>App</title>
+        <title>San Carlos Technology Summit</title>
 
         <!-- Sets initial viewport load and disables zooming  -->
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
@@ -14,8 +14,8 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css(.tmp) styles/main.css -->
             <link rel="stylesheet" href="styles/ratchet.css">
-            <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
             <link rel="stylesheet" href="scripts/vendor/ratchet-theme-ios.css">
+            <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
             <!-- <link rel="stylesheet" href="scripts/vendor/ratchet-theme-android.css"> -->
             <link rel="stylesheet" href="styles/style.css">
         <!-- endbuild -->
@@ -32,7 +32,28 @@
         <script type="text/javascript">
             var languages = {};
             var PHONEGAP = false;
+
+            /**
+             * Get device agent
+             */
+            var deviceAgent = navigator.userAgent.toLowerCase();
+
+            if(deviceAgent.match(/android/i)){
+                var elements = document.getElementsByTagName('link');
+                /**
+                 * Development env
+                 */
+                if(elements.length > 1){
+                    elements[1].href = 'scripts/vendor/ratchet-theme-android.css';
+                } else {
+                    /**
+                     * Production env
+                     */
+                    elements[0].href = 'styles/android.css';
+                }
+            }
         </script>
+
         <!-- build:js scripts/vendor.js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/underscore/underscore.js"></script>

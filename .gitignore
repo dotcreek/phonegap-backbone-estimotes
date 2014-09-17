@@ -14,14 +14,13 @@
 
 # Local configuration file (sdk path, etc)
 platforms/android/local.properties
-platforms/android/CordovaLib/local.properties
 
 platforms/android/ant-build/
-platforms/android/CordobaLib/ant-build/
-platforms/android/CordobaLib/ant-gen/
+platforms/android/CordobaLib/
 platforms/android/ant-gen/
 platforms/android/assets/www/
-
+platforms/android/src
+*.fetch.json
 www/scripts/
 www/styles/
 www/fonts/

@@ -103,10 +103,9 @@ module.exports = function(grunt) {
         'imagemin',
         'htmlmin',
         'concat',
-        'cssmin',
+        'cssmin:webView',
         'uglify',
         'copy:dist',
-        'rev',
         'usemin'
     ]);
 

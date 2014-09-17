@@ -11,7 +11,9 @@
                     <div class="media-body">
                         <div class="room-content-full">
                             <span class="content-hour"> <i class="fa fa-calendar"></i>
-                                <%- App.utils.convertDate([item.get('startAt'), item.get('endAt')],'times') %>
+                                <%- App.utils.convertDate(item.get('events')[0].startAt, 'day') %>
+                                <%- App.utils.convertDate(item.get('events')[0].startAt, 'month') %>
+                                <%- App.utils.convertDate([item.get('events')[0].startAt, item.get('events')[0].endAt],'times') %>
                             </span>
                             <h4 class="content-title">
                                 <%- item.get('description') %>

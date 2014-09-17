@@ -305,10 +305,9 @@ window.App = {
 
     init: function() {
         'use strict';
-
-        // $.ajaxSetup({
-        //     timeout: (App.config.ajaxTimeOut * 1000)
-        // });
+        $.ajaxSetup({
+            timeout: (App.config.ajaxTimeOut * 1000)
+        });
         /**
          * Override remove function from View
          * @return {Object} view instance
@@ -887,7 +886,7 @@ __e( App.utils.convertDate(model.upcomingFirst.startAt,'dayStringShort')) +
 __e( App.utils.convertDate(model.upcomingFirst.startAt,'day')) +
 '</p>\n<p class="month"> ' +
 __e( App.utils.convertDate(model.upcomingFirst.startAt,'month')) +
-'</p>\n</div>\n<div class="room-content">\n<span class="content-hour"><i class="fa fa-calendar"></i>\n' +
+'</p>\n</div>\n<div class="room-content-partial">\n<span class="content-hour"><i class="fa fa-calendar"></i>\n' +
 __e( App.utils.convertDate([model.upcomingFirst.startAt,model.upcomingFirst.endAt],'times') ) +
 '\n</span>\n<p class="content-summary">\n' +
 __e( model.upcomingFirst.summary ) +
@@ -905,7 +904,7 @@ __e( App.utils.convertDate(event.startAt,'dayStringShort')) +
 __e( App.utils.convertDate(event.startAt,'day')) +
 '</p>\n<p class="month"> ' +
 __e( App.utils.convertDate(event.startAt,'month')) +
-'</p>\n</div>\n<div class="room-content">\n<span class="content-hour"> <i class="fa fa-calendar"></i>\n' +
+'</p>\n</div>\n<div class="room-content-partial">\n<span class="content-hour"> <i class="fa fa-calendar"></i>\n' +
 __e( App.utils.convertDate([event.startAt,event.endAt],'times') ) +
 '\n</span>\n<p class="content-summary">\n' +
 __e( event.summary ) +

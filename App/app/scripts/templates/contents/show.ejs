@@ -1,16 +1,17 @@
 <header class="bar bar-nav">
     <a class="icon icon-left-nav pull-left btn-back"></a>
     <a class="icon <%= model.isFavorite() %> pull-right" id="add-favorite"></a>
+    <h1 class="title truncated"><%- model.get('description') %></h1>
 </header>
 
 <div class="content ">
-    <ul class="table-view">
+    <ul class="table-view append-list">
         <li class="table-view-cell media">
             <div class="media-body">
                 <h4 class="room-name">
                     <%- model.get('events')[0].room.name %>
                 </h4>
-                <h4 class=""><%- model.get('description') %></h4>
+                <h4><%- model.get('description') %></h4>
                 <span class="content-hour"><i class="fa fa-calendar"></i>
                     <%- App.utils.convertDate(model.get('events')[0].startAt,'day') %>
                     <%- App.utils.convertDate(model.get('events')[0].startAt,'month') %>

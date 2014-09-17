@@ -22,7 +22,7 @@
         },
 
         hide: function() {
-            if (device.platform === 'Android') {
+            if (PHONEGAP && device.platform === 'Android') {
                 this.$el.hide();
             }
         }

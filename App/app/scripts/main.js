@@ -155,7 +155,35 @@ window.App = {
             //get name of day
 
             // return day + ' ' + newDate;
-        }
+        },
+
+        /**
+         * @name config#isAndroid
+         * @method isAndroid
+         * @description Validate current device, is android or not
+         * @return {Boolean} true is android otherwise, false
+         */
+        isAndroid: function() {
+            'use strict';
+
+            /**
+             * Try to use 'device' plugin
+             */
+            var device = device ? device : false;
+
+            /**
+             * If device is defined, use it to check if current one is android
+             */
+            if (device && device.platform === 'Android') {
+                return true;
+            }
+
+            var deviceAgent = navigator.userAgent.toLowerCase();
+            if (deviceAgent.match(/android/i)) {
+                return true;
+            }
+            return false;
+        },
     },
 
     init: function() {

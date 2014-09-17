@@ -36,27 +36,6 @@
                     <%t ('rooms.upcoming-events') %>:
                 </p>
             </li>
-            <% if (model.upcomingFirst) { %>
-                <li class="table-view-cell media upcoming-event navigate-right">
-                    <a href='#contents/<%=model.upcomingFirst.contentId%>/<%= model.upcomingFirst.id%>'>
-                        <div class="media-body">
-                            <div class="date">
-                                <p class="day-name"> <%- App.utils.convertDate(model.upcomingFirst.startAt,'dayStringShort')%></p>
-                                <p class="day"> <%- App.utils.convertDate(model.upcomingFirst.startAt,'day')%></p>
-                                <p class="month"> <%- App.utils.convertDate(model.upcomingFirst.startAt,'month')%></p>
-                            </div>
-                            <div class="room-content-partial">
-                                <span class="content-hour"><i class="fa fa-calendar"></i>
-                                    <%- App.utils.convertDate([model.upcomingFirst.startAt,model.upcomingFirst.endAt],'times') %>
-                                </span>
-                                <p class="content-summary">
-                                    <%- model.upcomingFirst.summary %>
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            <% }%>
 
             <% model.upcoming.forEach(function (event) { %>
                 <li class="navigate-right table-view-cell media upcoming-event">

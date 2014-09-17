@@ -21,8 +21,14 @@
             this.$el.find(selector).addClass('active');
         },
 
+        /**
+         * @name Header#hide
+         * @memberOf Header
+         * @method hide
+         * @description Hide header on Android devices
+         */
         hide: function() {
-            if (PHONEGAP && device.platform === 'Android') {
+            if (App.utils.isAndroid()) {
                 this.$el.hide();
             }
         }

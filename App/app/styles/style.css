@@ -2,6 +2,10 @@
 body {
     background: url('../images/bg.jpg') repeat center center fixed;
     background-color: #259fc2;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 body.home .title {
@@ -411,7 +415,7 @@ li.table-view-cell.table-view-divider.event-moment {
 }
 
 ul.table-view.about {
-    background: rgba(0, 0, 0, 0.1) repeat center center fixed;
+    /*background: rgba(0, 0, 0, 0.1) repeat center center fixed;*/
     padding: 1px 20px 14px 20px;
     margin-bottom: 0px;
     color: #fff;

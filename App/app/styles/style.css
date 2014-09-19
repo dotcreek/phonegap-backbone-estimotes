@@ -1,11 +1,10 @@
 /* Home Style */
 body {
-    background: url('../images/bg.jpg') repeat center center fixed;
-    background-color: #259fc2;
+    background: rgba(37, 159, 194, 0.9) !important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: 100% !important;
+    background-size: 100%;
 }
 
 body.home .title {

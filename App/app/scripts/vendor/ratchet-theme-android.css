@@ -648,11 +648,4 @@ body.fav .content ul.rooms-home {
   padding-top: 0px !important;
 }
 
-body {
-  -webkit-background-size: inherit !important;
-  -moz-background-size: inherit !important;
-  -o-background-size: inherit !important;
-  background-size: 100% !important;
-}
-
 /***/

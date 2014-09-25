@@ -1,0 +1,15 @@
+<a href='#contents/<%- item.get("contentId")%>/<%- item.get("id")%>'>
+    <div class="media-body">
+
+        <div class="room-content">
+        <%- item.get('title') %>
+        <br/>
+            <span class="content-hour">
+                <i class="fa fa-calendar"></i>
+                <%- App.utils.convertDate(item.get('publishDate'),'day') %>
+                <%- App.utils.convertDate(item.get('publishDate'), 'month') %>
+                <%- App.utils.convertDate([item.get('publishDate')], 'times') %>
+            </span>
+        </div>
+    </div>
+</a>

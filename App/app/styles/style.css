@@ -53,6 +53,26 @@ body.list .content {
 }
 i {
     color: #D6FFB2;
+}/* News Style */
+body.news .title {
+    color: #D6FFB2;
+}
+
+body.news li.table-view-cell.media {
+    padding: 2px 0 0 0;
+    margin-bottom: 10px;
+}
+
+body.news p{
+    padding: 0px;
+    color: #fff;
+}
+
+body.news .content {
+    padding-top: 10px;
+}
+i {
+    color: #D6FFB2;
 }
 
 

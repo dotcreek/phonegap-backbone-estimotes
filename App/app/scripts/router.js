@@ -15,8 +15,13 @@ App.Router = Backbone.Router.extend({
         /**
          * Static pages and Home
          */
-        '': 'home',
+        'home': 'home',
         'settings': 'settings',
+
+        /**
+         * GET /news
+         */
+        '': 'news',
 
         /**
          * GET /rooms
@@ -129,7 +134,7 @@ App.Router = Backbone.Router.extend({
     },
 
     /**
-     * Visit /
+     * Visit /home
      */
     home: function() {
         /**
@@ -140,6 +145,16 @@ App.Router = Backbone.Router.extend({
         App.currentView = this.getView('Home');
         document.body.className = 'home';
         // this.cleanView(this.getView('Home', 'Events'));
+    },
+
+    /**
+     * Visit /
+     */
+    news: function(){
+        App.Header.setActive('.news');
+        App.slider.slidePage(this.getView('News', 'News').render().$el);
+        App.currentView = this.getView('News');
+        document.body.className = 'news';
     },
 
     /**

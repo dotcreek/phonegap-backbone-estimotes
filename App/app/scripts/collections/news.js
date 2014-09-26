@@ -5,7 +5,12 @@
 
         model: App.Models.News,
 
-        url: App.config.api + 'news'
+        url: App.config.api + 'news',
+
+        parse: function(data) {
+            data[0].isFirst = true;
+            return data;
+        }
 
     });
 

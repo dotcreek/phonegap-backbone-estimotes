@@ -3,6 +3,9 @@
 
         <div class="room-content">
         <%- item.get('title') %>
+        <% if(item.get('isFirst')) { %>
+            <p><%- item.get('summary') %></p>
+        <% } %>
         <br/>
             <span class="content-hour">
                 <i class="fa fa-calendar"></i>

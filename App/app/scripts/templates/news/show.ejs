@@ -3,13 +3,9 @@
     <h1 class="title"><%- model.get("description") %></h1>
 </header>
 <div class="content">
-    <ul class="table-view">
-        <li class="table-view-cell media">
-            <div class="media-body">
-                <div class="event-content">
-                    <%= model.get('content') %>
-                </div>
-            </div>
-        </li>
-    </ul>
+    <div class="media-body">
+        <div class="event-content">
+            <%= model.get('content') %>
+        </div>
+    </div>
 </div>

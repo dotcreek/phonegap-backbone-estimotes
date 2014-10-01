@@ -23,7 +23,7 @@ body.home .content {
     padding-top: 10px;
 }
 
-body.home .rooms-home li.table-view-cell.media, .show-room li.table-view-cell.media.upcoming-event,body.news {
+body.home .rooms-home li.table-view-cell.media, .show-room li.table-view-cell.media.upcoming-event,body.news li {
     -webkit-box-shadow: 0 3px 9px 0 rgba(0,0,0,0.2);
     box-shadow: 0 3px 9px 0 rgba(0,0,0,0.2);
     margin-bottom: 10px;

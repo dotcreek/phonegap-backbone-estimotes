@@ -39,9 +39,14 @@ App.Router = Backbone.Router.extend({
         'maps/:query': 'roomMap',
 
         /**
-         * GET /contents/:id
+         * GET /contents/:id/:eventId
          */
-        'contents/:id/:eventId': 'showContent',
+        'contents/:id/:eventId': 'showEventContent',
+
+        /**
+         * GET /content/:id
+         */
+        'newsContents/:id': 'showNewsContent',
 
         /**
          * GET /favorites
@@ -150,7 +155,7 @@ App.Router = Backbone.Router.extend({
     /**
      * Visit /
      */
-    news: function(){
+    news: function() {
         App.Header.setActive('.news');
         App.slider.slidePage(this.getView('News', 'News').render().$el);
         App.currentView = this.getView('News');
@@ -225,7 +230,7 @@ App.Router = Backbone.Router.extend({
         });
     },
 
-    showContent: function(id, eventId) {
+    showEventContent: function(id, eventId) {
         var self = this;
         var model = new App.Models.Content({
             id: id,
@@ -256,9 +261,31 @@ App.Router = Backbone.Router.extend({
         });
     },
 
+    showNewsContent: function(id) {
+        var self = this;
+        var model = new App.Models.Content({
+            id: id
+        });
+
+        model.fetch({
+            cache: true,
+            expires: App.config.cacheExpire,
+            success: function() {
+                var view = new App.Views.NewsShow({
+                    model: model
+                });
+                App.Header.hide();
+                App.slider.slidePage(view.render().$el);
+                self.cleanView(view);
+            }
+        });
+    },
+
     getView: function(view, collectionName) {
         var key = view.toLowerCase();
-        if (this.views[key]) { return this.views[key]; }
+        if (this.views[key]) {
+            return this.views[key];
+        }
         this.views[key] = new App.Views[view](collectionName);
         return this.views[key];
     }

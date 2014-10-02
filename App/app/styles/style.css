@@ -79,6 +79,7 @@ i {
 .navigate-left:after, .navigate-right:after, .push-left:after, .push-right:after {
     top: 62%;
     color: #D6FFB2;
+    content: '\e826';
 }
 
 .page {

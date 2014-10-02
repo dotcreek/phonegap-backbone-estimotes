@@ -42,22 +42,27 @@
              */
             this.upcoming = data.upcoming || [];
 
-            if (!data.upcoming.length) {
-                return data;
-            }
+            try {
 
-            data.upcoming = data.upcoming.sort(function(a, b) {
+                if (!data.upcoming.length) {
+                    return data;
+                }
+
+                data.upcoming = data.upcoming.sort(function(a, b) {
+                    /**
+                     * Convert string date value to date and do the substraction
+                     */
+                    return new Date(a.startAt) - new Date(b.startAt);
+                });
+
                 /**
-                 * Convert string date value to date and do the substraction
+                 * Set property upcomingFirst
+                 * @type {Object}
                  */
-                return new Date(a.startAt) - new Date(b.startAt);
-            });
-
-            /**
-             * Set property upcomingFirst
-             * @type {Object}
-             */
-            this.upcomingFirst = data.upcoming[0] || false;
+                this.upcomingFirst = data.upcoming[0] || false;
+            } catch (err) {
+                console.log(err);
+            }
 
             /**
              * Return an object based on API response after set all properties

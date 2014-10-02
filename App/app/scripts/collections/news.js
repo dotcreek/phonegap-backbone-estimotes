@@ -8,7 +8,9 @@
         url: App.config.api + 'news',
 
         parse: function(data) {
-            data[0].isFirst = true;
+            if (!_.isEmpty(data)) {
+                data[0].isFirst = true;
+            }
             return data;
         }
 

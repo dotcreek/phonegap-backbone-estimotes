@@ -24,12 +24,11 @@ to your repository.
 
 ### Install Required plugins
 
-To install the cordova globalization plugin use this command:
-
 ~~~
 ~$ phonegap plugin add org.apache.cordova.globalization
 ~$ phonegap plugin add org.apache.cordova.dialogs
 ~$ phonegap plugin add org.apache.cordova.splashscreen
+~$ phonegap plugin add https://github.com/itsimoshka/estimote-beacons-phonegap-plugin-for-android.git
 ~~~
 
 ### About special "grunt phonegap" task

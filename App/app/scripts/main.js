@@ -151,10 +151,6 @@ window.App = {
 
             return options[method](date);
 
-
-            //get name of day
-
-            // return day + ' ' + newDate;
         },
 
         /**
@@ -184,6 +180,66 @@ window.App = {
             }
             return false;
         },
+
+        estimote: function(method, callback) {
+            'use strict';
+            var options = {
+                main: function() {
+                    window.EstimoteBeacons.startRangingBeaconsInRegion(function() {
+                        //every now and then get the list of beacons in range
+                        setInterval(function() {
+                            EstimoteBeacons.getBeacons(function(beacons) {
+                                console.log(beacons);
+                                console.log('Getting beacons...');
+                                var closest = (beacons[0].distance / 3.2808).toFixed(2),
+                                    major = beacons[0].major,
+                                    minor = beacons[0].minor;
+                                for (var i = 1, l = beacons.length; i < l; i++) {
+                                    var beacon = beacons[i];
+                                    var distance = beacon.distance / 3.2808;
+                                    if (distance < closest) {
+                                        closest = distance;
+                                        major = beacon.major;
+                                        minor = beacon.minor;
+                                    }
+                                    // beacon contains major, minor, rssi, macAddress, measuredPower, etc.
+
+                                }
+
+                                new App.Models.Beacon({}).fetch({
+                                    data: {
+                                        major: major,
+                                        minor: minor
+                                    },
+                                    success: function(resp) {
+                                        return callback(resp);
+                                    },
+                                    error: function(resp, status, msg) {
+                                        alert('Something when wrong ' + msg);
+                                    }
+                                });
+                                //return callback(room);
+
+                            });
+
+                        }, 3000);
+                    });
+                },
+                bleSupport: function() {
+
+                    function successCallback() {
+                        alert('ble is supported');
+                    }
+
+                    function errorCallback() {
+                        alert('Error no BLE ');
+                    }
+                    EstimoteBeacons.isBleSupported(successCallback, errorCallback);
+                }
+
+            };
+            return options[method]();
+        }
     },
 
     init: function() {
@@ -203,6 +259,9 @@ window.App = {
         };
 
         new App.Router();
+        App.utils.estimote('main', function(beacon) {
+            alert('UUD: ' + beacon.get('uuid') + '\nRoomId: ' + beacon.get('roomId'));
+        });
         App.polyglot = new Polyglot();
         /**
          * Get language here, should be either ES or EN by now
